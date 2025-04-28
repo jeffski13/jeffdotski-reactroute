@@ -1,0 +1,45 @@
+.TitlePage {
+    background-color: #bbb;
+}
+
+.TitleImage>img {
+    max-width: 100%;
+    max-height: none;
+}
+
+.TitlePage_aboutJeff {
+    background: #EFEFEF;
+}
+
+.TitlePage_aboutJeff-image {
+    padding: 20px;
+}
+
+.TitlePage_aboutJeff-text {
+    display: table;
+    height: 400px;
+    overflow: hidden;
+}
+
+.TitlePage_aboutJeff-text-container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.TitlePage_aboutJeff-image>img {
+    height: 400px;
+    padding: 45px;
+}
+
+.TitlePage_aboutJeff-name {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.TitlePage_aboutJeff-name-websiteName {
+    color: #000000;
+    font-weight: bold;
+}
+.TitlePage_aboutJeff-name-nonwebsitename {
+    color: #504747;
+}
