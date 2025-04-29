@@ -88,7 +88,7 @@ class Bio extends Component {
               </Col>
               <Col sm={6} smOffset={1} className="bioHobbieDisclaimer" >
                 <p>
-                  *Of course I don't own any of these images! (:
+                  *I don't own any of these images. Please support the official releases.
                 </p>
               </Col>
             </Row>

@@ -11,7 +11,5 @@ export function meta({ }: Route.MetaArgs) {
 
 const Content = JeffDotSkiPage(TitlePage);
 export default function JeffskiHome() {
-  return (
-    <Content />
-  );
+  return <Content />;
 }

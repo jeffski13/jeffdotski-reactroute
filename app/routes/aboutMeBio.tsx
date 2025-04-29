@@ -11,9 +11,5 @@ export function meta({ }: Route.MetaArgs) {
 
 const Content = JeffDotSkiPage(Bio);
 export default function AboutMeBio() {
-  return (
-    <>
-     <Content />
-    </>
-  );
+  return <Content />;
 }
