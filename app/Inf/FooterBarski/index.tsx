@@ -61,7 +61,7 @@ class FooterBarski extends Component {
           </Col>
           <Col xs={3} sm={1} >
             <a title="My Open Source Website!"
-              href="https://github.com/jeffski13/jeffDotSki"
+              href="https://github.com/jeffski13"
             >
               <Image src={githubLogoImage}
                 className="githubLogo"

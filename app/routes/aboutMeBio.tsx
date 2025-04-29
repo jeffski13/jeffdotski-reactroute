@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import JeffDotSkiPage from "../Inf/JeffDotSkiPage"
+import JeffSkiPageWithContent from "../Inf/JeffSkiPageWithContent"
 import Bio from "../AboutMe/Bio";
 
 export function meta({ }: Route.MetaArgs) {
@@ -9,7 +9,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-const Content = JeffDotSkiPage(Bio);
+const Content = JeffSkiPageWithContent(Bio);
 export default function AboutMeBio() {
   return <Content />;
 }
