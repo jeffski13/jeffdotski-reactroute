@@ -1,13 +1,8 @@
 const ROUTES = {
-    login: '/traveltrails/login',
-    manageTrips: '/traveltrails/manageTrips',
-    profile: '/traveltrails/profile',
-    profileEditInfo: '/traveltrails/profile/edit',
-    profileEditPic: '/traveltrails/profile/edit/pic',
-    registerCognito: '/traveltrails/signup/register/account',
-    registerBlogUser: '/traveltrails/signup/register/bloguser',
-    travelTrailsHome: '/traveltrails',
-    verify: '/traveltrails/signup/verify',
+    aboutMe: {
+      bio: '/aboutme/bio',
+      hobbies: '/aboutme/hobbies',
+    },
     pokemonEnPeru: {
       selectPokemon: '/pokemonEnPeru/select'
     }

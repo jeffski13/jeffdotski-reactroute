@@ -19,9 +19,8 @@ class NavigationBar extends Component {
                             </NavDropdown>
                         </Nav>
                         <Nav >
-                            <Nav.Link href="/aboutme/bio">Bio</Nav.Link>
-                            <Nav.Link href={ROUTES.travelTrailsHome}>Travel Trails</Nav.Link>
-                            <Nav.Link href="/aboutme/hobbies">Hobbies</Nav.Link>
+                            <Nav.Link href={ROUTES.aboutMe.bio}>Bio</Nav.Link>
+                            <Nav.Link href={ROUTES.aboutMe.hobbies}>Hobbies</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
