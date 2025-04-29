@@ -1,19 +1,15 @@
-import type { Route } from "./+types/home";
 import TitlePage from "../TitlePage";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
-}
+import NavigationBar from "../Inf/NavigationBar";
+import FooterBarski from "../Inf/FooterBarski";
 
 export default function JeffskiHome() {
-
-  // return(
-  //   <div>JeffskiHome</div> 
-  // );
-  return(
-    <TitlePage/>
+  return (
+    <div id="App" >
+        <NavigationBar />
+        <div className="webpagecontent">
+          <TitlePage />
+        </div>
+        <FooterBarski />
+    </div>
   )
 };
