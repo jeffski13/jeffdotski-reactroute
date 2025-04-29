@@ -1,10 +1,16 @@
 import NavigationBar from "./NavigationBar";
 import FooterBarski from "./FooterBarski";
 import React from 'react';
+import '../styles.css';
 
 interface ComponentWithProps {}
 
-const jeffDotSkiPage = <P extends object>(Component: React.ComponentType<P>) =>
+/**
+ * HOC that has the navbar, bottom bar, etc for the webside content.
+ * @param PageContent the content of the page
+ * @returns the page with the common website components.
+ */
+const jeffDotSkiPage = <P extends object>(PageContent: React.ComponentType<P>) =>
   class JeffDotSkiPage extends React.Component<P & ComponentWithProps> {
     render() {
       const { ...props } = this.props;
@@ -12,11 +18,11 @@ const jeffDotSkiPage = <P extends object>(Component: React.ComponentType<P>) =>
           <div id="App" >
               <NavigationBar />
               <div className="webpagecontent">
-                <Component {...props} />
+                <PageContent {...props} />
               </div>
               <FooterBarski />
           </div>
-        )
+        );
     }
   }
 

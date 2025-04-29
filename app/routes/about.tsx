@@ -13,7 +13,6 @@ const Content = JeffDotSkiPage(AboutskiComp);
 export default function AboutTsxski() {
   return (
     <>
-    <div>about</div>
      <Content />
     </>
   );
