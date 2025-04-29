@@ -1,15 +1,17 @@
+import type { Route } from "./+types/home";
+import JeffDotSkiPage from "../Inf/JeffDotSkiPage"
 import TitlePage from "../TitlePage";
-import NavigationBar from "../Inf/NavigationBar";
-import FooterBarski from "../Inf/FooterBarski";
 
+export function meta({ }: Route.MetaArgs) {
+  return [
+    { title: "Jeff Szcinski" },
+    { name: "Home Page", content: "Jeff Szcinski Personal Website" },
+  ];
+}
+
+const Content = JeffDotSkiPage(TitlePage);
 export default function JeffskiHome() {
   return (
-    <div id="App" >
-        <NavigationBar />
-        <div className="webpagecontent">
-          <TitlePage />
-        </div>
-        <FooterBarski />
-    </div>
-  )
-};
+    <Content />
+  );
+}
