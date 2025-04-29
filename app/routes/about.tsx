@@ -1,7 +1,6 @@
 import type { Route } from "./+types/home";
 import { AboutskiComp } from "../about/aboutski";
-import NavigationBar from "../Inf/NavigationBar";
-import FooterBarski from "../Inf/FooterBarski";
+import JeffDotSkiPage from "../Inf/JeffDotSkiPage"
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -10,14 +9,12 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
+const Content = JeffDotSkiPage(AboutskiComp);
 export default function AboutTsxski() {
   return (
-    <div id="App" >
-      <NavigationBar />
-      <div className="webpagecontent">
-        <AboutskiComp />
-      </div>
-      <FooterBarski />
-    </div>
+    <>
+    <div>about</div>
+     <Content />
+    </>
   );
 }
