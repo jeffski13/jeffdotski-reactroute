@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './styles.css';
 import './battle.css';
+import { Button } from 'react-bootstrap';
 
 
 interface MonsterSelectionResultsProps {
@@ -18,7 +19,7 @@ function MonsterSelectionResults(selectionResults: MonsterSelectionResultsProps)
       <h1>Selection Results</h1>
       <p>User 1 chose: {selectionResults.monster1}</p>
       <p>User 2 chose: {selectionResults.monster2}</p>
-      <button onClick={() => selectionResults.setBattleClicked()}>Start Battle</button>
+      <Button onClick={() => selectionResults.setBattleClicked()}>Start Battle</Button>
     </div>
   );
 }
