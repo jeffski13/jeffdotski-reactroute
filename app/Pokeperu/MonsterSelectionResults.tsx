@@ -87,6 +87,10 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
     }
   };
 
+  const calculateHpPercentage = (currentHp: number, maxHp: number) => {
+    return (currentHp / maxHp) * 100;
+  };
+
   return (
     <div className="BattlePage">
       <h1>Battle Time!</h1>
@@ -97,7 +101,14 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
             <img src={selectedMonsters[0].image} alt={selectedMonsters[0].name} className="monster-image" />
           </div>
           <p>HP: {monster1Hp}</p>
-          <p>Speed: {selectedMonsters[0].speed}</p> {/* Display speed */}
+          <div className="hp-bar">
+            <div
+              className="hp-bar-fill"
+              style={{
+                width: `${calculateHpPercentage(monster1Hp, selectedMonsters[0].hp)}%`,
+              }}
+            ></div>
+          </div>
           <button onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)} disabled={monster2Hp === 0}>
             {selectedMonsters[0].attack1.name}
           </button>
@@ -109,7 +120,14 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
           <h2>{selectedMonsters[1].name}</h2>
           <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
           <p>HP: {monster2Hp}</p>
-          <p>Speed: {selectedMonsters[1].speed}</p> {/* Display speed */}
+          <div className="hp-bar">
+            <div
+              className="hp-bar-fill"
+              style={{
+                width: `${calculateHpPercentage(monster2Hp, selectedMonsters[1].hp)}%`,
+              }}
+            ></div>
+          </div>
           <button onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)} disabled={monster1Hp === 0}>
             {selectedMonsters[1].attack1.name}
           </button>
