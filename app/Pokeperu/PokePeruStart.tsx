@@ -13,6 +13,7 @@ const monsters = [
     specialDefense: 50,
     speed: 90,
     type: 'Electric',
+    image: '/images/pikachu.jpg', // Add image path
   },
   {
     name: 'Charmander',
@@ -24,6 +25,7 @@ const monsters = [
     specialDefense: 50,
     speed: 65,
     type: 'Fire',
+    image: '/images/charmander.jpg',
   },
   {
     name: 'Bulbasaur',
@@ -35,6 +37,7 @@ const monsters = [
     specialDefense: 65,
     speed: 45,
     type: 'Grass/Poison',
+    image: '/images/bulbasaur.jpg',
   },
   {
     name: 'Squirtle',
@@ -46,6 +49,7 @@ const monsters = [
     specialDefense: 64,
     speed: 43,
     type: 'Water',
+    image: '/images/squirtle.png',
   },
   {
     name: 'Eevee',
@@ -57,6 +61,7 @@ const monsters = [
     specialDefense: 65,
     speed: 55,
     type: 'Normal',
+    image: '/images/eevee.png',
   },
   {
     name: 'Jigglypuff',
@@ -68,6 +73,7 @@ const monsters = [
     specialDefense: 25,
     speed: 20,
     type: 'Normal/Fairy',
+    image: '/images/jigglypuff.jpg',
   },
 ];
 
@@ -96,7 +102,10 @@ export default function PokePeruStart() {
                 disabled={selectedMonsters.includes(monster.name)}
                 className="monster-button"
               >
-                {monster.name} (Trainer: {monster.trainer})
+                <div>
+                  {monster.name} (Trainer: {monster.trainer})
+                </div>
+                <img src={monster.image} alt={monster.name} className="monster-image" />
               </button>
             ))}
           </div>
