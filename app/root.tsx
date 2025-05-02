@@ -32,15 +32,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" crossOrigin></script>
+        <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" 
+          crossOrigin="true"></script>
 
         <script
           src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
-          crossOrigin></script>
+          crossOrigin="true"></script>
 
         <script
           src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
-          crossOrigin></script>
+          crossOrigin="true"></script>
 
         <script>var Alert = ReactBootstrap.Alert;</script>
       </head>
