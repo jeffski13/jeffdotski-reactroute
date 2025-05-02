@@ -82,6 +82,7 @@ export default function PokePeruStart() {
   const [currentUser, setCurrentUser] = useState(1);
 
   const handleMonsterSelect = (monsterName: string) => {
+    console.log('handleMonsterSelect')
     if (selectedMonsters.includes(monsterName)) return; // Prevent duplicate selection
 
     setSelectedMonsters([...selectedMonsters, monsterName]);
