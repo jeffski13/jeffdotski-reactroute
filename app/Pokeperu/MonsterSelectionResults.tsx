@@ -60,6 +60,16 @@ interface BattlePageProps {
     speed: number;
     type: string;
     image: string;
+    attack1: {
+      name: string;
+      damage: number
+      type: string;
+    };
+    attack2: {
+      name: string;
+      damage: number
+      type: string;
+    };
    }[];
 }
 
@@ -88,10 +98,10 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
           </div>
           <p>HP: {monster1Hp}</p>
           <button onClick={() => handleAttack(1, 10)} disabled={monster2Hp === 0}>
-            Quick Attack (-10 HP)
+            {selectedMonsters[0].attack1.name}
           </button>
           <button onClick={() => handleAttack(1, 20)} disabled={monster2Hp === 0}>
-            Thunderbolt (-20 HP)
+            {selectedMonsters[0].attack2.name}
           </button>
         </div>
         <div className="monster">
@@ -99,10 +109,10 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
           <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
           <p>HP: {monster2Hp}</p>
           <button onClick={() => handleAttack(2, 10)} disabled={monster1Hp === 0}>
-            Scratch (-10 HP)
+            {selectedMonsters[1].attack1.name}
           </button>
           <button onClick={() => handleAttack(2, 20)} disabled={monster1Hp === 0}>
-            Flamethrower (-20 HP)
+            {selectedMonsters[1].attack2.name}
           </button>
         </div>
       </div>

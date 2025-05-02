@@ -13,7 +13,17 @@ const monsters = [
     specialDefense: 50,
     speed: 90,
     type: 'Electric',
-    image: '/images/pikachu.jpg', // Add image path
+    image: '/images/pikachu.jpg',
+    attack1: {
+      name: 'Quick Attack',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Thunderbolt',
+      damage: 20,
+      type: 'Electric',
+    },
   },
   {
     name: 'Charmander',
@@ -26,6 +36,16 @@ const monsters = [
     speed: 65,
     type: 'Fire',
     image: '/images/charmander.jpg',
+    attack1: {
+      name: 'Scratch',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Flamethrower',
+      damage: 20,
+      type: 'Fire',
+    },
   },
   {
     name: 'Bulbasaur',
@@ -38,6 +58,16 @@ const monsters = [
     speed: 45,
     type: 'Grass/Poison',
     image: '/images/bulbasaur.jpg',
+    attack1: {
+      name: 'Tackle',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Vine Whip',
+      damage: 20,
+      type: 'Grass',
+    },
   },
   {
     name: 'Squirtle',
@@ -50,6 +80,16 @@ const monsters = [
     speed: 43,
     type: 'Water',
     image: '/images/squirtle.png',
+    attack1: {
+      name: 'Tackle',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Water Gun',
+      damage: 20,
+      type: 'Water',
+    },
   },
   {
     name: 'Eevee',
@@ -62,6 +102,16 @@ const monsters = [
     speed: 55,
     type: 'Normal',
     image: '/images/eevee.png',
+    attack1: {
+      name: 'Quick Attack',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Bite',
+      damage: 20,
+      type: 'Dark',
+    },
   },
   {
     name: 'Jigglypuff',
@@ -74,6 +124,16 @@ const monsters = [
     speed: 20,
     type: 'Normal/Fairy',
     image: '/images/jigglypuff.jpg',
+    attack1: {
+      name: 'Pound',
+      damage: 10,
+      type: 'Normal',
+    },
+    attack2: {
+      name: 'Sing',
+      damage: 0,
+      type: 'Fairy', // Sing could be a status move, but for simplicity, it deals no damage here.
+    },
   },
 ];
 
