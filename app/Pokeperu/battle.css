@@ -12,6 +12,12 @@
   text-align: center;
 }
 
+.monster-image {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
 button {
   margin-top: 10px;
   padding: 10px 20px;

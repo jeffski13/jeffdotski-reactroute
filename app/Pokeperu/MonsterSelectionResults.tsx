@@ -69,11 +69,11 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
 
-  const handleAttack = (attacker: number) => {
+  const handleAttack = (attacker: number, damage: number) => {
     if (attacker === 1) {
-      setMonster2Hp((prevHp) => Math.max(prevHp - 10, 0)); // Monster 1 attacks Monster 2
+      setMonster2Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 1 attacks Monster 2
     } else {
-      setMonster1Hp((prevHp) => Math.max(prevHp - 10, 0)); // Monster 2 attacks Monster 1
+      setMonster1Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 2 attacks Monster 1
     }
   };
 
@@ -82,17 +82,27 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
       <h1>Battle Time!</h1>
       <div className="battle-container">
         <div className="monster">
-          <h2>{selectedMonsters[0].name}</h2>
+          <div>
+            <h2>{selectedMonsters[0].name}</h2>
+            <img src={selectedMonsters[0].image} alt={selectedMonsters[0].name} className="monster-image" />
+          </div>
           <p>HP: {monster1Hp}</p>
-          <button onClick={() => handleAttack(1)} disabled={monster2Hp === 0}>
-            Attack
+          <button onClick={() => handleAttack(1, 10)} disabled={monster2Hp === 0}>
+            Quick Attack (-10 HP)
+          </button>
+          <button onClick={() => handleAttack(1, 20)} disabled={monster2Hp === 0}>
+            Thunderbolt (-20 HP)
           </button>
         </div>
         <div className="monster">
           <h2>{selectedMonsters[1].name}</h2>
+          <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
           <p>HP: {monster2Hp}</p>
-          <button onClick={() => handleAttack(2)} disabled={monster1Hp === 0}>
-            Attack
+          <button onClick={() => handleAttack(2, 10)} disabled={monster1Hp === 0}>
+            Scratch (-10 HP)
+          </button>
+          <button onClick={() => handleAttack(2, 20)} disabled={monster1Hp === 0}>
+            Flamethrower (-20 HP)
           </button>
         </div>
       </div>
