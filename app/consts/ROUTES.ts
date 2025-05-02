@@ -3,8 +3,8 @@ const ROUTES = {
       bio: '/aboutme/bio',
       hobbies: '/aboutme/hobbies',
     },
-    pokemonEnPeru: {
-      selectPokemon: '/pokemonEnPeru/select'
+    pokePeru: {
+      battle: '/pokePeru/battle'
     }
 };
 export default ROUTES;

@@ -5,4 +5,5 @@ export default [
     index("routes/jeffskihome.tsx"),
     route(ROUTES.aboutMe.bio, "routes/aboutMeBio.tsx"),
     route(ROUTES.aboutMe.hobbies, "routes/aboutMeHobbies.tsx"),
+    route(ROUTES.pokePeru.battle, "routes/pokeperubattle.tsx"),
 ] satisfies RouteConfig;

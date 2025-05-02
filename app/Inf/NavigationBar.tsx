@@ -22,6 +22,7 @@ class NavigationBar extends Component {
                             </NavDropdown>
                         </Nav>
                         <Nav >
+                            <Nav.Link href={ROUTES.pokePeru.battle}>Poke Peru</Nav.Link>
                             <Nav.Link href={ROUTES.aboutMe.bio}>Bio</Nav.Link>
                             <Nav.Link href={ROUTES.aboutMe.hobbies}>Hobbies</Nav.Link>
                         </Nav>

@@ -3,9 +3,6 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import './styles.css';
 
 export default function TitlePage() {
-    // return (
-    //     <div>TitlePage</div>
-    // );
   return (
       <div className="TitlePage" >
           <TitleImg />
