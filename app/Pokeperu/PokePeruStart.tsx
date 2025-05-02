@@ -78,29 +78,31 @@ const monsters = [
 ];
 
 export default function PokePeruStart() {
-  const [selectedMonsters, setSelectedMonsters] = useState<string[]>([]);
+  const [selectedMonstersNames, setSelectedMonstersNames] = useState<string[]>([]);
+  const [selectedMonsters, setSelectedMonsters] = useState<object[]>([]);
   const [currentUser, setCurrentUser] = useState(1);
 
-  const handleMonsterSelect = (monsterName: string) => {
+  const handleMonsterSelect = (monster: object) => {
     console.log('handleMonsterSelect')
-    if (selectedMonsters.includes(monsterName)) return; // Prevent duplicate selection
+    if (selectedMonstersNames.includes(monster.name)) return; // Prevent duplicate selection
 
-    setSelectedMonsters([...selectedMonsters, monsterName]);
+    setSelectedMonstersNames([...selectedMonstersNames, monster.name]);
+    setSelectedMonsters([...selectedMonsters, monster]);
     setCurrentUser(currentUser === 1 ? 2 : 1); // Switch user
   };
 
   return (
     <div className="PokePeruStart">
       <h1>Monster Selection</h1>
-      {selectedMonsters.length < 2 ? (
+      {selectedMonstersNames.length < 2 ? (
         <>
           <h2>User {currentUser}, choose your monster:</h2>
           <div className="monster-grid">
             {monsters.map((monster) => (
               <button
                 key={monster.name}
-                onClick={() => handleMonsterSelect(monster.name)}
-                disabled={selectedMonsters.includes(monster.name)}
+                onClick={() => handleMonsterSelect(monster)}
+                disabled={selectedMonstersNames.includes(monster.name)}
                 className="monster-button"
               >
                 <div>
