@@ -1,0 +1,25 @@
+.PokePeruStart {
+  text-align: center;
+}
+
+.monster-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.monster-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.monster-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.MonsterSelectionResults {
+  text-align: center;
+}
