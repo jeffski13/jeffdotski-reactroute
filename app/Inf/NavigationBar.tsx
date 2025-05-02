@@ -14,8 +14,11 @@ class NavigationBar extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse>
                         <Nav className="mr-auto">
-                            <NavDropdown title="Software Engineering" id="navigationbar-softwareengineering">
-                                <NavDropdown.Item href="https://s3.us-east-2.amazonaws.com/jeff.ski/resume/JeffSzcinski_Resume2021_08_14_SoftwareEng.pdf" >Resume</NavDropdown.Item>
+                            <NavDropdown title="Resume" id="navigationbar-resume">
+                                <NavDropdown.Item href="https://s3.us-east-2.amazonaws.com/jeff.ski/resume/JeffSzcinski_Resume_2025_01_07_software.pdf" >Software Engineering</NavDropdown.Item>
+                                <NavDropdown.Item href="https://s3.us-east-2.amazonaws.com/jeff.ski/resume/JeffSzcinski_CV_2025_01_07_Software.pdf" >Ingeníero Informático Español</NavDropdown.Item>
+                                <NavDropdown.Item href="https://s3.us-east-2.amazonaws.com/jeff.ski/resume/JeffSzcinski_Resume_2025_01_26_TeacherEnglish.pdf" >English Teacher</NavDropdown.Item>
+                                <NavDropdown.Item href="https://s3.us-east-2.amazonaws.com/jeff.ski/resume/JeffSzcinski_CV_2025_01_26_ProfeIngles.pdf" >Profesor de Inglés Español</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav >
