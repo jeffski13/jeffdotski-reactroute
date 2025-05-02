@@ -22,12 +22,10 @@ export default function TitlePage() {
                           <h3>Who Is This Jeff Guy?</h3>
                           <ul>
                               <li><strong>Software Engineer:</strong> Web Developer and Android Native Applications</li>
-                              <li><strong>Traveler</strong> Tokyo, Japan <span>&nbsp;&bull;&nbsp;</span> Chile Coast <span>&nbsp;&bull;&nbsp;</span> Next Germany? </li>
-                              <li><strong>Entrepreneur:</strong> Developing a travel blog platform </li>
-                              <li><strong>Passion for Personal Finance:</strong> FI Meetup lead and on the road FI!</li>
-                              <li><strong>A Believer of the Arts:</strong> Taking piano lessons, and always singing in the car</li>
+                              <li><strong>English Teacher:</strong> I teach elementry and private classes to spanish speakers</li>
+                              <li><strong>Traveler</strong> Tokyo, Japan <span>&nbsp;&bull;&nbsp;</span> Chile <span>&nbsp;&bull;&nbsp;</span> Colombia <span>&nbsp;&bull;&nbsp;</span> Peru </li>
+                              <li><strong>A Believer of the Arts:</strong> I am a leader of the Señora Fátima Choir in Lima, Perú</li>
                           </ul>
-                          {/* <li><strong>AWS Serverless Officionado: </strong> Goodbye server management, hello microservices!</li> */}
                       </div>
                   </Col>
               </Row>
