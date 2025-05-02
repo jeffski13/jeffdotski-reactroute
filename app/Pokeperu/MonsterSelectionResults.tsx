@@ -10,7 +10,6 @@ interface MonsterSelectionResultsProps {
   setBattleClicked: Function;
 }
 
-
 function MonsterSelectionResults(selectionResults: MonsterSelectionResultsProps) {
   console.log('MonsterSelectionResults Monsters 0:', selectionResults.monster1);
   console.log('MonsterSelectionResults Monsters 1:', selectionResults.monster2);
@@ -49,11 +48,19 @@ export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) 
   );
 }
 
-
-
-
 interface BattlePageProps {
-  selectedMonsters: { name: string; hp: number }[];
+  selectedMonsters: { 
+    name: string;
+    trainer: string;
+    hp: number;
+    attack: number;
+    defense: number;
+    specialAttack: number;
+    specialDefense: number;
+    speed: number;
+    type: string;
+    image: string;
+   }[];
 }
 
 export function BattlePage({ selectedMonsters }: BattlePageProps) {
