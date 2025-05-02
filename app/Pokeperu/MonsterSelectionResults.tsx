@@ -72,7 +72,6 @@ interface BattlePageProps {
     };
    }[];
 }
-
 export function BattlePage({ selectedMonsters }: BattlePageProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
@@ -97,6 +96,7 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
       <div className="battle-container">
         <div className="monster">
           <div>
+            <h3>Trainer: {selectedMonsters[0].trainer}</h3> {/* Display trainer name */}
             <h2>{selectedMonsters[0].name}</h2>
             <img src={selectedMonsters[0].image} alt={selectedMonsters[0].name} className="monster-image" />
           </div>
@@ -117,6 +117,7 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
           </button>
         </div>
         <div className="monster">
+          <h3>Trainer: {selectedMonsters[1].trainer}</h3> {/* Display trainer name */}
           <h2>{selectedMonsters[1].name}</h2>
           <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
           <p>HP: {monster2Hp}</p>

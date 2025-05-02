@@ -5,7 +5,7 @@ import MonsterSelectionResults from './MonsterSelectionResults';
 const monsters = [
   {
     name: 'Pikachu',
-    trainer: 'Ash',
+    trainer: 'Lt. Surge',
     hp: 35,
     attack: 55,
     defense: 40,
@@ -27,7 +27,7 @@ const monsters = [
   },
   {
     name: 'Charmander',
-    trainer: 'Brock',
+    trainer: 'Blaine',
     hp: 39,
     attack: 52,
     defense: 43,
@@ -49,7 +49,7 @@ const monsters = [
   },
   {
     name: 'Bulbasaur',
-    trainer: 'Misty',
+    trainer: 'Erika',
     hp: 45,
     attack: 49,
     defense: 49,
@@ -71,7 +71,7 @@ const monsters = [
   },
   {
     name: 'Squirtle',
-    trainer: 'Lt. Surge',
+    trainer: 'Misty',
     hp: 44,
     attack: 48,
     defense: 65,
@@ -115,7 +115,7 @@ const monsters = [
   },
   {
     name: 'Jigglypuff',
-    trainer: 'Sabrina',
+    trainer: 'Whitney',
     hp: 115,
     attack: 45,
     defense: 20,
@@ -166,7 +166,10 @@ export default function PokePeruStart() {
                 className="monster-button"
               >
                 <div>
-                  {monster.name} (Trainer: {monster.trainer})
+                  {monster.name}
+                </div>
+                <div>
+                  (Gym Leader: {monster.trainer})
                 </div>
                 <img src={monster.image} alt={monster.name} className="monster-image" />
               </button>
