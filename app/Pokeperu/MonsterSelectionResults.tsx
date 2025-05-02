@@ -97,10 +97,11 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
             <img src={selectedMonsters[0].image} alt={selectedMonsters[0].name} className="monster-image" />
           </div>
           <p>HP: {monster1Hp}</p>
-          <button onClick={() => handleAttack(1, 10)} disabled={monster2Hp === 0}>
+          <p>Speed: {selectedMonsters[0].speed}</p> {/* Display speed */}
+          <button onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)} disabled={monster2Hp === 0}>
             {selectedMonsters[0].attack1.name}
           </button>
-          <button onClick={() => handleAttack(1, 20)} disabled={monster2Hp === 0}>
+          <button onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage)} disabled={monster2Hp === 0}>
             {selectedMonsters[0].attack2.name}
           </button>
         </div>
@@ -108,10 +109,11 @@ export function BattlePage({ selectedMonsters }: BattlePageProps) {
           <h2>{selectedMonsters[1].name}</h2>
           <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
           <p>HP: {monster2Hp}</p>
-          <button onClick={() => handleAttack(2, 10)} disabled={monster1Hp === 0}>
+          <p>Speed: {selectedMonsters[1].speed}</p> {/* Display speed */}
+          <button onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)} disabled={monster1Hp === 0}>
             {selectedMonsters[1].attack1.name}
           </button>
-          <button onClick={() => handleAttack(2, 20)} disabled={monster1Hp === 0}>
+          <button onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage)} disabled={monster1Hp === 0}>
             {selectedMonsters[1].attack2.name}
           </button>
         </div>
