@@ -40,7 +40,7 @@ export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) 
   return (
     <div className="MonsterSelectionResults">
       {isBattleClicked ? (
-        <BattlePage selectedMonsters={selectedMonsters} />
+        <BattlePhase selectedMonsters={selectedMonsters} />
       ) : (
         <MonsterSelectionResults monster1={selectedMonsters[0].name} monster2={selectedMonsters[1].name} setBattleClicked={() => {setBattleClicked(true)}} />
       )}
@@ -72,7 +72,7 @@ interface BattlePageProps {
     };
    }[];
 }
-export function BattlePage({ selectedMonsters }: BattlePageProps) {
+export function BattlePhase({ selectedMonsters }: BattlePageProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);

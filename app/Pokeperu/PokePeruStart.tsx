@@ -1,6 +1,6 @@
 import './styles.css';
 import { useState } from 'react';
-import MonsterSelectionResults from './MonsterSelectionResults';
+import BattlePhase from './BattlePhase';
 import MonsterSelection from './MonsterSelection';
 
 const monsters = [
@@ -161,7 +161,7 @@ export default function PokePeruStart() {
           handleMonsterSelect={handleMonsterSelect}
         />
       ) : (
-        <MonsterSelectionResults selectedMonsters={selectedMonsters} />
+        <BattlePhase selectedMonsters={selectedMonsters} />
       )}
     </>
   );
