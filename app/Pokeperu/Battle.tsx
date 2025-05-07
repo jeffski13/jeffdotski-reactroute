@@ -13,6 +13,7 @@ interface BattleProps {
     specialDefense: number;
     speed: number;
     type: string;
+    secondType: string | null;
     image: string;
     attack1: {
       name: string;

@@ -14,6 +14,7 @@ const monsters = [
     specialDefense: 50,
     speed: 90,
     type: 'Electric',
+    secondType: null, // Added second type
     image: '/images/pikachu.jpg',
     attack1: {
       name: 'Quick Attack',
@@ -36,6 +37,7 @@ const monsters = [
     specialDefense: 50,
     speed: 65,
     type: 'Fire',
+    secondType: null, // Added second type
     image: '/images/charmander.jpg',
     attack1: {
       name: 'Scratch',
@@ -57,7 +59,8 @@ const monsters = [
     specialAttack: 65,
     specialDefense: 65,
     speed: 45,
-    type: 'Grass/Poison',
+    type: 'Grass',
+    secondType: 'Poison', // Added second type
     image: '/images/bulbasaur.jpg',
     attack1: {
       name: 'Tackle',
@@ -80,6 +83,7 @@ const monsters = [
     specialDefense: 64,
     speed: 43,
     type: 'Water',
+    secondType: null, // Added second type
     image: '/images/squirtle.png',
     attack1: {
       name: 'Tackle',
@@ -102,6 +106,7 @@ const monsters = [
     specialDefense: 65,
     speed: 55,
     type: 'Normal',
+    secondType: null, // Added second type
     image: '/images/eevee.png',
     attack1: {
       name: 'Quick Attack',
@@ -123,7 +128,8 @@ const monsters = [
     specialAttack: 45,
     specialDefense: 25,
     speed: 20,
-    type: 'Normal/Fairy',
+    type: 'Normal',
+    secondType: 'Fairy', // Added second type
     image: '/images/jigglypuff.jpg',
     attack1: {
       name: 'Pound',

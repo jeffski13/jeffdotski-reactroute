@@ -5,7 +5,13 @@ import MonsterSelectionResults from './MonsterSelectionResults';
 import Battle from './Battle';
 
 interface BattleProps {
-  selectedMonsters: { name: string; hp: number; image: string; }[];
+  selectedMonsters: {
+    name: string;
+    hp: number;
+    image: string;
+    type: string;
+    secondType: string | null;
+  }[];
 }
 
 export default function BattlePhase({ selectedMonsters }: BattleProps) {
