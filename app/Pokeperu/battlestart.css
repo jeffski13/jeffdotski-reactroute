@@ -1,0 +1,16 @@
+.monster-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.monster {
+  text-align: center;
+}
+
+.monster-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-top: 10px;
+}

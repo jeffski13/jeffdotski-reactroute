@@ -5,7 +5,7 @@ import MonsterSelectionResults from './MonsterSelectionResults';
 import MonsterBattle from './MonsterBattle';
 
 interface MonsterBattleProps {
-  selectedMonsters: { name: string; hp: number }[];
+  selectedMonsters: { name: string; hp: number; image: string; }[];
 }
 
 export default function BattlePhase({ selectedMonsters }: MonsterBattleProps) {
@@ -25,6 +25,8 @@ export default function BattlePhase({ selectedMonsters }: MonsterBattleProps) {
         <MonsterSelectionResults
           monster1={selectedMonsters[0].name}
           monster2={selectedMonsters[1].name}
+          monster1Image={selectedMonsters[0].image}
+          monster2Image={selectedMonsters[1].image}
           setBattleClicked={() => setBattleClicked(true)}
         />
       )}
