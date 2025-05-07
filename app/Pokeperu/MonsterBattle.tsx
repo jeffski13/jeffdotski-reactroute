@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import './battle.css';
 
-interface BattlePageProps {
+interface MonsterBattleProps {
   selectedMonsters: {
     name: string;
     trainer: string;
@@ -27,7 +27,7 @@ interface BattlePageProps {
   }[];
 }
 
-export default function MonsterBattle({ selectedMonsters }: BattlePageProps) {
+export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);

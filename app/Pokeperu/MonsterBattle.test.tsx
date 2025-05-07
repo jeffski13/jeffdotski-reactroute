@@ -47,4 +47,20 @@ describe('MonsterBattle Component', () => {
     // Verify that monster2's HP is reduced
     expect(screen.getByText(/HP: 29/i)).toBeInTheDocument(); // Charmander's HP after attack
   });
+
+  test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
+    render(<MonsterBattle selectedMonsters={mockSelectedMonsters} />);
+
+    // Verify monster1's attack buttons are enabled
+    const monster1Attack1Button = screen.getByText(/Quick Attack/i);
+    const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
+    expect(monster1Attack1Button).toBeEnabled();
+    expect(monster1Attack2Button).toBeEnabled();
+
+    // Verify monster2's attack buttons are disabled
+    const monster2Attack1Button = screen.getByText(/Scratch/i);
+    const monster2Attack2Button = screen.getByText(/Flamethrower/i);
+    expect(monster2Attack1Button).toBeDisabled();
+    expect(monster2Attack2Button).toBeDisabled();
+  });
 });
