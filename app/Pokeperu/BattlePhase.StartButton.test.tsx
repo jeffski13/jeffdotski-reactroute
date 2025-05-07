@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import MonsterBattle from './BattlePhase';
+import BattlePhase from './BattlePhase';
 
 const mockSelectedMonsters = [
   {
@@ -34,7 +34,7 @@ const mockSelectedMonsters = [
 
 describe('BattlePhase Component', () => {
   test('clicking "Start Battle" transitions to the battle phase', () => {
-    render(<MonsterBattle selectedMonsters={mockSelectedMonsters} />);
+    render(<BattlePhase selectedMonsters={mockSelectedMonsters} />);
 
     // Verify the initial UI shows the selection results
     expect(screen.getByText(/Selection Results/i)).toBeInTheDocument();
