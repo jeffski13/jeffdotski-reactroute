@@ -28,6 +28,8 @@ interface BattleProps {
 }
 
 export default function Battle({ selectedMonsters }: BattleProps) {
+  console.log('Selected Monsters:', selectedMonsters);
+
   // Determine the first turn based on speed
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
@@ -47,6 +49,8 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const calculateHpPercentage = (currentHp: number, maxHp: number) => {
     return (currentHp / maxHp) * 100;
   };
+
+  const isGameOver = monster1Hp === 0 || monster2Hp === 0; // Check if the game is over
 
   return (
     <div className="Battle">
@@ -69,15 +73,15 @@ export default function Battle({ selectedMonsters }: BattleProps) {
           </div>
           <button
             onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)}
-            disabled={!isMonster1Turn || monster2Hp === 0}
-            className={!isMonster1Turn || monster2Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
+            disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
+            className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack1.name}
           </button>
           <button
             onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage)}
-            disabled={!isMonster1Turn || monster2Hp === 0}
-            className={!isMonster1Turn || monster2Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
+            disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
+            className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack2.name}
           </button>
@@ -97,15 +101,15 @@ export default function Battle({ selectedMonsters }: BattleProps) {
           </div>
           <button
             onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)}
-            disabled={isMonster1Turn || monster1Hp === 0}
-            className={isMonster1Turn || monster1Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
+            disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
+            className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack1.name}
           </button>
           <button
             onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage)}
-            disabled={isMonster1Turn || monster1Hp === 0}
-            className={isMonster1Turn || monster1Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
+            disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
+            className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack2.name}
           </button>

@@ -82,4 +82,25 @@ describe('Battle Component', () => {
     // Monster2's attack buttons should be disabled
     expect(monster2Attack2Button).toBeEnabled();
   });
+
+  test('attack buttons are disabled once a monster has won', () => {
+    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+
+    // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
+    const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
+    const attackButtonMonster2 = screen.getByText(/Scratch/i);
+    for (let i = 0; i < 4; i++) {
+      fireEvent.click(attackButtonMonster1);
+      fireEvent.click(attackButtonMonster2);
+    }
+
+    // Verify that Monster 2's HP is 0
+    expect(screen.getByText(/HP: 0/i)).toBeInTheDocument();
+
+    // Verify that all attack buttons are disabled
+    const allButtons = screen.getAllByRole('button');
+    allButtons.forEach((button) => {
+      expect(button).toBeDisabled();
+    });
+  });
 });
