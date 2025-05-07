@@ -1,6 +1,7 @@
 import './styles.css';
 import { useState } from 'react';
 import MonsterSelectionResults from './MonsterSelectionResults';
+import MonsterSelection from './MonsterSelection';
 
 const monsters = [
   {
@@ -143,7 +144,6 @@ export default function PokePeruStart() {
   const [currentUser, setCurrentUser] = useState(1);
 
   const handleMonsterSelect = (monster: object) => {
-    console.log('handleMonsterSelect')
     if (selectedMonstersNames.includes(monster.name)) return; // Prevent duplicate selection
 
     setSelectedMonstersNames([...selectedMonstersNames, monster.name]);
@@ -152,33 +152,17 @@ export default function PokePeruStart() {
   };
 
   return (
-    <div className="PokePeruStart">
-      <h1>Monster Selection</h1>
+    <>
       {selectedMonstersNames.length < 2 ? (
-        <>
-          <h2>User {currentUser}, choose your monster:</h2>
-          <div className="monster-grid">
-            {monsters.map((monster) => (
-              <button
-                key={monster.name}
-                onClick={() => handleMonsterSelect(monster)}
-                disabled={selectedMonstersNames.includes(monster.name)}
-                className="monster-button"
-              >
-                <div>
-                  {monster.name}
-                </div>
-                <div>
-                  (Gym Leader: {monster.trainer})
-                </div>
-                <img src={monster.image} alt={monster.name} className="monster-image" />
-              </button>
-            ))}
-          </div>
-        </>
+        <MonsterSelection
+          monsters={monsters}
+          selectedMonstersNames={selectedMonstersNames}
+          currentUser={currentUser}
+          handleMonsterSelect={handleMonsterSelect}
+        />
       ) : (
         <MonsterSelectionResults selectedMonsters={selectedMonsters} />
       )}
-    </div>
+    </>
   );
 }
