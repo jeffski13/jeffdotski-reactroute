@@ -70,12 +70,14 @@ export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) 
           <button
             onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)}
             disabled={!isMonster1Turn || monster2Hp === 0}
+            className={!isMonster1Turn || monster2Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack1.name}
           </button>
           <button
             onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage)}
             disabled={!isMonster1Turn || monster2Hp === 0}
+            className={!isMonster1Turn || monster2Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack2.name}
           </button>
@@ -96,12 +98,14 @@ export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) 
           <button
             onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)}
             disabled={isMonster1Turn || monster1Hp === 0}
+            className={isMonster1Turn || monster1Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack1.name}
           </button>
           <button
             onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage)}
             disabled={isMonster1Turn || monster1Hp === 0}
+            className={isMonster1Turn || monster1Hp === 0 ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack2.name}
           </button>
