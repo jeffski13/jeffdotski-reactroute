@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import MonsterBattle from './MonsterBattle';
+import Battle from './Battle';
 
 const mockSelectedMonsters = [
   {
@@ -32,9 +32,9 @@ const mockSelectedMonsters = [
   },
 ];
 
-describe('MonsterBattle Component', () => {
+describe('Battle Component', () => {
   test('when monster1 attacks, monster2Hp is reduced', () => {
-    render(<MonsterBattle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} />);
 
     // Verify initial HP values
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
@@ -49,7 +49,7 @@ describe('MonsterBattle Component', () => {
   });
 
   test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
-    render(<MonsterBattle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} />);
 
     // Verify monster1's attack buttons are enabled
     const monster1Attack1Button = screen.getByText(/Quick Attack/i);

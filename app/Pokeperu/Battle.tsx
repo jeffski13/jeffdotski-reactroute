@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import './battle.css';
 
-interface MonsterBattleProps {
+interface BattleProps {
   selectedMonsters: {
     name: string;
     trainer: string;
@@ -27,7 +27,7 @@ interface MonsterBattleProps {
   }[];
 }
 
-export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) {
+export default function Battle({ selectedMonsters }: BattleProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
@@ -49,7 +49,7 @@ export default function MonsterBattle({ selectedMonsters }: MonsterBattleProps) 
   };
 
   return (
-    <div className="MonsterBattle">
+    <div className="Battle">
       <h1>Battle Time!</h1>
       <div className="battle-container">
         <div className="monster">

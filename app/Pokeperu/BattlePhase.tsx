@@ -2,25 +2,25 @@ import { useState } from 'react';
 import './styles.css';
 import './battle.css';
 import MonsterSelectionResults from './MonsterSelectionResults';
-import MonsterBattle from './MonsterBattle';
+import Battle from './Battle';
 
-interface MonsterBattleProps {
+interface BattleProps {
   selectedMonsters: { name: string; hp: number; image: string; }[];
 }
 
-export default function BattlePhase({ selectedMonsters }: MonsterBattleProps) {
+export default function BattlePhase({ selectedMonsters }: BattleProps) {
   const [isBattleClicked, setBattleClicked] = useState(false);
 
   if (selectedMonsters.length !== 2) {
     return <></>;
   }
 
-  console.log('MonsterBattle selectedMonsters:', selectedMonsters);
+  console.log('Battle selectedMonsters:', selectedMonsters);
 
   return (
     <div className="MonsterSelectionResults">
       {isBattleClicked ? (
-        <MonsterBattle selectedMonsters={selectedMonsters} />
+        <Battle selectedMonsters={selectedMonsters} />
       ) : (
         <MonsterSelectionResults
           monster1={selectedMonsters[0].name}
