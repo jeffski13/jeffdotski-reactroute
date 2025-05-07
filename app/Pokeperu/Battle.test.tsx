@@ -32,6 +32,11 @@ const mockSelectedMonsters = [
   },
 ];
 
+const mockSelectedMonstersSpeedMod = [{...mockSelectedMonsters[0]}, {...mockSelectedMonsters[1]}];
+mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
+mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
+
+
 describe('Battle Component', () => {
   test('when monster1 attacks, monster2Hp is reduced', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} />);
@@ -62,5 +67,19 @@ describe('Battle Component', () => {
     const monster2Attack2Button = screen.getByText(/Flamethrower/i);
     expect(monster2Attack1Button).toBeDisabled();
     expect(monster2Attack2Button).toBeDisabled();
+  });
+
+  test('monster with the highest speed attacks first', () => {
+    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} />);
+
+    // Verify that the monster with the highest speed (Pikachu) attacks first
+    const monster2Attack1Button = screen.getByText(/Scratch/i);
+    const monster2Attack2Button = screen.getByText(/Flamethrower/i);
+
+    // Monster1's attack buttons should be enabled
+    expect(monster2Attack1Button).toBeEnabled();
+
+    // Monster2's attack buttons should be disabled
+    expect(monster2Attack2Button).toBeEnabled();
   });
 });

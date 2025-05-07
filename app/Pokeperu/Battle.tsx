@@ -28,11 +28,11 @@ interface BattleProps {
 }
 
 export default function Battle({ selectedMonsters }: BattleProps) {
-  console.log('Selected Monsters:', selectedMonsters);
-
+  // Determine the first turn based on speed
+  const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
-  const [isMonster1Turn, setIsMonster1Turn] = useState(true); // Track whose turn it is
+  const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
 
   const handleAttack = (attacker: number, damage: number) => {
     if (attacker === 1) {

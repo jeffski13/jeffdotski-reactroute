@@ -18,9 +18,6 @@ export default function MonsterSelectionResults({
   monster2Image,
   setBattleClicked,
 }: MonsterSelectionResultsProps) {
-  console.log('MonsterSelectionResults Monsters 0:', monster1);
-  console.log('MonsterSelectionResults Monsters 1:', monster2);
-
   return (
     <div className="MonsterSelectionResults">
       <h1>Selection Results</h1>

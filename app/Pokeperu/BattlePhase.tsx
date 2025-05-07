@@ -15,8 +15,6 @@ export default function BattlePhase({ selectedMonsters }: BattleProps) {
     return <></>;
   }
 
-  console.log('Battle selectedMonsters:', selectedMonsters);
-
   return (
     <div className="MonsterSelectionResults">
       {isBattleClicked ? (
