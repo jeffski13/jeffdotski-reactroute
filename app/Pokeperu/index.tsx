@@ -1,11 +1,11 @@
-import PokePeruStart from './PokePeruStart';
+import PokePeruContent from './PokePeruContent';
 
 export default function PokePeru() {
   return (
       <div className="TitlePage" >
           Projects in Actions: Pokemon in Peru!
 
-          <PokePeruStart />
+          <PokePeruContent />
       </div>
   );
 }

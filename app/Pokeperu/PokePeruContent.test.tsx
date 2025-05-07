@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import PokePeruStart from './PokePeruStart';
+import PokePeruContent from './PokePeruContent';
 
 describe('PokePeruStart Component', () => {
   test('handleMonsterSelect modifies the selected monsters', () => {
-    render(<PokePeruStart />);
+    render(<PokePeruContent />);
 
     // Find the buttons for the monsters
     const pikachuButton = screen.getByText(/Pikachu/i);
