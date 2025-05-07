@@ -32,12 +32,15 @@ export default function MonsterBattle({ selectedMonsters }: BattlePageProps) {
 
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
+  const [isMonster1Turn, setIsMonster1Turn] = useState(true); // Track whose turn it is
 
   const handleAttack = (attacker: number, damage: number) => {
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 1 attacks Monster 2
+      setIsMonster1Turn(false); // Switch to Monster 2's turn
     } else {
       setMonster1Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 2 attacks Monster 1
+      setIsMonster1Turn(true); // Switch to Monster 1's turn
     }
   };
 
@@ -46,7 +49,7 @@ export default function MonsterBattle({ selectedMonsters }: BattlePageProps) {
   };
 
   return (
-    <div className="BattlePage">
+    <div className="MonsterBattle">
       <h1>Battle Time!</h1>
       <div className="battle-container">
         <div className="monster">
@@ -64,10 +67,16 @@ export default function MonsterBattle({ selectedMonsters }: BattlePageProps) {
               }}
             ></div>
           </div>
-          <button onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)} disabled={monster2Hp === 0}>
+          <button
+            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage)}
+            disabled={!isMonster1Turn || monster2Hp === 0}
+          >
             {selectedMonsters[0].attack1.name}
           </button>
-          <button onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage)} disabled={monster2Hp === 0}>
+          <button
+            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage)}
+            disabled={!isMonster1Turn || monster2Hp === 0}
+          >
             {selectedMonsters[0].attack2.name}
           </button>
         </div>
@@ -84,10 +93,16 @@ export default function MonsterBattle({ selectedMonsters }: BattlePageProps) {
               }}
             ></div>
           </div>
-          <button onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)} disabled={monster1Hp === 0}>
+          <button
+            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage)}
+            disabled={isMonster1Turn || monster1Hp === 0}
+          >
             {selectedMonsters[1].attack1.name}
           </button>
-          <button onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage)} disabled={monster1Hp === 0}>
+          <button
+            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage)}
+            disabled={isMonster1Turn || monster1Hp === 0}
+          >
             {selectedMonsters[1].attack2.name}
           </button>
         </div>
