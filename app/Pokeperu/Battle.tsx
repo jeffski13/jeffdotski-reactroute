@@ -37,6 +37,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
+  const [attackResult, setAttackResult] = useState<string | null>(null); // Track the result of the last attack
 
   const handleAttack = (attacker: number, damage: number, attackType: MonsterType) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -49,7 +50,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
       adjustedDamage *= 2;
     }
-    
+
     const typeEffectiveness = (attackType: MonsterType, defenderType: MonsterType | null) => {
       if (!defenderType) return 1; // No second type
 
@@ -84,6 +85,9 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
 
     adjustedDamage *= primaryEffectiveness * secondaryEffectiveness;
+    
+    //half the damage to make the battle last longer
+    adjustedDamage /= 2;
 
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
@@ -92,6 +96,9 @@ export default function Battle({ selectedMonsters }: BattleProps) {
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 2 attacks Monster 1
       setIsMonster1Turn(true); // Switch to Monster 1's turn
     }
+
+    // Set the attack result message
+    setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
   };
 
   const calculateHpPercentage = (currentHp: number, maxHp: number) => {
@@ -163,6 +170,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
           </button>
         </div>
       </div>
+      {attackResult && <p className="attack-result">{attackResult}</p>}
       {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}
       {monster2Hp === 0 && <h2>{selectedMonsters[0].name} Wins!</h2>}
     </div>
