@@ -49,24 +49,41 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
       adjustedDamage *= 2;
     }
+    
+    const typeEffectiveness = (attackType: MonsterType, defenderType: MonsterType | null) => {
+      if (!defenderType) return 1; // No second type
 
-    // Double damage if attack type is strong against defender's type or second type
-    if (attackType === MonsterType.Fire && (defenderMonster.type === MonsterType.Grass || defenderMonster.secondType === MonsterType.Grass)) {
-      adjustedDamage *= 2;
-    } else if (attackType === MonsterType.Water && (defenderMonster.type === MonsterType.Fire || defenderMonster.secondType === MonsterType.Fire)) {
-      adjustedDamage *= 2;
-    } else if (attackType === MonsterType.Grass && (defenderMonster.type === MonsterType.Water || defenderMonster.secondType === MonsterType.Water)) {
-      adjustedDamage *= 2;
-    }
+      const effectivenessChart: Record<MonsterType, { x0: MonsterType[]; x0_5: MonsterType[]; x2: MonsterType[] }> = {
+        [MonsterType.Normal]: { x0: [MonsterType.Ghost], x0_5: [MonsterType.Rock, MonsterType.Steel], x2: [] },
+        [MonsterType.Fire]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Rock, MonsterType.Dragon], x2: [MonsterType.Grass, MonsterType.Ice, MonsterType.Bug, MonsterType.Steel] },
+        [MonsterType.Water]: { x0: [], x0_5: [MonsterType.Water, MonsterType.Grass, MonsterType.Dragon], x2: [MonsterType.Fire, MonsterType.Ground, MonsterType.Rock] },
+        [MonsterType.Electric]: { x0: [MonsterType.Ground], x0_5: [MonsterType.Electric, MonsterType.Grass, MonsterType.Dragon], x2: [MonsterType.Water, MonsterType.Flying] },
+        [MonsterType.Grass]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Grass, MonsterType.Poison, MonsterType.Flying, MonsterType.Bug, MonsterType.Dragon, MonsterType.Steel], x2: [MonsterType.Water, MonsterType.Ground, MonsterType.Rock] },
+        [MonsterType.Ice]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Ice, MonsterType.Steel], x2: [MonsterType.Grass, MonsterType.Ground, MonsterType.Flying, MonsterType.Dragon] },
+        [MonsterType.Fighting]: { x0: [MonsterType.Ghost], x0_5: [MonsterType.Poison, MonsterType.Flying, MonsterType.Psychic, MonsterType.Bug, MonsterType.Fairy], x2: [MonsterType.Normal, MonsterType.Ice, MonsterType.Rock, MonsterType.Dark, MonsterType.Steel] },
+        [MonsterType.Poison]: { x0: [MonsterType.Steel], x0_5: [MonsterType.Poison, MonsterType.Ground, MonsterType.Rock, MonsterType.Ghost], x2: [MonsterType.Grass, MonsterType.Fairy] },
+        [MonsterType.Ground]: { x0: [MonsterType.Flying], x0_5: [MonsterType.Grass, MonsterType.Bug], x2: [MonsterType.Fire, MonsterType.Electric, MonsterType.Poison, MonsterType.Rock, MonsterType.Steel] },
+        [MonsterType.Flying]: { x0: [], x0_5: [MonsterType.Electric, MonsterType.Rock, MonsterType.Steel], x2: [MonsterType.Grass, MonsterType.Fighting, MonsterType.Bug] },
+        [MonsterType.Psychic]: { x0: [MonsterType.Dark], x0_5: [MonsterType.Psychic, MonsterType.Steel], x2: [MonsterType.Fighting, MonsterType.Poison] },
+        [MonsterType.Bug]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Fighting, MonsterType.Poison, MonsterType.Flying, MonsterType.Ghost, MonsterType.Steel, MonsterType.Fairy], x2: [MonsterType.Grass, MonsterType.Psychic, MonsterType.Dark] },
+        [MonsterType.Rock]: { x0: [], x0_5: [MonsterType.Fighting, MonsterType.Ground, MonsterType.Steel], x2: [MonsterType.Fire, MonsterType.Ice, MonsterType.Flying, MonsterType.Bug] },
+        [MonsterType.Ghost]: { x0: [MonsterType.Normal], x0_5: [MonsterType.Dark], x2: [MonsterType.Psychic, MonsterType.Ghost] },
+        [MonsterType.Dragon]: { x0: [MonsterType.Fairy], x0_5: [MonsterType.Steel], x2: [MonsterType.Dragon] },
+        [MonsterType.Dark]: { x0: [], x0_5: [MonsterType.Fighting, MonsterType.Dark, MonsterType.Fairy], x2: [MonsterType.Psychic, MonsterType.Ghost] },
+        [MonsterType.Steel]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Electric, MonsterType.Steel], x2: [MonsterType.Ice, MonsterType.Rock, MonsterType.Fairy] },
+        [MonsterType.Fairy]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Poison, MonsterType.Steel], x2: [MonsterType.Fighting, MonsterType.Dragon, MonsterType.Dark] },
+      };
 
-    // Halve damage if attack type is weak against defender's type or second type
-    if (attackType === MonsterType.Fire && (defenderMonster.type === MonsterType.Ground || defenderMonster.secondType === MonsterType.Ground)) {
-      adjustedDamage /= 2;
-    } else if (attackType === MonsterType.Water && (defenderMonster.type === MonsterType.Grass || defenderMonster.secondType === MonsterType.Grass)) {
-      adjustedDamage /= 2;
-    } else if (attackType === MonsterType.Grass && (defenderMonster.type === MonsterType.Fire || defenderMonster.secondType === MonsterType.Fire)) {
-      adjustedDamage /= 2;
-    }
+      if (effectivenessChart[attackType].x0.includes(defenderType)) return 0;
+      if (effectivenessChart[attackType].x0_5.includes(defenderType)) return 0.5;
+      if (effectivenessChart[attackType].x2.includes(defenderType)) return 2;
+      return 1;
+    };
+
+    const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
+    const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
+
+    adjustedDamage *= primaryEffectiveness * secondaryEffectiveness;
 
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
