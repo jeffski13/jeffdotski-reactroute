@@ -37,14 +37,41 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
 
-  const handleAttack = (attacker: number, damage: number, attackType: string, attackingMonsterType: string, attackingMonsterSecondType: string | null, defendingMonsterType: string, defendingMonsterSecondType: string | null) => {
+  const handleAttack = (attacker: number, damage: number, attackType: string) => {
+    const attackerMonster = selectedMonsters[attacker - 1];
+    const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
+
+    // Adjust damage based on attack type and monster types
+    let adjustedDamage = damage;
+
+    // Double damage if attack type matches attacker's type or second type
+    if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
+      adjustedDamage *= 2;
+    }
+
+    // Double damage if attack type is strong against defender's type or second type
+    if (attackType === 'fire' && (defenderMonster.type === 'grass' || defenderMonster.secondType === 'grass')) {
+      adjustedDamage *= 2;
+    } else if (attackType === 'water' && (defenderMonster.type === 'fire' || defenderMonster.secondType === 'fire')) {
+      adjustedDamage *= 2;
+    } else if (attackType === 'grass' && (defenderMonster.type === 'water' || defenderMonster.secondType === 'water')) {
+      adjustedDamage *= 2;
+    }
+
+    // Halve damage if attack type is weak against defender's type or second type
+    if (attackType === 'fire' && (defenderMonster.type === 'ground' || defenderMonster.secondType === 'ground')) {
+      adjustedDamage /= 2;
+    } else if (attackType === 'water' && (defenderMonster.type === 'grass' || defenderMonster.secondType === 'grass')) {
+      adjustedDamage /= 2;
+    } else if (attackType === 'grass' && (defenderMonster.type === 'fire' || defenderMonster.secondType === 'fire')) {
+      adjustedDamage /= 2;
+    }
+
     if (attacker === 1) {
-      setMonster2Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 1 attacks Monster 2
-      console.log(`Monster 1 attacks with ${attackingMonsterType}${attackingMonsterSecondType ? ' and ' + attackingMonsterSecondType : ''}`);
+      setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
       setIsMonster1Turn(false); // Switch to Monster 2's turn
     } else {
-      setMonster1Hp((prevHp) => Math.max(prevHp - damage, 0)); // Monster 2 attacks Monster 1
-      console.log(`Monster 2 attacks with ${attackingMonsterType}${attackingMonsterSecondType ? ' and ' + attackingMonsterSecondType : ''}`);
+      setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 2 attacks Monster 1
       setIsMonster1Turn(true); // Switch to Monster 1's turn
     }
   };
@@ -75,14 +102,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
             ></div>
           </div>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].type, selectedMonsters[0].secondType, selectedMonsters[1].type, selectedMonsters[1].secondType)}
+            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type)}
             disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
             className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack1.name}
           </button>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].type, selectedMonsters[0].secondType, selectedMonsters[1].type, selectedMonsters[1].secondType)}
+            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type)}
             disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
             className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
@@ -103,14 +130,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
             ></div>
           </div>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].type, selectedMonsters[1].secondType, selectedMonsters[0].type, selectedMonsters[0].secondType)}
+            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type)}
             disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
             className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack1.name}
           </button>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].type, selectedMonsters[1].secondType, selectedMonsters[0].type, selectedMonsters[0].secondType)}
+            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type)}
             disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
             className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
