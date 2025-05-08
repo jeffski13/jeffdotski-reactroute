@@ -6,4 +6,5 @@ export default [
     route(ROUTES.aboutMe.bio, "routes/aboutMeBio.tsx"),
     route(ROUTES.aboutMe.hobbies, "routes/aboutMeHobbies.tsx"),
     route(ROUTES.pokePeru.battle, "routes/pokeperubattle.tsx"),
+    route(ROUTES.pokePeru.pokedex, "routes/pokeperupokedex.tsx"),
 ] satisfies RouteConfig;

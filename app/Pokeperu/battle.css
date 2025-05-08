@@ -52,7 +52,7 @@ button {
 }
 
 .attack-button.enabled {
-  background-color: #4caf50; /* Green for enabled buttons */
+  background-color: #2242b6; /* Green for enabled buttons */
   color: white;
 }
 

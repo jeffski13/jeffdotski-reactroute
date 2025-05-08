@@ -1,4 +1,5 @@
 import React from 'react';
+import ROUTES from '../consts/ROUTES';
 
 interface MonsterSelectionProps {
   monsters: {
@@ -19,7 +20,10 @@ export default function MonsterSelection({
 }: MonsterSelectionProps) {
   return (
     <div className="PokePeruStart">
-      <h1>Monster Selection</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>Monster Selection</h1>
+        <a href={ROUTES.pokePeru.pokedex} className="pokedex-button">Pokedex</a>
+      </div>
       <h2>User {currentUser}, choose your monster:</h2>
       <div className="monster-grid">
         {monsters.map((monster) => (

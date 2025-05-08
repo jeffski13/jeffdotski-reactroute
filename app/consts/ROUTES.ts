@@ -4,7 +4,8 @@ const ROUTES = {
       hobbies: '/aboutme/hobbies',
     },
     pokePeru: {
-      battle: '/pokePeru/battle'
+      battle: '/pokePeru/battle',
+      pokedex: '/pokePeru/pokedex',
     }
 };
 export default ROUTES;
