@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';
 import './battle.css';
+import { MonsterType } from './PokePeruContent';
 
 interface BattleProps {
   selectedMonsters: {
@@ -12,18 +13,18 @@ interface BattleProps {
     specialAttack: number;
     specialDefense: number;
     speed: number;
-    type: string;
-    secondType: string | null;
+    type: MonsterType;
+    secondType: MonsterType | null;
     image: string;
     attack1: {
       name: string;
       damage: number;
-      type: string;
+      type: MonsterType;
     };
     attack2: {
       name: string;
       damage: number;
-      type: string;
+      type: MonsterType;
     };
   }[];
 }
@@ -37,7 +38,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
 
-  const handleAttack = (attacker: number, damage: number, attackType: string) => {
+  const handleAttack = (attacker: number, damage: number, attackType: MonsterType) => {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
@@ -50,20 +51,20 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     }
 
     // Double damage if attack type is strong against defender's type or second type
-    if (attackType === 'fire' && (defenderMonster.type === 'grass' || defenderMonster.secondType === 'grass')) {
+    if (attackType === MonsterType.Fire && (defenderMonster.type === MonsterType.Grass || defenderMonster.secondType === MonsterType.Grass)) {
       adjustedDamage *= 2;
-    } else if (attackType === 'water' && (defenderMonster.type === 'fire' || defenderMonster.secondType === 'fire')) {
+    } else if (attackType === MonsterType.Water && (defenderMonster.type === MonsterType.Fire || defenderMonster.secondType === MonsterType.Fire)) {
       adjustedDamage *= 2;
-    } else if (attackType === 'grass' && (defenderMonster.type === 'water' || defenderMonster.secondType === 'water')) {
+    } else if (attackType === MonsterType.Grass && (defenderMonster.type === MonsterType.Water || defenderMonster.secondType === MonsterType.Water)) {
       adjustedDamage *= 2;
     }
 
     // Halve damage if attack type is weak against defender's type or second type
-    if (attackType === 'fire' && (defenderMonster.type === 'ground' || defenderMonster.secondType === 'ground')) {
+    if (attackType === MonsterType.Fire && (defenderMonster.type === MonsterType.Ground || defenderMonster.secondType === MonsterType.Ground)) {
       adjustedDamage /= 2;
-    } else if (attackType === 'water' && (defenderMonster.type === 'grass' || defenderMonster.secondType === 'grass')) {
+    } else if (attackType === MonsterType.Water && (defenderMonster.type === MonsterType.Grass || defenderMonster.secondType === MonsterType.Grass)) {
       adjustedDamage /= 2;
-    } else if (attackType === 'grass' && (defenderMonster.type === 'fire' || defenderMonster.secondType === 'fire')) {
+    } else if (attackType === MonsterType.Grass && (defenderMonster.type === MonsterType.Fire || defenderMonster.secondType === MonsterType.Fire)) {
       adjustedDamage /= 2;
     }
 

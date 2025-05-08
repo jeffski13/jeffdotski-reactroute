@@ -3,6 +3,27 @@ import { useState } from 'react';
 import BattlePhase from './BattlePhase';
 import MonsterSelection from './MonsterSelection';
 
+export enum MonsterType {
+  Normal = 'Normal',
+  Fire = 'Fire',
+  Water = 'Water',
+  Electric = 'Electric',
+  Grass = 'Grass',
+  Ice = 'Ice',
+  Fighting = 'Fighting',
+  Poison = 'Poison',
+  Ground = 'Ground',
+  Flying = 'Flying',
+  Psychic = 'Psychic',
+  Bug = 'Bug',
+  Rock = 'Rock',
+  Ghost = 'Ghost',
+  Dragon = 'Dragon',
+  Dark = 'Dark',
+  Steel = 'Steel',
+  Fairy = 'Fairy',
+}
+
 const monsters = [
   {
     name: 'Pikachu',
@@ -13,18 +34,18 @@ const monsters = [
     specialAttack: 50,
     specialDefense: 50,
     speed: 90,
-    type: 'Electric',
+    type: MonsterType.Electric,
     secondType: null, // Added second type
     image: '/images/pikachu.jpg',
     attack1: {
       name: 'Quick Attack',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Thunderbolt',
       damage: 20,
-      type: 'Electric',
+      type: MonsterType.Electric,
     },
   },
   {
@@ -36,18 +57,18 @@ const monsters = [
     specialAttack: 60,
     specialDefense: 50,
     speed: 65,
-    type: 'Fire',
+    type: MonsterType.Fire,
     secondType: null, // Added second type
     image: '/images/charmander.jpg',
     attack1: {
       name: 'Scratch',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Flamethrower',
       damage: 20,
-      type: 'Fire',
+      type: MonsterType.Fire,
     },
   },
   {
@@ -59,18 +80,18 @@ const monsters = [
     specialAttack: 65,
     specialDefense: 65,
     speed: 45,
-    type: 'Grass',
-    secondType: 'Poison', // Added second type
+    type: MonsterType.Grass,
+    secondType: MonsterType.Poison, // Added second type
     image: '/images/bulbasaur.jpg',
     attack1: {
       name: 'Tackle',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Vine Whip',
       damage: 20,
-      type: 'Grass',
+      type: MonsterType.Grass,
     },
   },
   {
@@ -82,18 +103,18 @@ const monsters = [
     specialAttack: 50,
     specialDefense: 64,
     speed: 43,
-    type: 'Water',
+    type: MonsterType.Water,
     secondType: null, // Added second type
     image: '/images/squirtle.png',
     attack1: {
       name: 'Tackle',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Water Gun',
       damage: 20,
-      type: 'Water',
+      type: MonsterType.Water,
     },
   },
   {
@@ -105,18 +126,18 @@ const monsters = [
     specialAttack: 45,
     specialDefense: 65,
     speed: 55,
-    type: 'Normal',
+    type: MonsterType.Normal,
     secondType: null, // Added second type
     image: '/images/eevee.png',
     attack1: {
       name: 'Quick Attack',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Bite',
       damage: 20,
-      type: 'Dark',
+      type: MonsterType.Dark,
     },
   },
   {
@@ -128,18 +149,18 @@ const monsters = [
     specialAttack: 45,
     specialDefense: 25,
     speed: 20,
-    type: 'Normal',
-    secondType: 'Fairy', // Added second type
+    type: MonsterType.Normal,
+    secondType: MonsterType.Fairy, // Added second type
     image: '/images/jigglypuff.jpg',
     attack1: {
       name: 'Pound',
       damage: 10,
-      type: 'Normal',
+      type: MonsterType.Normal,
     },
     attack2: {
       name: 'Sing',
       damage: 0,
-      type: 'Fairy', // Sing could be a status move, but for simplicity, it deals no damage here.
+      type: MonsterType.Fairy, // Sing could be a status move, but for simplicity, it deals no damage here.
     },
   },
 ];
