@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Battle from './Battle';
+import { MonsterType } from './PokePeruContent';
 
 const mockSelectedMonsters = [
   {
@@ -102,5 +103,82 @@ describe('Battle Component', () => {
     allButtons.forEach((button) => {
       expect(button).toBeDisabled();
     });
+  });
+
+  it('should deal no damage when an Electric type attack is used against a Ground type monster', () => {
+    const selectedMonsters = [
+      {...mockSelectedMonsters[0]},
+      {
+        name: 'Diglett',
+        trainer: 'Brock',
+        hp: 100,
+        attack: 55,
+        defense: 25,
+        specialAttack: 35,
+        specialDefense: 45,
+        speed: 95,
+        type: MonsterType.Ground,
+        secondType: null,
+        image: '/images/diglett.jpg',
+        attack1: {
+          name: 'Scratch',
+          damage: 10,
+          type: MonsterType.Normal,
+        },
+        attack2: {
+          name: 'Earthquake',
+          damage: 50,
+          type: MonsterType.Ground,
+        },
+      },
+    ];
+
+    render(<Battle selectedMonsters={selectedMonsters} />);
+
+    // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Diglett)
+    const thunderboltButton = screen.getByText('Thunderbolt');
+    fireEvent.click(thunderboltButton);
+
+    // Assert that Diglett's HP remains unchanged
+    expect(screen.getByText(/HP: 100/i)).toBeInTheDocument();
+  });
+
+  it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
+    const selectedMonsters = [
+      {...mockSelectedMonsters[0]},
+      {
+        name: 'Gengar',
+        trainer: 'Morty',
+        hp: 100,
+        attack: 65,
+        defense: 60,
+        specialAttack: 130,
+        specialDefense: 75,
+        speed: 110,
+        type: MonsterType.Ghost,
+        secondType: MonsterType.Ground,
+        image: '/images/gengar.jpg',
+        attack1: {
+          name: 'Shadow Ball',
+          damage: 50,
+          type: MonsterType.Ghost,
+        },
+        attack2: {
+          name: 'Earthquake',
+          damage: 50,
+          type: MonsterType.Ground,
+        },
+      },
+    ];
+
+    render(<Battle selectedMonsters={selectedMonsters} />);
+
+    // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Gengar)
+    const thunderboltButton = screen.getByText('Thunderbolt');
+    fireEvent.click(thunderboltButton);
+
+    // Assert that Gengar's HP remains unchanged
+    const gengarHp = screen.getByText('HP: 100');
+    expect(gengarHp).toBeInTheDocument();
   });
 });
