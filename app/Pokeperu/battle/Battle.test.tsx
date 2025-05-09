@@ -1,8 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Battle from './Battle';
+import Battle, { calculateAdjustedDamage } from './Battle';
 import { MonsterType } from '../MonsterType';
+import type { Monster } from '../monsters';
 
-const mockSelectedMonsters = [
+const mockSelectedMonsters: Monster[] = [
   {
     name: 'Pikachu',
     trainer: 'Ash',
@@ -12,10 +13,11 @@ const mockSelectedMonsters = [
     specialAttack: 50,
     specialDefense: 50,
     speed: 90,
-    type: 'Electric',
+    type: MonsterType.Electric,
+    secondType: null,
     image: '/images/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: 'Normal' },
-    attack2: { name: 'Thunderbolt', damage: 20, type: 'Electric' },
+    attack1: { name: 'Quick Attack', damage: 10, type: MonsterType.Normal },
+    attack2: { name: 'Thunderbolt', damage: 20, type: MonsterType.Electric },
   },
   {
     name: 'Charmander',
@@ -26,10 +28,11 @@ const mockSelectedMonsters = [
     specialAttack: 60,
     specialDefense: 50,
     speed: 65,
-    type: 'Fire',
+    type: MonsterType.Fire,
+    secondType: null,
     image: '/images/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: 'Normal' },
-    attack2: { name: 'Flamethrower', damage: 20, type: 'Fire' },
+    attack1: { name: 'Scratch', damage: 10, type: MonsterType.Normal },
+    attack2: { name: 'Flamethrower', damage: 20, type: MonsterType.Fire },
   },
 ];
 
@@ -50,8 +53,10 @@ describe('Battle Component', () => {
     const attackButton = screen.getByText(/Quick Attack/i);
     fireEvent.click(attackButton);
 
+    const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type);
+    const expectedHp = mockSelectedMonsters[1].hp - damage;
     // Verify that monster2's HP is reduced
-    expect(screen.getByText(/HP: 34/i)).toBeInTheDocument(); // Charmander's HP after attack
+    expect(screen.getByText(`HP: ${expectedHp}`)).toBeInTheDocument(); // Charmander's HP after attack
   });
   
   test('when monster1 attacks, the results of the attack are displayed', () => {
