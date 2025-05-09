@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './styles.css';
+import '../styles.css';
 import './battle.css';
-import { MonsterType } from './PokePeruContent';
+import { MonsterType } from '../MonsterType';
 
 interface BattleProps {
   selectedMonsters: {

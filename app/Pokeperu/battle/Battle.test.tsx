@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Battle from './Battle';
-import { MonsterType } from './PokePeruContent';
+import { MonsterType } from '../MonsterType';
 
 const mockSelectedMonsters = [
   {
@@ -51,7 +51,22 @@ describe('Battle Component', () => {
     fireEvent.click(attackButton);
 
     // Verify that monster2's HP is reduced
-    expect(screen.getByText(/HP: 29/i)).toBeInTheDocument(); // Charmander's HP after attack
+    expect(screen.getByText(/HP: 34/i)).toBeInTheDocument(); // Charmander's HP after attack
+  });
+  
+  test('when monster1 attacks, the results of the attack are displayed', () => {
+    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+
+    // Verify initial HP values
+    expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
+    expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
+
+    // Find and click the attack button for monster1 (Pikachu)
+    const attackButton = screen.getByText(/Quick Attack/i);
+    fireEvent.click(attackButton);
+
+    // Verify that monster2's HP is reduced
+    expect(screen.getByText(/Pikachu did 5 damage to Charmander./i)).toBeInTheDocument(); // 
   });
 
   test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
@@ -90,7 +105,7 @@ describe('Battle Component', () => {
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
     const attackButtonMonster2 = screen.getByText(/Scratch/i);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 10; i++) {
       fireEvent.click(attackButtonMonster1);
       fireEvent.click(attackButtonMonster2);
     }

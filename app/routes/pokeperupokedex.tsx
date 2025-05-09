@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import JeffSkiPageWithContent from "../Inf/JeffSkiPageWithContent"
-import Pokedex from "../Pokeperu/Pokedex";
+import Pokedex from "../Pokeperu/pokedex/Pokedex";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -10,6 +10,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 const Content = JeffSkiPageWithContent(Pokedex);
-export default function PokePeruBattle() {
+export default function PokePeruPokedex() {
   return <Content />;
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import ROUTES from '../consts/ROUTES';
 
 interface MonsterSelectionProps {

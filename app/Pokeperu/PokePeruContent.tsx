@@ -1,6 +1,6 @@
 import './styles.css';
 import { useState } from 'react';
-import BattlePhase from './BattlePhase';
+import BattlePhase from './battle/BattlePhase';
 import MonsterSelection from './MonsterSelection';
 import { monsters, type Monster } from './monsters';
 

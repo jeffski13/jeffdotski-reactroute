@@ -1,6 +1,6 @@
 import React from 'react';
-import ROUTES from '../consts/ROUTES';
-import { monsters, type Monster } from './monsters';
+import ROUTES from '../../consts/ROUTES';
+import { monsters, type Monster } from '../monsters';
 
 
 export default function Pokedex() {

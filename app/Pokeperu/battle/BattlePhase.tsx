@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './styles.css';
-import './battle.css';
 import MonsterSelectionResults from './MonsterSelectionResults';
 import Battle from './Battle';
+import '../styles.css';
+import './battle.css';
 
 interface BattleProps {
   selectedMonsters: {

@@ -1,6 +1,5 @@
-import React from 'react';
 import { Button } from 'react-bootstrap';
-import './styles.css';
+import '../styles.css';
 import './battlestart.css';
 
 interface MonsterSelectionResultsProps {
