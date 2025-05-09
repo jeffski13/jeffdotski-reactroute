@@ -2,31 +2,10 @@ import React, { useState } from 'react';
 import '../styles.css';
 import './battle.css';
 import { MonsterType } from '../MonsterType';
+import type { Monster } from '../monsters';
 
 interface BattleProps {
-  selectedMonsters: {
-    name: string;
-    trainer: string;
-    hp: number;
-    attack: number;
-    defense: number;
-    specialAttack: number;
-    specialDefense: number;
-    speed: number;
-    type: MonsterType;
-    secondType: MonsterType | null;
-    image: string;
-    attack1: {
-      name: string;
-      damage: number;
-      type: MonsterType;
-    };
-    attack2: {
-      name: string;
-      damage: number;
-      type: MonsterType;
-    };
-  }[];
+  selectedMonsters: Monster[];
 }
 
 export default function Battle({ selectedMonsters }: BattleProps) {
