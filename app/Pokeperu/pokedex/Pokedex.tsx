@@ -1,7 +1,7 @@
 import React from 'react';
 import ROUTES from '../../consts/ROUTES';
 import { monsters, type Monster } from '../monsters';
-import { getTypeColor } from '../typeColors';
+import { getTypeColor } from './typeColors';
 import './pokedex.css';
 
 export default function Pokedex() {
@@ -14,11 +14,19 @@ export default function Pokedex() {
           <li key={monster.name} className="monster-item">
             <h2>{monster.name}</h2>
             <img src={monster.image} alt={monster.name} className="monster-image" />
-            <p style={{ color: getTypeColor(monster.type) }}>Type: {monster.type}</p>
+            <div
+              className="type-badge"
+              style={{ backgroundColor: getTypeColor(monster.type) }}
+            >
+              {monster.type}
+            </div>
             {monster.secondType && (
-              <p style={{ color: getTypeColor(monster.secondType) }}>
-                Secondary Type: {monster.secondType}
-              </p>
+              <div
+                className="type-badge"
+                style={{ backgroundColor: getTypeColor(monster.secondType) }}
+              >
+                {monster.secondType}
+              </div>
             )}
             <p className="monster-description">{monster.description}</p>
           </li>

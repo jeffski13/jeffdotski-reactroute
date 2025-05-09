@@ -1,11 +1,11 @@
-import { MonsterType } from './MonsterType';
+import { MonsterType } from '../MonsterType';
 
 export const getTypeColor = (type: MonsterType): string => {
   const typeColors: Record<MonsterType, string> = {
     [MonsterType.Normal]: '#A8A77A',
     [MonsterType.Fire]: '#EE8130',
     [MonsterType.Water]: '#6390F0',
-    [MonsterType.Electric]: '#F7D02C',
+    [MonsterType.Electric]: '#ba9b1e',
     [MonsterType.Grass]: '#7AC74C',
     [MonsterType.Ice]: '#96D9D6',
     [MonsterType.Fighting]: '#C22E28',
