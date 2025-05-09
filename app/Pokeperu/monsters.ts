@@ -20,6 +20,7 @@ export interface Monster {
   type: MonsterType;
   secondType: MonsterType | null;
   image: string;
+  description: string | null; // New description attribute
   attack1: MonsterAttack;
   attack2: MonsterAttack;
 }
@@ -38,6 +39,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Electric,
     secondType: null,
     image: '/images/pikachu.jpg',
+    description: 'Pikachu is an Electric-type Pokémon known for its agility and powerful Thunderbolt attack.',
     attack1: {
       name: 'Quick Attack',
       damage: 10,
@@ -61,6 +63,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Fire,
     secondType: null,
     image: '/images/charmander.jpg',
+    description: 'Charmander is a Fire-type Pokémon that uses its fiery tail to intimidate opponents.',
     attack1: {
       name: 'Scratch',
       damage: 10,
@@ -84,6 +87,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Grass,
     secondType: MonsterType.Poison,
     image: '/images/bulbasaur.jpg',
+    description: 'Bulbasaur is a Grass/Poison-type Pokémon that uses its bulb to unleash powerful attacks.',
     attack1: {
       name: 'Tackle',
       damage: 10,
@@ -107,6 +111,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Water,
     secondType: null,
     image: '/images/squirtle.png',
+    description: 'Squirtle is a Water-type Pokémon that uses its shell for defense and Water Gun for offense.',
     attack1: {
       name: 'Tackle',
       damage: 10,
@@ -130,6 +135,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Normal,
     secondType: null,
     image: '/images/eevee.png',
+    description: 'Eevee is a Normal-type Pokémon known for its adaptability and potential to evolve into various forms.',
     attack1: {
       name: 'Quick Attack',
       damage: 10,
@@ -153,6 +159,7 @@ export const monsters: Monster[] = [
     type: MonsterType.Normal,
     secondType: MonsterType.Fairy,
     image: '/images/jigglypuff.jpg',
+    description: 'Jigglypuff is a Normal/Fairy-type Pokémon that uses its singing ability to put opponents to sleep.',
     attack1: {
       name: 'Pound',
       damage: 10,
