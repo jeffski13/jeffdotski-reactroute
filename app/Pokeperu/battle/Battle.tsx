@@ -67,7 +67,8 @@ export const calculateAdjustedDamage = (
   // Half the damage to make the battle last longer
   adjustedDamage /= 2;
 
-  return adjustedDamage;
+  // Round the final adjusted damage to remove decimals
+  return Math.round(adjustedDamage);
 };
 
 export default function Battle({ selectedMonsters }: BattleProps) {
