@@ -15,7 +15,6 @@ export const calculateAdjustedDamage = (
   attackType: MonsterType,
   isPhysical: boolean
 ): number => {
-  
   const typeEffectiveness = (attackType: MonsterType, defenderType: MonsterType | null) => {
     if (!defenderType) return 1; // No second type
 
@@ -45,8 +44,6 @@ export const calculateAdjustedDamage = (
     if (effectivenessChart[attackType].x2.includes(defenderType)) return 2;
     return 1;
   };
-
-  
   
   // Calculate adjusted damage using the provided formula
   const A = isPhysical ? attackerMonster.attack : attackerMonster.specialAttack;
@@ -59,8 +56,9 @@ export const calculateAdjustedDamage = (
   // Adjust damage based on type effectiveness
   const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
   const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
-  adjustedDamage *= primaryEffectiveness * secondaryEffectiveness;
-
+  const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
+  adjustedDamage *= effectivenessFactor;
+  
   // STAB (Same Type Attack Bonus)
   if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
     adjustedDamage *= 2;
@@ -84,11 +82,11 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
   const [attackResult, setAttackResult] = useState<string | null>(null); // Track the result of the last attack
 
-  const handleAttack = (attacker: number, damage: number, attackType: MonsterType, isPhysical: boolean) => {
+  const handleAttack = (attacker: number, attackBaseDamage: number, attackType: MonsterType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
-    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, damage, attackType, isPhysical);
+    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
 
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
@@ -135,7 +133,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
             {selectedMonsters[0].attack1.name}
           </button>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack1.isPhysical)}
+            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical)}
             disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
             className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >

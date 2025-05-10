@@ -103,7 +103,7 @@ export const monsters: Monster[] = [
       name: 'Vine Whip',
       damage: 20,
       type: MonsterType.Grass,
-      isPhysical: true,
+      isPhysical: false,
     },
   },
   {
