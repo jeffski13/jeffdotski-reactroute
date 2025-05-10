@@ -102,6 +102,21 @@
   transition: width 0.3s ease-in-out;
 }
 
+.stats-container {
+  display: flex;
+  justify-content: space-between; /* Space between labels */
+  align-items: center; /* Center vertically inside the parent div */
+  margin-top: 5px; /* Space between the bar and labels */
+}
+
+.stats-label-container {
+  display: flex;
+  justify-content: space-between; /* Space between labels */
+  align-items: center; /* Center vertically inside the parent div */
+}
+
 .stats-label {
   white-space: nowrap; /* Prevent line breaks */
+  display: flex;
+  align-items: center; /* Center vertically inside the parent div */
 }

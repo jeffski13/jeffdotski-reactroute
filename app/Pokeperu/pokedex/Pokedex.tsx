@@ -39,30 +39,60 @@ export default function Pokedex() {
               <p className="monster-description">{monster.description}</p>
               <Container>
                 <Row>
-                  <Col md={4}>
-                    <div><span className='stats-label'>HP:</span></div>
-                    <div><span className='stats-label'>Attack:</span></div>
-                    <div><span className='stats-label'>Defense:</span></div>
-                    <div><span className='stats-label'>Special Attack:</span></div>
-                    <div><span className='stats-label'>Special Defense:</span></div>
-                    <div><span className='stats-label'>Speed:</span></div>
+                  <Col md={4} className='stats-container'>
+                    <div className="stats-label-container"><span className='stats-label'>Hit Points:</span></div>
                   </Col>
                   <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.hp}%`, backgroundColor: '#FF5959' }}></div>
                       </div>
+                  </Col>
+                </Row>
+                    <Row>
+                  <Col md={4} className='stats-container' >
+                    <div className="stats-label-container"><span className='stats-label'>Attack:</span></div>
+                  </Col>
+                  <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.attack}%`, backgroundColor: '#F5AC78' }}></div>
                       </div>
+                  </Col>
+                </Row>
+                    <Row>
+                  <Col md={4} className='stats-container' >
+                    <div className="stats-label-container"><span className='stats-label'>Defense:</span></div>
+                  </Col>
+                  <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.defense}%`, backgroundColor: '#FAE078' }}></div>
                       </div>
+                  </Col>
+                </Row>
+                    <Row>
+                  <Col md={4} className='stats-container' >
+                    <div className="stats-label-container"><span className='stats-label'>Special Attack:</span></div>
+                  </Col>
+                  <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.specialAttack}%`, backgroundColor: '#9DB7F5' }}></div>
                       </div>
+                  </Col>
+                </Row>
+                    <Row>
+                  <Col md={4} className='stats-container' >
+                    <div className="stats-label-container"><span className='stats-label'>Special Defense:</span></div>
+                  </Col>
+                  <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.specialDefense}%`, backgroundColor: '#A7DB8D' }}></div>
                       </div>
+                  </Col>
+                </Row>
+                    <Row>
+                  <Col md={4} className='stats-container' >
+                    <div className="stats-label-container"><span className='stats-label'>Speed:</span></div>
+                  </Col>
+                  <Col md={8}>
                       <div className="stat-bar">
                         <div className="bar" style={{ width: `${monster.speed}%`, backgroundColor: '#FA92B2' }}></div>
                       </div>
