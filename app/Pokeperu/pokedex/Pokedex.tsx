@@ -12,23 +12,25 @@ export default function Pokedex() {
       <ul className="monster-list">
         {monsters.map((monster: Monster) => (
           <li key={monster.name} className="monster-item">
-            <h2>{monster.name}</h2>
             <img src={monster.image} alt={monster.name} className="monster-image" />
-            <div
-              className="type-badge"
-              style={{ backgroundColor: getTypeColor(monster.type) }}
-            >
-              {monster.type}
-            </div>
-            {monster.secondType && (
+            <div className="monster-details">
+              <h2 className="monster-name">{monster.name}</h2>
               <div
                 className="type-badge"
-                style={{ backgroundColor: getTypeColor(monster.secondType) }}
+                style={{ backgroundColor: getTypeColor(monster.type) }}
               >
-                {monster.secondType}
+                {monster.type}
               </div>
-            )}
-            <p className="monster-description">{monster.description}</p>
+              {monster.secondType && (
+                <div
+                  className="type-badge"
+                  style={{ backgroundColor: getTypeColor(monster.secondType) }}
+                >
+                  {monster.secondType}
+                </div>
+              )}
+              <p className="monster-description">{monster.description}</p>
+            </div>
           </li>
         ))}
       </ul>

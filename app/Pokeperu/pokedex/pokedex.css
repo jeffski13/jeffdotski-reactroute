@@ -1,43 +1,53 @@
 .Pokedex {
-    text-align: center;
+  text-align: center;
 }
 
 .monster-list {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .monster-item {
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    /* border: 1px solid #ba9b1e; */
-    border-radius: 8px;
-    padding: 15px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+  display: flex;
+  align-items: flex-start;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .monster-image {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    margin-bottom: 10px;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-right: 15px;
 }
 
-.monster-description {
-    font-style: italic;
-    color: #555;
+.monster-details {
+  flex: 1;
+}
+
+.monster-name {
+  font-weight: bold;
+  margin: 0 0 10px 0;
 }
 
 .type-badge {
   display: inline-block;
   padding: 5px 10px;
-  margin: 5px 0;
+  margin: 5px 5px 5px 0;
   border-radius: 12px;
   color: white;
   font-weight: bold;
   text-align: center;
-  min-width: 120px;
+}
+
+.monster-description {
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
 }
