@@ -21,7 +21,13 @@ export default function MonsterSelection({
     <div className="PokePeruStart">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Monster Selection</h1>
-        <a href={ROUTES.pokePeru.pokedex} className="pokedex-button">Pokedex</a>
+        <a href={ROUTES.pokePeru.pokedex} className="pokedex-link">
+          <img
+            src="/images/pokedex-icon.png"
+            alt="Pokedex"
+            className="pokedex-image"
+          />
+        </a>
       </div>
       <h2>User {currentUser}, choose your monster:</h2>
       <div className="monster-grid">
