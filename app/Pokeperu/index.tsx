@@ -8,6 +8,7 @@ export default function PokePeru() {
   return (
     <div className="TitlePage" >
           <h3 className="pokeperu-header">Projects in Actions: Pokemon in Peru!</h3>
+          <hr/>
           <PokePeruContent />
       </div>
   );
