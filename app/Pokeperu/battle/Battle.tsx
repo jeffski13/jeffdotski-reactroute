@@ -11,17 +11,11 @@ interface BattleProps {
 export const calculateAdjustedDamage = (
   attackerMonster: Monster,
   defenderMonster: Monster,
-  damage: number,
+  attackBaseDamage: number,
   attackType: MonsterType,
   isPhysical: boolean
 ): number => {
-  let adjustedDamage = damage;
-
-  // Double damage if attack type matches attacker's type or second type
-  if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
-    adjustedDamage *= 2;
-  }
-
+  
   const typeEffectiveness = (attackType: MonsterType, defenderType: MonsterType | null) => {
     if (!defenderType) return 1; // No second type
 
@@ -52,21 +46,30 @@ export const calculateAdjustedDamage = (
     return 1;
   };
 
+  
+  
+  // Calculate adjusted damage using the provided formula
+  const A = isPhysical ? attackerMonster.attack : attackerMonster.specialAttack;
+  const D = isPhysical ? defenderMonster.defense : defenderMonster.specialDefense;
+  
+  let level = 25;
+  let criticalHitFactor = 1;
+  let adjustedDamage = (((((2*level*criticalHitFactor)/5) + 2) * attackBaseDamage * (A/D))/50) + 2
+
+  // Adjust damage based on type effectiveness
   const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
   const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
-
   adjustedDamage *= primaryEffectiveness * secondaryEffectiveness;
 
-  // Adjust damage based on whether the attack is physical or special
-  if (isPhysical) {
-    adjustedDamage *= attackerMonster.attack / defenderMonster.defense;
-  } else {
-    adjustedDamage *= attackerMonster.specialAttack / defenderMonster.specialDefense;
+  // STAB (Same Type Attack Bonus)
+  if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
+    adjustedDamage *= 2;
   }
-
-  // Half the damage to make the battle last longer
-  adjustedDamage /= 2;
-
+  
+  const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
+  const randomFactor = Z / 255; // Normalize to 0-1 range
+  adjustedDamage *= randomFactor; // Apply random factor
+  
   // Round the final adjusted damage to remove decimals
   return Math.round(adjustedDamage);
 };
