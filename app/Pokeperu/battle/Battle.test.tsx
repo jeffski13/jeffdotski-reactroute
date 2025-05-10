@@ -45,7 +45,7 @@ mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
 
 describe('Battle Component', () => {
   test('verify initial HP', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
     // Verify initial HP values
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
@@ -53,7 +53,7 @@ describe('Battle Component', () => {
   });
 
   test('when monster1 attacks, monster2Hp is reduced', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
@@ -66,7 +66,7 @@ describe('Battle Component', () => {
   });
   
   test('when monster1 attacks, the results of the attack are displayed', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
@@ -78,7 +78,7 @@ describe('Battle Component', () => {
   });
 
   test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
     // Verify monster1's attack buttons are enabled
     const monster1Attack1Button = screen.getByText(/Quick Attack/i);
@@ -94,7 +94,7 @@ describe('Battle Component', () => {
   });
 
   test('monster with the highest speed attacks first', () => {
-    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} />);
+    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} />);
 
     // Verify that the monster with the highest speed (Pikachu) attacks first
     const monster2Attack1Button = screen.getByText(/Scratch/i);
@@ -108,7 +108,7 @@ describe('Battle Component', () => {
   });
 
   test('attack buttons are disabled once a monster has won', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
@@ -158,7 +158,7 @@ describe('Battle Component', () => {
       },
     ];
 
-    render(<Battle selectedMonsters={selectedMonsters} />);
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Diglett)
     const thunderboltButton = screen.getByText('Thunderbolt');
@@ -198,7 +198,7 @@ describe('Battle Component', () => {
       },
     ];
 
-    render(<Battle selectedMonsters={selectedMonsters} />);
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Gengar)
     const thunderboltButton = screen.getByText('Thunderbolt');

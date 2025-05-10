@@ -6,6 +6,7 @@ import type { Monster } from '../monsters';
 
 interface BattleProps {
   selectedMonsters: Monster[];
+  attackMissedPercentage?: number; // Optional property to dynamically control the miss chance
 }
 
 // Moved the typeEffectiveness function to the top level of the file to ensure it is accessible
@@ -74,7 +75,7 @@ export const calculateAdjustedDamage = (
   return Math.round(adjustedDamage);
 };
 
-export default function Battle({ selectedMonsters }: BattleProps) {
+export default function Battle({ selectedMonsters, attackMissedPercentage }: BattleProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
   // Determine the first turn based on speed
@@ -90,13 +91,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
     let adjustedDamage = 0;
-    
-    // Introduce a 1 in 10 chance for the attack to miss
-    const attackMissed = Math.random() < 0.1; // 10% chance
+
+    // Use the attackMissedPercentage from props or default to 10%
+    const missChance = attackMissedPercentage ?? 0.1;
+    const attackMissed = Math.random() < missChance; // Dynamic miss chance
+
     if (attackMissed) {
       adjustedDamage = 0;
-    }
-    else {
+    } else {
       adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
     }
     
