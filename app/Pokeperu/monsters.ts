@@ -5,6 +5,7 @@ interface MonsterAttack {
   name: string;
   damage: number;
   type: MonsterType;
+  isPhysical: boolean; // True for physical attacks, false for special attacks
 }
 
 // Define the structure of a monster
@@ -44,11 +45,13 @@ export const monsters: Monster[] = [
       name: 'Quick Attack',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Thunderbolt',
       damage: 20,
       type: MonsterType.Electric,
+      isPhysical: false,
     },
   },
   {
@@ -68,11 +71,13 @@ export const monsters: Monster[] = [
       name: 'Scratch',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Flamethrower',
       damage: 20,
       type: MonsterType.Fire,
+      isPhysical: false,
     },
   },
   {
@@ -92,11 +97,13 @@ export const monsters: Monster[] = [
       name: 'Tackle',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Vine Whip',
       damage: 20,
       type: MonsterType.Grass,
+      isPhysical: true,
     },
   },
   {
@@ -116,11 +123,13 @@ export const monsters: Monster[] = [
       name: 'Tackle',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Water Gun',
       damage: 20,
       type: MonsterType.Water,
+      isPhysical: false,
     },
   },
   {
@@ -140,11 +149,13 @@ export const monsters: Monster[] = [
       name: 'Quick Attack',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Bite',
       damage: 20,
       type: MonsterType.Dark,
+      isPhysical: true,
     },
   },
   {
@@ -164,11 +175,13 @@ export const monsters: Monster[] = [
       name: 'Pound',
       damage: 10,
       type: MonsterType.Normal,
+      isPhysical: true,
     },
     attack2: {
       name: 'Sing',
       damage: 0,
       type: MonsterType.Fairy,
+      isPhysical: false,
     },
   },
 ];

@@ -12,7 +12,8 @@ export const calculateAdjustedDamage = (
   attackerMonster: Monster,
   defenderMonster: Monster,
   damage: number,
-  attackType: MonsterType
+  attackType: MonsterType,
+  isPhysical: boolean
 ): number => {
   let adjustedDamage = damage;
 
@@ -56,6 +57,13 @@ export const calculateAdjustedDamage = (
 
   adjustedDamage *= primaryEffectiveness * secondaryEffectiveness;
 
+  // Adjust damage based on whether the attack is physical or special
+  if (isPhysical) {
+    adjustedDamage *= attackerMonster.attack / defenderMonster.defense;
+  } else {
+    adjustedDamage *= attackerMonster.specialAttack / defenderMonster.specialDefense;
+  }
+
   // Half the damage to make the battle last longer
   adjustedDamage /= 2;
 
@@ -72,11 +80,11 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
   const [attackResult, setAttackResult] = useState<string | null>(null); // Track the result of the last attack
 
-  const handleAttack = (attacker: number, damage: number, attackType: MonsterType) => {
+  const handleAttack = (attacker: number, damage: number, attackType: MonsterType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
-    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, damage, attackType);
+    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, damage, attackType, isPhysical);
 
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
@@ -116,14 +124,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
             ></div>
           </div>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type)}
+            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical)}
             disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
             className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[0].attack1.name}
           </button>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type)}
+            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack1.isPhysical)}
             disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
             className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
@@ -144,14 +152,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
             ></div>
           </div>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type)}
+            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical)}
             disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
             className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
             {selectedMonsters[1].attack1.name}
           </button>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type)}
+            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical)}
             disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
             className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
           >
