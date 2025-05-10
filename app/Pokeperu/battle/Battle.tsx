@@ -83,6 +83,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
   const [attackResult, setAttackResult] = useState<string | null>(null); // Track the result of the last attack
+  const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null); // Track the effectiveness result of the last attack
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: MonsterType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -106,12 +107,13 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
     const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
 
+    setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
     if (effectivenessFactor === 0.5) {
-      setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}. It's not very effective.`);
+      setEffectivenessResult(`It's not very effective.`);
     } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {
-      setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}. It's super effective!`);
+      setEffectivenessResult(`It's super effective!`);
     } else {
-      setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
+      setEffectivenessResult(``);
     }
   };
 
@@ -185,6 +187,7 @@ export default function Battle({ selectedMonsters }: BattleProps) {
         </div>
       </div>
       {attackResult && <p className="attack-result">{attackResult}</p>}
+      {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
       {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}
       {monster2Hp === 0 && <h2>{selectedMonsters[0].name} Wins!</h2>}
     </div>
