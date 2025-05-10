@@ -89,8 +89,14 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
-    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
+    let adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
 
+    // Introduce a 1 in 10 chance for the attack to miss
+    const attackMissed = Math.random() < 0.1; // 10% chance
+    if (attackMissed) {
+      adjustedDamage = 0;
+    }
+    
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
       setIsMonster1Turn(false); // Switch to Monster 2's turn
@@ -98,22 +104,24 @@ export default function Battle({ selectedMonsters }: BattleProps) {
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 2 attacks Monster 1
       setIsMonster1Turn(true); // Switch to Monster 1's turn
     }
-
-    // Set the attack result message
+    
+    
     setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
-
-    // Display effectiveness messages based on the effectivenessFactor
-    const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
-    const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
-    const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
-
-    setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
-    if (effectivenessFactor === 0.5) {
-      setEffectivenessResult(`It's not very effective.`);
-    } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {
-      setEffectivenessResult(`It's super effective!`);
-    } else {
-      setEffectivenessResult(``);
+    if(attackMissed) {
+      setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
+    }
+    else {
+      // Display effectiveness messages based on the effectivenessFactor
+      const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
+      const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
+      const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
+      if (effectivenessFactor === 0.5) {
+        setEffectivenessResult(`It's not very effective.`);
+      } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {
+        setEffectivenessResult(`It's super effective!`);
+      } else {
+        setEffectivenessResult(``);
+      }
     }
   };
 
