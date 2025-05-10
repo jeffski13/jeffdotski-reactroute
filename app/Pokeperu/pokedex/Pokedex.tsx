@@ -1,8 +1,8 @@
-import React from 'react';
 import ROUTES from '../../consts/ROUTES';
 import { monsters, type Monster } from '../monsters';
 import { getTypeColor } from './typeColors';
 import './pokedex.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function Pokedex() {
   return (
@@ -37,6 +37,40 @@ export default function Pokedex() {
                 </div>
               )}
               <p className="monster-description">{monster.description}</p>
+              <Container>
+                <Row>
+                  <Col md={4}>
+                    <div><span className='stats-label'>HP:</span></div>
+                    <div><span className='stats-label'>Attack:</span></div>
+                    <div><span className='stats-label'>Defense:</span></div>
+                    <div><span className='stats-label'>Special Attack:</span></div>
+                    <div><span className='stats-label'>Special Defense:</span></div>
+                    <div><span className='stats-label'>Speed:</span></div>
+                  </Col>
+                  <Col md={8}>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.hp}%`, backgroundColor: '#FF5959' }}></div>
+                      </div>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.attack}%`, backgroundColor: '#F5AC78' }}></div>
+                      </div>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.defense}%`, backgroundColor: '#FAE078' }}></div>
+                      </div>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.specialAttack}%`, backgroundColor: '#9DB7F5' }}></div>
+                      </div>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.specialDefense}%`, backgroundColor: '#A7DB8D' }}></div>
+                      </div>
+                      <div className="stat-bar">
+                        <div className="bar" style={{ width: `${monster.speed}%`, backgroundColor: '#FA92B2' }}></div>
+                      </div>
+                  </Col>
+                </Row>
+              </Container>
+              <div className="monster-stats">
+              </div>
             </div>
           </li>
         ))}
