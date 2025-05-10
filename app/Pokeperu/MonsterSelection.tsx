@@ -19,8 +19,8 @@ export default function MonsterSelection({
 }: MonsterSelectionProps) {
   return (
     <div className="PokePeruStart">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>Monster Selection</h1>
+      <div className="header">
+        <h1 className="title">Monster Selection</h1>
         <a href={ROUTES.pokePeru.pokedex} className="pokedex-link">
           <img
             src="/images/pokedex-icon.png"

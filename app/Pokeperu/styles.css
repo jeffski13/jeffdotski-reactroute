@@ -1,5 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title */
+  position: relative; /* Allow absolute positioning for the pokedex-link */
+  margin-bottom: 20px;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+}
+
 .PokePeruStart {
   text-align: center;
+}
+
+.pokeperu-header {
+  margin-top: 20px;
 }
 
 .monster-grid {
@@ -39,13 +56,22 @@
   margin-bottom: 10px;
 }
 
+.pokedex-icon-container {
+  display: flex;
+  align-items: right;
+  justify-content: right; /* Center the icon */
+}
+
 .pokedex-link {
-  display: inline-block;
+  position: absolute;
+  right: 10px; /* Position the link on the right side */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the link */
 }
 
 .pokedex-image {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   transition: transform 0.3s ease-in-out;
 }
 

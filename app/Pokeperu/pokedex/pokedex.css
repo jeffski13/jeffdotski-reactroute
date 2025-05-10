@@ -2,6 +2,40 @@
   text-align: center;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  margin-bottom: 20px;
+}
+
+.back-button {
+  position: absolute; /* Position the back button on the left */
+  left: 10px;
+}
+
+.back-arrow {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.back-arrow:hover {
+  transform: scale(1.2); /* Increase size by 20% on hover */
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center; /* Center the title and icon */
+}
+
+.pokedex-icon {
+  width: 75px;
+  height: 75px;
+}
+
 .monster-list {
   list-style-type: none;
   padding: 0;
