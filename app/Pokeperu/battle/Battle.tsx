@@ -65,7 +65,7 @@ export const calculateAdjustedDamage = (
   if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
     adjustedDamage *= 2;
   }
-  
+
   const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
   const randomFactor = Z / 255; // Normalize to 0-1 range
   adjustedDamage *= randomFactor; // Apply random factor
@@ -89,12 +89,15 @@ export default function Battle({ selectedMonsters }: BattleProps) {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
-    let adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
-
+    let adjustedDamage = 0;
+    
     // Introduce a 1 in 10 chance for the attack to miss
     const attackMissed = Math.random() < 0.1; // 10% chance
     if (attackMissed) {
       adjustedDamage = 0;
+    }
+    else {
+      adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
     }
     
     if (attacker === 1) {

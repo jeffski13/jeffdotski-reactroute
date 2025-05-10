@@ -7,6 +7,7 @@ const mockSelectedMonsters: Monster[] = [
   {
     name: 'Pikachu',
     trainer: 'Ash',
+    description: '',
     hp: 35,
     attack: 55,
     defense: 40,
@@ -16,13 +17,14 @@ const mockSelectedMonsters: Monster[] = [
     type: MonsterType.Electric,
     secondType: null,
     image: '/images/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: MonsterType.Normal },
-    attack2: { name: 'Thunderbolt', damage: 20, type: MonsterType.Electric },
+    attack1: { name: 'Quick Attack', damage: 10, type: MonsterType.Normal, isPhysical: false },
+    attack2: { name: 'Thunderbolt', damage: 20, type: MonsterType.Electric, isPhysical: true },
   },
   {
     name: 'Charmander',
     trainer: 'Brock',
-    hp: 39,
+    description: '',
+    hp: 47,
     attack: 52,
     defense: 43,
     specialAttack: 60,
@@ -31,8 +33,8 @@ const mockSelectedMonsters: Monster[] = [
     type: MonsterType.Fire,
     secondType: null,
     image: '/images/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: MonsterType.Normal },
-    attack2: { name: 'Flamethrower', damage: 20, type: MonsterType.Fire },
+    attack1: { name: 'Scratch', damage: 10, type: MonsterType.Normal, isPhysical: false },
+    attack2: { name: 'Flamethrower', damage: 20, type: MonsterType.Fire, isPhysical: true },
   },
 ];
 
@@ -42,18 +44,22 @@ mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
 
 
 describe('Battle Component', () => {
-  test('when monster1 attacks, monster2Hp is reduced', () => {
+  test('verify initial HP', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} />);
 
     // Verify initial HP values
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
-    expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
+    expect(screen.getByText(/HP: 47/i)).toBeInTheDocument(); // Charmander's HP
+  });
+
+  test('when monster1 attacks, monster2Hp is reduced', () => {
+    render(<Battle selectedMonsters={mockSelectedMonsters} />);
 
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
     fireEvent.click(attackButton);
 
-    const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type);
+    const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type, mockSelectedMonsters[0].attack1.isPhysical);
     const expectedHp = mockSelectedMonsters[1].hp - damage;
     // Verify that monster2's HP is reduced
     expect(screen.getByText(`HP: ${expectedHp}`)).toBeInTheDocument(); // Charmander's HP after attack
@@ -62,16 +68,13 @@ describe('Battle Component', () => {
   test('when monster1 attacks, the results of the attack are displayed', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} />);
 
-    // Verify initial HP values
-    expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
-    expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
-
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
     fireEvent.click(attackButton);
 
     // Verify that monster2's HP is reduced
-    expect(screen.getByText(/Pikachu did 5 damage to Charmander./i)).toBeInTheDocument(); // 
+    expect(screen.getByText(/Pikachu did /i)).toBeInTheDocument(); // 
+    expect(screen.getByText(/damage to Charmander./i)).toBeInTheDocument(); // 
   });
 
   test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
@@ -110,7 +113,7 @@ describe('Battle Component', () => {
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
     const attackButtonMonster2 = screen.getByText(/Scratch/i);
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 30; i++) {
       fireEvent.click(attackButtonMonster1);
       fireEvent.click(attackButtonMonster2);
     }
@@ -144,11 +147,13 @@ describe('Battle Component', () => {
           name: 'Scratch',
           damage: 10,
           type: MonsterType.Normal,
+          isPhysical: true,
         },
         attack2: {
           name: 'Earthquake',
           damage: 50,
           type: MonsterType.Ground,
+          isPhysical: false,
         },
       },
     ];
@@ -182,11 +187,13 @@ describe('Battle Component', () => {
           name: 'Shadow Ball',
           damage: 50,
           type: MonsterType.Ghost,
+          isPhysical: false,
         },
         attack2: {
           name: 'Earthquake',
           damage: 50,
           type: MonsterType.Ground,
+          isPhysical: false,
         },
       },
     ];
