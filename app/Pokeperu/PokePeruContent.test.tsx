@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import PokePeruContent from './PokePeruContent';
+import PokePeruContent from './index';
 
 describe('PokePeruStart Component', () => {
   test('handleMonsterSelect modifies the selected monsters', () => {

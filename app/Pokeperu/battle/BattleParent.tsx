@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MonsterSelectionResults from './MonsterSelectionResults';
+import BattleStartScreen from './BattleStartScreen';
 import Battle from './Battle';
 import '../styles.css';
 import './battle.css';
@@ -14,7 +14,7 @@ interface BattleProps {
   }[];
 }
 
-export default function BattlePhase({ selectedMonsters }: BattleProps) {
+export default function BattleContainer({ selectedMonsters }: BattleProps) {
   const [isBattleClicked, setBattleClicked] = useState(false);
 
   if (selectedMonsters.length !== 2) {
@@ -26,7 +26,7 @@ export default function BattlePhase({ selectedMonsters }: BattleProps) {
       {isBattleClicked ? (
         <Battle selectedMonsters={selectedMonsters} />
       ) : (
-        <MonsterSelectionResults
+        <BattleStartScreen
           monster1={selectedMonsters[0].name}
           monster2={selectedMonsters[1].name}
           monster1Image={selectedMonsters[0].image}

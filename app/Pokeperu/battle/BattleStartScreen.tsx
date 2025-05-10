@@ -10,7 +10,7 @@ interface MonsterSelectionResultsProps {
   setBattleClicked: () => void;
 }
 
-export default function MonsterSelectionResults({
+export default function BattleStartScreen({
   monster1,
   monster2,
   monster1Image,
