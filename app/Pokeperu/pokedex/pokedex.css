@@ -105,18 +105,24 @@
 .stats-container {
   display: flex;
   justify-content: space-between; /* Space between labels */
-  align-items: center; /* Center vertically inside the parent div */
   margin-top: 5px; /* Space between the bar and labels */
+  align-items: center; /* Center vertically inside the parent div */
+  padding: 0;
 }
 
 .stats-label-container {
   display: flex;
-  justify-content: space-between; /* Space between labels */
-  align-items: center; /* Center vertically inside the parent div */
+  justify-content: flex-start; /* Space between labels */
+  align-items: left; /* Center vertically inside the parent div */
 }
 
 .stats-label {
   white-space: nowrap; /* Prevent line breaks */
-  display: flex;
-  align-items: center; /* Center vertically inside the parent div */
+  display: block; /* Ensure the label takes up the full width */
+}
+
+.total-stats {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
 }
