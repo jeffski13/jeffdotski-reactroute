@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Battle, { calculateAdjustedDamage } from './Battle';
-import { ElementType } from '../MonsterType';
+import { ElementType } from '../ElementType';
 import type { Monster } from '../monsters';
 
 const mockSelectedMonsters: Monster[] = [

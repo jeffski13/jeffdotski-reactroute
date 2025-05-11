@@ -1,4 +1,4 @@
-import { ElementType } from './MonsterType';
+import { ElementType } from './ElementType';
 
 // Define the structure of an attack
 interface MonsterAttack {

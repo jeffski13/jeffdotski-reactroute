@@ -1,4 +1,4 @@
-import { ElementType } from '../MonsterType';
+import { ElementType } from '../ElementType';
 
 export const getTypeColor = (type: ElementType): string => {
   const typeColors: Record<ElementType, string> = {

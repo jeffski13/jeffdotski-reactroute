@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ElementType } from '../MonsterType';
+import { ElementType } from '../ElementType';
 import type { Monster } from '../monsters';
 import './battle.css';
 
