@@ -84,6 +84,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
+  const [attackAnimation, setAttackAnimation] = useState<string | null>(null); // New state for attack animation
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: ElementType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -114,6 +115,12 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
         setTimeout(() => setIsMonster1Blinking(false), 500);
       }
       setIsMonster1Turn(true);
+    }
+
+    // Trigger attack animation
+    if (!attackMissed) {
+      setAttackAnimation(attackType); // Set the attack animation based on the attackType
+      setTimeout(() => setAttackAnimation(null), 500); // Clear the animation after 500ms
     }
 
     setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
@@ -247,6 +254,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           </button>
         </div>
       </div>
+      {attackAnimation && <div className={`attack-animation ${attackAnimation}`}></div>}
       {attackResult && <p className="attack-result">{attackResult}</p>}
       {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
       {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}

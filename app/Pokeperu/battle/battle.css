@@ -75,3 +75,43 @@ button {
     opacity: 0;
   }
 }
+
+.attack-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  animation: fade-out 0.5s ease-in-out;
+}
+
+.attack-animation.Fire {
+  background: radial-gradient(circle, rgba(255,69,0,1) 0%, rgba(255,140,0,1) 50%, rgba(255,0,0,0) 100%);
+}
+
+.attack-animation.Water {
+  background: radial-gradient(circle, rgba(0,191,255,1) 0%, rgba(135,206,250,1) 50%, rgba(0,0,255,0) 100%);
+}
+
+.attack-animation.Electric {
+  background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(255,215,0,1) 50%, rgba(255,255,0,0) 100%);
+}
+
+.attack-animation.Grass {
+  background: radial-gradient(circle, rgba(34,139,34,1) 0%, rgba(50,205,50,1) 50%, rgba(0,255,0,0) 100%);
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
