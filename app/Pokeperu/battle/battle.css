@@ -71,7 +71,7 @@ button {
 }
 
 .blinking {
-  animation: blink 0.5s ease-in-out;
+  animation: blink 0.2s ease-in-out 2; /* Loop the animation 3 times */
 }
 
 @keyframes blink {
