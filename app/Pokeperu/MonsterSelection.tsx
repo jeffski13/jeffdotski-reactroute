@@ -56,7 +56,7 @@ export default function MonsterSelection({
             disabled={selectedMonstersNames.includes(monster.name)}
             className="monster-button"
           >
-            <div>{monster.name}</div>
+            <div><strong>{monster.name}</strong></div>
             <div>(Gym Leader: {monster.trainer})</div>
             <img src={monster.image} alt={monster.name} className="monster-image" />
             <div className="shortcut-label">Press {index + 1}</div>
