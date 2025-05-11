@@ -47,21 +47,21 @@ export const calculateAdjustedDamage = (
   attackType: ElementType,
   isPhysical: boolean
 ): number => {
-  
+
   // Calculate adjusted damage using the provided formula
   const A = isPhysical ? attackerMonster.attack : attackerMonster.specialAttack;
   const D = isPhysical ? defenderMonster.defense : defenderMonster.specialDefense;
-  
+
   let level = 25;
   let criticalHitFactor = 1;
-  let adjustedDamage = (((((2*level*criticalHitFactor)/5) + 2) * attackBaseDamage * (A/D))/50) + 2
+  let adjustedDamage = (((((2 * level * criticalHitFactor) / 5) + 2) * attackBaseDamage * (A / D)) / 50) + 2
 
   // Adjust damage based on type effectiveness
   const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
   const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
   const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
   adjustedDamage *= effectivenessFactor;
-  
+
   // STAB (Same Type Attack Bonus)
   if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
     adjustedDamage *= 2;
@@ -70,7 +70,7 @@ export const calculateAdjustedDamage = (
   const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
   const randomFactor = Z / 255; // Normalize to 0-1 range
   adjustedDamage *= randomFactor; // Apply random factor
-  
+
   // Round the final adjusted damage to remove decimals
   return Math.round(adjustedDamage);
 };
@@ -84,7 +84,8 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
-  const [attackAnimation, setAttackAnimation] = useState<string | null>(null); // New state for attack animation
+  const [damageToMonster1Animation, setDamageToMonster1Animation] = useState<string | null>(null); // New state for attack animation
+  const [damageToMonster2Animation, setDamageToMonster2Animation] = useState<string | null>(null); // New state for attack animation
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: ElementType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -119,8 +120,13 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
     // Trigger attack animation
     if (!attackMissed) {
-      setAttackAnimation(attackType); // Set the attack animation based on the attackType
-      setTimeout(() => setAttackAnimation(null), 500); // Clear the animation after 500ms
+      if(attacker === 1) {
+        setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
+      }
+      else {
+        setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
+      }
+      setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
     }
 
     setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
@@ -196,6 +202,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
               alt={selectedMonsters[0].name}
               className={`monster-image ${isMonster1Blinking ? 'blinking' : ''}`}
             />
+            {damageToMonster1Animation && <div className={`attack-animation ${damageToMonster1Animation}`}></div>}
           </div>
           <p>HP: {monster1Hp}</p>
           <div className="hp-bar">
@@ -204,7 +211,8 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
               style={{
                 width: `${calculateHpPercentage(monster1Hp, selectedMonsters[0].hp)}%`,
               }}
-            ></div>
+            >
+            </div>
           </div>
           <button
             onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical)}
@@ -229,6 +237,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             alt={selectedMonsters[1].name}
             className={`monster-image ${isMonster2Blinking ? 'blinking' : ''}`}
           />
+          {damageToMonster2Animation && <div className={`attack-animation ${damageToMonster2Animation}`}></div>}
           <p>HP: {monster2Hp}</p>
           <div className="hp-bar">
             <div
@@ -254,7 +263,6 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           </button>
         </div>
       </div>
-      {attackAnimation && <div className={`attack-animation ${attackAnimation}`}></div>}
       {attackResult && <p className="attack-result">{attackResult}</p>}
       {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
       {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}

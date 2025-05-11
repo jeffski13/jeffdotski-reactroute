@@ -10,12 +10,19 @@
 
 .monster {
   text-align: center;
+  position: relative; /* Make the monster container a positioning context */
 }
 
 .monster-image {
   display: block;
   margin: auto;
   width: 50%;
+}
+
+.monster .attack-animation {
+  top: 50%; /* Center vertically relative to the monster */
+  left: 50%; /* Center horizontally relative to the monster */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
 }
 
 button {
@@ -78,13 +85,10 @@ button {
 
 .attack-animation {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 10;
-  width: 200px;
-  height: 200px;
+  width: 100px; /* Reduced size */
+  height: 100px; /* Reduced size */
   opacity: 0;
   animation: fade-out 0.5s ease-in-out;
 }
