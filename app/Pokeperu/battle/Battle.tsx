@@ -104,13 +104,17 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
-      setIsMonster2Blinking(true); // Trigger blinking for Monster 2
-      setTimeout(() => setIsMonster2Blinking(false), 500); // Stop blinking after 500ms
+      if (!attackMissed) {
+        setIsMonster2Blinking(true); // Trigger blinking for Monster 2 only if the attack hits
+        setTimeout(() => setIsMonster2Blinking(false), 500); // Stop blinking after 500ms
+      }
       setIsMonster1Turn(false);
     } else {
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
-      setIsMonster1Blinking(true); // Trigger blinking for Monster 1
-      setTimeout(() => setIsMonster1Blinking(false), 500); // Stop blinking after 500ms
+      if (!attackMissed) {
+        setIsMonster1Blinking(true); // Trigger blinking for Monster 1 only if the attack hits
+        setTimeout(() => setIsMonster1Blinking(false), 500); // Stop blinking after 500ms
+      }
       setIsMonster1Turn(true);
     }
 
