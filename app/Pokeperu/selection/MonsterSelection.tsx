@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import ROUTES from '../consts/ROUTES';
+import ROUTES from '../../consts/ROUTES';
 import './monsterselection.css';
 
 interface MonsterSelectionProps {
