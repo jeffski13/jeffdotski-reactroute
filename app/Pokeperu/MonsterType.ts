@@ -1,4 +1,4 @@
-export enum MonsterType {
+export enum ElementType {
   Normal = 'Normal',
   Fire = 'Fire',
   Water = 'Water',

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Battle, { calculateAdjustedDamage } from './Battle';
-import { MonsterType } from '../MonsterType';
+import { ElementType } from '../MonsterType';
 import type { Monster } from '../monsters';
 
 const mockSelectedMonsters: Monster[] = [
@@ -14,11 +14,11 @@ const mockSelectedMonsters: Monster[] = [
     specialAttack: 50,
     specialDefense: 50,
     speed: 90,
-    type: MonsterType.Electric,
+    type: ElementType.Electric,
     secondType: null,
     image: '/images/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: MonsterType.Normal, isPhysical: false },
-    attack2: { name: 'Thunderbolt', damage: 20, type: MonsterType.Electric, isPhysical: true },
+    attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: false },
+    attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: true },
   },
   {
     name: 'Charmander',
@@ -30,11 +30,11 @@ const mockSelectedMonsters: Monster[] = [
     specialAttack: 60,
     specialDefense: 50,
     speed: 65,
-    type: MonsterType.Fire,
+    type: ElementType.Fire,
     secondType: null,
     image: '/images/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: MonsterType.Normal, isPhysical: false },
-    attack2: { name: 'Flamethrower', damage: 20, type: MonsterType.Fire, isPhysical: true },
+    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: false },
+    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: true },
   },
 ];
 
@@ -140,19 +140,19 @@ describe('Battle Component', () => {
         specialAttack: 35,
         specialDefense: 45,
         speed: 95,
-        type: MonsterType.Ground,
+        type: ElementType.Ground,
         secondType: null,
         image: '/images/diglett.jpg',
         attack1: {
           name: 'Scratch',
           damage: 10,
-          type: MonsterType.Normal,
+          type: ElementType.Normal,
           isPhysical: true,
         },
         attack2: {
           name: 'Earthquake',
           damage: 50,
-          type: MonsterType.Ground,
+          type: ElementType.Ground,
           isPhysical: false,
         },
       },
@@ -180,19 +180,19 @@ describe('Battle Component', () => {
         specialAttack: 130,
         specialDefense: 75,
         speed: 110,
-        type: MonsterType.Ghost,
-        secondType: MonsterType.Ground,
+        type: ElementType.Ghost,
+        secondType: ElementType.Ground,
         image: '/images/gengar.jpg',
         attack1: {
           name: 'Shadow Ball',
           damage: 50,
-          type: MonsterType.Ghost,
+          type: ElementType.Ghost,
           isPhysical: false,
         },
         attack2: {
           name: 'Earthquake',
           damage: 50,
-          type: MonsterType.Ground,
+          type: ElementType.Ground,
           isPhysical: false,
         },
       },

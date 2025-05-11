@@ -1,25 +1,25 @@
-import { MonsterType } from '../MonsterType';
+import { ElementType } from '../MonsterType';
 
-export const getTypeColor = (type: MonsterType): string => {
-  const typeColors: Record<MonsterType, string> = {
-    [MonsterType.Normal]: '#A8A77A',
-    [MonsterType.Fire]: '#EE8130',
-    [MonsterType.Water]: '#6390F0',
-    [MonsterType.Electric]: '#ba9b1e',
-    [MonsterType.Grass]: '#7AC74C',
-    [MonsterType.Ice]: '#96D9D6',
-    [MonsterType.Fighting]: '#C22E28',
-    [MonsterType.Poison]: '#A33EA1',
-    [MonsterType.Ground]: '#E2BF65',
-    [MonsterType.Flying]: '#A98FF3',
-    [MonsterType.Psychic]: '#F95587',
-    [MonsterType.Bug]: '#A6B91A',
-    [MonsterType.Rock]: '#B6A136',
-    [MonsterType.Ghost]: '#735797',
-    [MonsterType.Dragon]: '#6F35FC',
-    [MonsterType.Dark]: '#705746',
-    [MonsterType.Steel]: '#B7B7CE',
-    [MonsterType.Fairy]: '#D685AD',
+export const getTypeColor = (type: ElementType): string => {
+  const typeColors: Record<ElementType, string> = {
+    [ElementType.Normal]: '#A8A77A',
+    [ElementType.Fire]: '#EE8130',
+    [ElementType.Water]: '#6390F0',
+    [ElementType.Electric]: '#ba9b1e',
+    [ElementType.Grass]: '#7AC74C',
+    [ElementType.Ice]: '#96D9D6',
+    [ElementType.Fighting]: '#C22E28',
+    [ElementType.Poison]: '#A33EA1',
+    [ElementType.Ground]: '#E2BF65',
+    [ElementType.Flying]: '#A98FF3',
+    [ElementType.Psychic]: '#F95587',
+    [ElementType.Bug]: '#A6B91A',
+    [ElementType.Rock]: '#B6A136',
+    [ElementType.Ghost]: '#735797',
+    [ElementType.Dragon]: '#6F35FC',
+    [ElementType.Dark]: '#705746',
+    [ElementType.Steel]: '#B7B7CE',
+    [ElementType.Fairy]: '#D685AD',
   };
 
   return typeColors[type] || '#000'; // Default to black if type is not found

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles.css';
 import './battle.css';
-import { MonsterType } from '../MonsterType';
+import { ElementType } from '../MonsterType';
 import type { Monster } from '../monsters';
 
 interface BattleProps {
@@ -10,28 +10,28 @@ interface BattleProps {
 }
 
 // Moved the typeEffectiveness function to the top level of the file to ensure it is accessible
-const typeEffectiveness = (attackType: MonsterType, defenderType: MonsterType | null) => {
+const typeEffectiveness = (attackType: ElementType, defenderType: ElementType | null) => {
   if (!defenderType) return 1; // No second type
 
-  const effectivenessChart: Record<MonsterType, { x0: MonsterType[]; x0_5: MonsterType[]; x2: MonsterType[] }> = {
-    [MonsterType.Normal]: { x0: [MonsterType.Ghost], x0_5: [MonsterType.Rock, MonsterType.Steel], x2: [] },
-    [MonsterType.Fire]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Rock, MonsterType.Dragon], x2: [MonsterType.Grass, MonsterType.Ice, MonsterType.Bug, MonsterType.Steel] },
-    [MonsterType.Water]: { x0: [], x0_5: [MonsterType.Water, MonsterType.Grass, MonsterType.Dragon], x2: [MonsterType.Fire, MonsterType.Ground, MonsterType.Rock] },
-    [MonsterType.Electric]: { x0: [MonsterType.Ground], x0_5: [MonsterType.Electric, MonsterType.Grass, MonsterType.Dragon], x2: [MonsterType.Water, MonsterType.Flying] },
-    [MonsterType.Grass]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Grass, MonsterType.Poison, MonsterType.Flying, MonsterType.Bug, MonsterType.Dragon, MonsterType.Steel], x2: [MonsterType.Water, MonsterType.Ground, MonsterType.Rock] },
-    [MonsterType.Ice]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Ice, MonsterType.Steel], x2: [MonsterType.Grass, MonsterType.Ground, MonsterType.Flying, MonsterType.Dragon] },
-    [MonsterType.Fighting]: { x0: [MonsterType.Ghost], x0_5: [MonsterType.Poison, MonsterType.Flying, MonsterType.Psychic, MonsterType.Bug, MonsterType.Fairy], x2: [MonsterType.Normal, MonsterType.Ice, MonsterType.Rock, MonsterType.Dark, MonsterType.Steel] },
-    [MonsterType.Poison]: { x0: [MonsterType.Steel], x0_5: [MonsterType.Poison, MonsterType.Ground, MonsterType.Rock, MonsterType.Ghost], x2: [MonsterType.Grass, MonsterType.Fairy] },
-    [MonsterType.Ground]: { x0: [MonsterType.Flying], x0_5: [MonsterType.Grass, MonsterType.Bug], x2: [MonsterType.Fire, MonsterType.Electric, MonsterType.Poison, MonsterType.Rock, MonsterType.Steel] },
-    [MonsterType.Flying]: { x0: [], x0_5: [MonsterType.Electric, MonsterType.Rock, MonsterType.Steel], x2: [MonsterType.Grass, MonsterType.Fighting, MonsterType.Bug] },
-    [MonsterType.Psychic]: { x0: [MonsterType.Dark], x0_5: [MonsterType.Psychic, MonsterType.Steel], x2: [MonsterType.Fighting, MonsterType.Poison] },
-    [MonsterType.Bug]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Fighting, MonsterType.Poison, MonsterType.Flying, MonsterType.Ghost, MonsterType.Steel, MonsterType.Fairy], x2: [MonsterType.Grass, MonsterType.Psychic, MonsterType.Dark] },
-    [MonsterType.Rock]: { x0: [], x0_5: [MonsterType.Fighting, MonsterType.Ground, MonsterType.Steel], x2: [MonsterType.Fire, MonsterType.Ice, MonsterType.Flying, MonsterType.Bug] },
-    [MonsterType.Ghost]: { x0: [MonsterType.Normal], x0_5: [MonsterType.Dark], x2: [MonsterType.Psychic, MonsterType.Ghost] },
-    [MonsterType.Dragon]: { x0: [MonsterType.Fairy], x0_5: [MonsterType.Steel], x2: [MonsterType.Dragon] },
-    [MonsterType.Dark]: { x0: [], x0_5: [MonsterType.Fighting, MonsterType.Dark, MonsterType.Fairy], x2: [MonsterType.Psychic, MonsterType.Ghost] },
-    [MonsterType.Steel]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Water, MonsterType.Electric, MonsterType.Steel], x2: [MonsterType.Ice, MonsterType.Rock, MonsterType.Fairy] },
-    [MonsterType.Fairy]: { x0: [], x0_5: [MonsterType.Fire, MonsterType.Poison, MonsterType.Steel], x2: [MonsterType.Fighting, MonsterType.Dragon, MonsterType.Dark] },
+  const effectivenessChart: Record<ElementType, { x0: ElementType[]; x0_5: ElementType[]; x2: ElementType[] }> = {
+    [ElementType.Normal]: { x0: [ElementType.Ghost], x0_5: [ElementType.Rock, ElementType.Steel], x2: [] },
+    [ElementType.Fire]: { x0: [], x0_5: [ElementType.Fire, ElementType.Water, ElementType.Rock, ElementType.Dragon], x2: [ElementType.Grass, ElementType.Ice, ElementType.Bug, ElementType.Steel] },
+    [ElementType.Water]: { x0: [], x0_5: [ElementType.Water, ElementType.Grass, ElementType.Dragon], x2: [ElementType.Fire, ElementType.Ground, ElementType.Rock] },
+    [ElementType.Electric]: { x0: [ElementType.Ground], x0_5: [ElementType.Electric, ElementType.Grass, ElementType.Dragon], x2: [ElementType.Water, ElementType.Flying] },
+    [ElementType.Grass]: { x0: [], x0_5: [ElementType.Fire, ElementType.Grass, ElementType.Poison, ElementType.Flying, ElementType.Bug, ElementType.Dragon, ElementType.Steel], x2: [ElementType.Water, ElementType.Ground, ElementType.Rock] },
+    [ElementType.Ice]: { x0: [], x0_5: [ElementType.Fire, ElementType.Water, ElementType.Ice, ElementType.Steel], x2: [ElementType.Grass, ElementType.Ground, ElementType.Flying, ElementType.Dragon] },
+    [ElementType.Fighting]: { x0: [ElementType.Ghost], x0_5: [ElementType.Poison, ElementType.Flying, ElementType.Psychic, ElementType.Bug, ElementType.Fairy], x2: [ElementType.Normal, ElementType.Ice, ElementType.Rock, ElementType.Dark, ElementType.Steel] },
+    [ElementType.Poison]: { x0: [ElementType.Steel], x0_5: [ElementType.Poison, ElementType.Ground, ElementType.Rock, ElementType.Ghost], x2: [ElementType.Grass, ElementType.Fairy] },
+    [ElementType.Ground]: { x0: [ElementType.Flying], x0_5: [ElementType.Grass, ElementType.Bug], x2: [ElementType.Fire, ElementType.Electric, ElementType.Poison, ElementType.Rock, ElementType.Steel] },
+    [ElementType.Flying]: { x0: [], x0_5: [ElementType.Electric, ElementType.Rock, ElementType.Steel], x2: [ElementType.Grass, ElementType.Fighting, ElementType.Bug] },
+    [ElementType.Psychic]: { x0: [ElementType.Dark], x0_5: [ElementType.Psychic, ElementType.Steel], x2: [ElementType.Fighting, ElementType.Poison] },
+    [ElementType.Bug]: { x0: [], x0_5: [ElementType.Fire, ElementType.Fighting, ElementType.Poison, ElementType.Flying, ElementType.Ghost, ElementType.Steel, ElementType.Fairy], x2: [ElementType.Grass, ElementType.Psychic, ElementType.Dark] },
+    [ElementType.Rock]: { x0: [], x0_5: [ElementType.Fighting, ElementType.Ground, ElementType.Steel], x2: [ElementType.Fire, ElementType.Ice, ElementType.Flying, ElementType.Bug] },
+    [ElementType.Ghost]: { x0: [ElementType.Normal], x0_5: [ElementType.Dark], x2: [ElementType.Psychic, ElementType.Ghost] },
+    [ElementType.Dragon]: { x0: [ElementType.Fairy], x0_5: [ElementType.Steel], x2: [ElementType.Dragon] },
+    [ElementType.Dark]: { x0: [], x0_5: [ElementType.Fighting, ElementType.Dark, ElementType.Fairy], x2: [ElementType.Psychic, ElementType.Ghost] },
+    [ElementType.Steel]: { x0: [], x0_5: [ElementType.Fire, ElementType.Water, ElementType.Electric, ElementType.Steel], x2: [ElementType.Ice, ElementType.Rock, ElementType.Fairy] },
+    [ElementType.Fairy]: { x0: [], x0_5: [ElementType.Fire, ElementType.Poison, ElementType.Steel], x2: [ElementType.Fighting, ElementType.Dragon, ElementType.Dark] },
   };
 
   if (effectivenessChart[attackType].x0.includes(defenderType)) return 0;
@@ -44,7 +44,7 @@ export const calculateAdjustedDamage = (
   attackerMonster: Monster,
   defenderMonster: Monster,
   attackBaseDamage: number,
-  attackType: MonsterType,
+  attackType: ElementType,
   isPhysical: boolean
 ): number => {
   
@@ -85,7 +85,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
 
-  const handleAttack = (attacker: number, attackBaseDamage: number, attackType: MonsterType, isPhysical: boolean) => {
+  const handleAttack = (attacker: number, attackBaseDamage: number, attackType: ElementType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
