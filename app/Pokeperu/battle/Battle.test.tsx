@@ -208,4 +208,16 @@ describe('Battle Component', () => {
     const gengarHp = screen.getByText('HP: 100');
     expect(gengarHp).toBeInTheDocument();
   });
+
+  it('displays "attack missed!" when the attack misses', () => {
+    // Render the Battle component with attackMissedPercentage set to 1 (guaranteed miss)
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} />);
+
+    // Simulate an attack by clicking the first monster's first attack button
+    const attackButton = screen.getByText('Quick Attack');
+    fireEvent.click(attackButton);
+
+    // Assert that the "attack missed!" message is displayed
+    expect(screen.getByText(/attack missed!/i)).toBeInTheDocument();
+  });
 });
