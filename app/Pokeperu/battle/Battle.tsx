@@ -78,13 +78,14 @@ export const calculateAdjustedDamage = (
 export default function Battle({ selectedMonsters, attackMissedPercentage }: BattleProps) {
   console.log('Selected Monsters:', selectedMonsters);
 
-  // Determine the first turn based on speed
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
-  const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First); // Track whose turn it is
-  const [attackResult, setAttackResult] = useState<string | null>(null); // Track the result of the last attack
-  const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null); // Track the effectiveness result of the last attack
+  const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First);
+  const [attackResult, setAttackResult] = useState<string | null>(null);
+  const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
+  const [isMonster1Blinking, setIsMonster1Blinking] = useState(false); // New state for Monster 1 blinking
+  const [isMonster2Blinking, setIsMonster2Blinking] = useState(false); // New state for Monster 2 blinking
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: MonsterType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -92,31 +93,31 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
     let adjustedDamage = 0;
 
-    // Use the attackMissedPercentage from props or default to 10%
     const missChance = attackMissedPercentage ?? 0.1;
-    const attackMissed = Math.random() < missChance; // Dynamic miss chance
+    const attackMissed = Math.random() < missChance;
 
     if (attackMissed) {
       adjustedDamage = 0;
     } else {
       adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
     }
-    
+
     if (attacker === 1) {
-      setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 1 attacks Monster 2
-      setIsMonster1Turn(false); // Switch to Monster 2's turn
+      setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
+      setIsMonster2Blinking(true); // Trigger blinking for Monster 2
+      setTimeout(() => setIsMonster2Blinking(false), 500); // Stop blinking after 500ms
+      setIsMonster1Turn(false);
     } else {
-      setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0)); // Monster 2 attacks Monster 1
-      setIsMonster1Turn(true); // Switch to Monster 1's turn
+      setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
+      setIsMonster1Blinking(true); // Trigger blinking for Monster 1
+      setTimeout(() => setIsMonster1Blinking(false), 500); // Stop blinking after 500ms
+      setIsMonster1Turn(true);
     }
-    
-    
+
     setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
-    if(attackMissed) {
+    if (attackMissed) {
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
-    }
-    else {
-      // Display effectiveness messages based on the effectivenessFactor
+    } else {
       const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
       const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
       const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
@@ -134,7 +135,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
     return (currentHp / maxHp) * 100;
   };
 
-  const isGameOver = monster1Hp === 0 || monster2Hp === 0; // Check if the game is over
+  const isGameOver = monster1Hp === 0 || monster2Hp === 0;
 
   return (
     <div className="Battle">
@@ -144,7 +145,11 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           <div>
             <h3>Trainer: {selectedMonsters[0].trainer}</h3>
             <h2>{selectedMonsters[0].name}</h2>
-            <img src={selectedMonsters[0].image} alt={selectedMonsters[0].name} className="monster-image" />
+            <img
+              src={selectedMonsters[0].image}
+              alt={selectedMonsters[0].name}
+              className={`monster-image ${isMonster1Blinking ? 'blinking' : ''}`} // Apply blinking class
+            />
           </div>
           <p>HP: {monster1Hp}</p>
           <div className="hp-bar">
@@ -173,7 +178,11 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
         <div className="monster">
           <h3>Trainer: {selectedMonsters[1].trainer}</h3>
           <h2>{selectedMonsters[1].name}</h2>
-          <img src={selectedMonsters[1].image} alt={selectedMonsters[1].name} className="monster-image" />
+          <img
+            src={selectedMonsters[1].image}
+            alt={selectedMonsters[1].name}
+            className={`monster-image ${isMonster2Blinking ? 'blinking' : ''}`} // Apply blinking class
+          />
           <p>HP: {monster2Hp}</p>
           <div className="hp-bar">
             <div
