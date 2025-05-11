@@ -122,11 +122,12 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
     if (!attackMissed) {
       if(attacker === 1) {
         setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
+        setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
       }
       else {
         setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
+        setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
       }
-      setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
     }
 
     setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
