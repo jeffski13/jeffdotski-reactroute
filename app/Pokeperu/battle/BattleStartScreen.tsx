@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import '../styles.css';
 import './battlestart.css';
@@ -17,6 +18,19 @@ export default function BattleStartScreen({
   monster2Image,
   setBattleClicked,
 }: MonsterSelectionResultsProps) {
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === '1') {
+        setBattleClicked();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [setBattleClicked]);
+
   return (
     <div className="MonsterSelectionResults">
       <h1>Selection Results</h1>
