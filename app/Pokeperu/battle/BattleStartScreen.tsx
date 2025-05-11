@@ -37,11 +37,11 @@ export default function BattleStartScreen({
       <div className="monster-container">
         <div className="monster">
           <p>User 1 chose: {monster1}</p>
-          <img src={monster1Image} alt={monster1} className="monster-image" />
+          <img src={monster1Image} alt={monster1} className="monster-selected" />
         </div>
         <div className="monster">
           <p>User 2 chose: {monster2}</p>
-          <img src={monster2Image} alt={monster2} className="monster-image" />
+          <img src={monster2Image} alt={monster2} className="monster-selected" />
         </div>
       </div>
       <Button onClick={setBattleClicked}>Start Battle</Button>

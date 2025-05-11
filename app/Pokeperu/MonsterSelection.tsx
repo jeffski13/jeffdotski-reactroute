@@ -57,8 +57,8 @@ export default function MonsterSelection({
             className="monster-button"
           >
             <div><strong>{monster.name}</strong></div>
-            <div>(Gym Leader: {monster.trainer})</div>
-            <img src={monster.image} alt={monster.name} className="monster-image" />
+            <div>({monster.trainer})</div>
+            <img src={monster.image} alt={monster.name} className="monster-image-selection" />
             <div className="shortcut-label">Press {index + 1}</div>
           </button>
         ))}

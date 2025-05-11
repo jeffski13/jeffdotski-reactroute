@@ -28,7 +28,7 @@ export default function Pokedex() {
 
           return (
             <li key={monster.name} className="monster-item">
-              <img src={monster.image} alt={monster.name} className="monster-image" />
+              <img src={monster.image} alt={monster.name} className="monster-image-dex" />
               <div className="monster-details">
                 <h2 className="monster-name">{monster.name}</h2>
                 <div

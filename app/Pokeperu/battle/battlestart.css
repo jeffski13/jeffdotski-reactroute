@@ -8,9 +8,9 @@
   text-align: center;
 }
 
-.monster-image {
-  width: 150px;
-  height: 150px;
+.monster-selected {
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   margin-top: 10px;
 }

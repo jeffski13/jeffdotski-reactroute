@@ -13,10 +13,12 @@
   position: relative; /* Make the monster container a positioning context */
 }
 
-.monster-image {
+.monster-battle-image {
   display: block;
   margin: auto;
   width: 50%;
+  width: 200px;
+  height: 200px;
 }
 
 .monster .attack-animation {

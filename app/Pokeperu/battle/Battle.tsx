@@ -201,7 +201,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             <img
               src={selectedMonsters[0].image}
               alt={selectedMonsters[0].name}
-              className={`monster-image ${isMonster1Blinking ? 'blinking' : ''}`}
+              className={`monster-battle-image ${isMonster1Blinking ? 'blinking' : ''}`}
             />
             {damageToMonster1Animation && <div className={`attack-animation ${damageToMonster1Animation}`}></div>}
           </div>
@@ -236,7 +236,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           <img
             src={selectedMonsters[1].image}
             alt={selectedMonsters[1].name}
-            className={`monster-image ${isMonster2Blinking ? 'blinking' : ''}`}
+            className={`monster-battle-image ${isMonster2Blinking ? 'blinking' : ''}`}
           />
           {damageToMonster2Animation && <div className={`attack-animation ${damageToMonster2Animation}`}></div>}
           <p>HP: {monster2Hp}</p>
