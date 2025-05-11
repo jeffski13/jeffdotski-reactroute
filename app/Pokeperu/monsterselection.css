@@ -69,13 +69,13 @@
   transform: translateY(-50%); /* Vertically center the link */
 }
 
-.pokedex-image {
+.pokedex-link-icon {
   width: 80px;
   height: 80px;
   transition: transform 0.3s ease-in-out;
 }
 
-.pokedex-image:hover {
+.pokedex-link-icon:hover {
   transform: scale(1.2); /* Increase size by 20% on hover */
 }
 

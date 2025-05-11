@@ -2,7 +2,6 @@ import { useState } from 'react';
 import BattleContainer from './battle/BattleParent';
 import MonsterSelection from './MonsterSelection';
 import { monsters, type Monster } from './monsters';
-import './styles.css';
 
 export default function PokePeru() {
   return (

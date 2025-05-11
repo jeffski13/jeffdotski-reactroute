@@ -1,8 +1,8 @@
 import ROUTES from '../../consts/ROUTES';
 import { monsters, type Monster } from '../monsters';
 import { getTypeColor } from './typeColors';
-import './pokedex.css';
 import { Container, Row, Col } from 'react-bootstrap';
+import './pokedex.css';
 
 export default function Pokedex() {
   return (

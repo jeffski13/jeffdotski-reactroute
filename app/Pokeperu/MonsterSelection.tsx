@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import ROUTES from '../consts/ROUTES';
+import './monsterselection.css';
 
 interface MonsterSelectionProps {
   monsters: {
@@ -43,7 +44,7 @@ export default function MonsterSelection({
           <img
             src="/images/pokedex-icon.png"
             alt="Pokedex"
-            className="pokedex-image"
+            className="pokedex-link-icon"
           />
         </a>
       </div>

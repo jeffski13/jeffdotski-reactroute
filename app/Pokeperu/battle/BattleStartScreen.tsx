@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import '../styles.css';
 import './battlestart.css';
 
 interface MonsterSelectionResultsProps {

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import BattleStartScreen from './BattleStartScreen';
 import Battle from './Battle';
-import '../styles.css';
 import './battle.css';
 
 interface BattleProps {
