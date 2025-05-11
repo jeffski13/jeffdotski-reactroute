@@ -85,6 +85,13 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
   const [damageToMonster1Animation, setDamageToMonster1Animation] = useState<string | null>(null); // New state for attack animation
   const [damageToMonster2Animation, setDamageToMonster2Animation] = useState<string | null>(null); // New state for attack animation
+  const [backgroundImage, setBackgroundImage] = useState<string>(''); // New state for background image
+
+  useEffect(() => {
+    // Randomly select an image from the /perulandscape folder
+    const randomImageIndex = Math.floor(Math.random() * 8) + 1; // Random number between 1 and 8
+    setBackgroundImage(`/images/perulandscape/peru-${randomImageIndex}.jpg`);
+  }, []);
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: ElementType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -192,7 +199,16 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   return (
     <div className="Battle">
       <h1>Battle Time!</h1>
-      <div className="battle-container">
+      <div className="battle-background"
+      style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          background: 'rgba(205,206,255,0.2)',
+        }}></div>
+      <div
+        className="battle-container"
+      >
         <div className="monster">
           <div>
             <h3>Trainer: {selectedMonsters[0].trainer}</h3>
