@@ -39,7 +39,7 @@ export const monsters: Monster[] = [
     speed: 90,
     type: ElementType.Electric,
     secondType: null,
-    image: '/images/pikachu.jpg',
+    image: '/images/monsters/pikachu.jpg',
     description: 'Pikachu is an Electric-type Pokémon known for its agility and powerful Thunderbolt attack.',
     attack1: {
       name: 'Quick Attack',
@@ -65,7 +65,7 @@ export const monsters: Monster[] = [
     speed: 65,
     type: ElementType.Fire,
     secondType: null,
-    image: '/images/charmander.jpg',
+    image: '/images/monsters/charmander.jpg',
     description: 'Charmander is a Fire-type Pokémon that uses its fiery tail to intimidate opponents.',
     attack1: {
       name: 'Scratch',
@@ -91,7 +91,7 @@ export const monsters: Monster[] = [
     speed: 45,
     type: ElementType.Grass,
     secondType: ElementType.Poison,
-    image: '/images/bulbasaur.jpg',
+    image: '/images/monsters/bulbasaur.jpg',
     description: 'Bulbasaur is a Grass/Poison-type Pokémon that uses its bulb to unleash powerful attacks.',
     attack1: {
       name: 'Tackle',
@@ -117,7 +117,7 @@ export const monsters: Monster[] = [
     speed: 43,
     type: ElementType.Water,
     secondType: null,
-    image: '/images/squirtle.png',
+    image: '/images/monsters/squirtle.png',
     description: 'Squirtle is a Water-type Pokémon that uses its shell for defense and Water Gun for offense.',
     attack1: {
       name: 'Tackle',
@@ -143,7 +143,7 @@ export const monsters: Monster[] = [
     speed: 55,
     type: ElementType.Normal,
     secondType: null,
-    image: '/images/eevee.png',
+    image: '/images/monsters/eevee.png',
     description: 'Eevee is a Normal-type Pokémon known for its adaptability and potential to evolve into various forms.',
     attack1: {
       name: 'Quick Attack',
@@ -169,7 +169,7 @@ export const monsters: Monster[] = [
     speed: 20,
     type: ElementType.Normal,
     secondType: ElementType.Fairy,
-    image: '/images/jigglypuff.jpg',
+    image: '/images/monsters/jigglypuff.jpg',
     description: 'Jigglypuff is a Normal/Fairy-type Pokémon that uses its singing ability to put opponents to sleep.',
     attack1: {
       name: 'Pound',
