@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles.css';
 import './battle.css';
 import { MonsterType } from '../MonsterType';
@@ -76,16 +76,14 @@ export const calculateAdjustedDamage = (
 };
 
 export default function Battle({ selectedMonsters, attackMissedPercentage }: BattleProps) {
-  console.log('Selected Monsters:', selectedMonsters);
-
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First);
   const [attackResult, setAttackResult] = useState<string | null>(null);
   const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
-  const [isMonster1Blinking, setIsMonster1Blinking] = useState(false); // New state for Monster 1 blinking
-  const [isMonster2Blinking, setIsMonster2Blinking] = useState(false); // New state for Monster 2 blinking
+  const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
+  const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
 
   const handleAttack = (attacker: number, attackBaseDamage: number, attackType: MonsterType, isPhysical: boolean) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -105,15 +103,15 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
     if (attacker === 1) {
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
-        setIsMonster2Blinking(true); // Trigger blinking for Monster 2 only if the attack hits
-        setTimeout(() => setIsMonster2Blinking(false), 500); // Stop blinking after 500ms
+        setIsMonster2Blinking(true);
+        setTimeout(() => setIsMonster2Blinking(false), 500);
       }
       setIsMonster1Turn(false);
     } else {
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
-        setIsMonster1Blinking(true); // Trigger blinking for Monster 1 only if the attack hits
-        setTimeout(() => setIsMonster1Blinking(false), 500); // Stop blinking after 500ms
+        setIsMonster1Blinking(true);
+        setTimeout(() => setIsMonster1Blinking(false), 500);
       }
       setIsMonster1Turn(true);
     }
@@ -141,6 +139,43 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
   const isGameOver = monster1Hp === 0 || monster2Hp === 0;
 
+  // Add keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (isGameOver) return;
+
+      switch (event.key) {
+        case '1': // Monster 1, Attack 1
+          if (isMonster1Turn) {
+            handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical);
+          }
+          break;
+        case '2': // Monster 1, Attack 2
+          if (isMonster1Turn) {
+            handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical);
+          }
+          break;
+        case '3': // Monster 2, Attack 1
+          if (!isMonster1Turn) {
+            handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical);
+          }
+          break;
+        case '4': // Monster 2, Attack 2
+          if (!isMonster1Turn) {
+            handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical);
+          }
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [isMonster1Turn, isGameOver, selectedMonsters]);
+
   return (
     <div className="Battle">
       <h1>Battle Time!</h1>
@@ -152,7 +187,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             <img
               src={selectedMonsters[0].image}
               alt={selectedMonsters[0].name}
-              className={`monster-image ${isMonster1Blinking ? 'blinking' : ''}`} // Apply blinking class
+              className={`monster-image ${isMonster1Blinking ? 'blinking' : ''}`}
             />
           </div>
           <p>HP: {monster1Hp}</p>
@@ -185,7 +220,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           <img
             src={selectedMonsters[1].image}
             alt={selectedMonsters[1].name}
-            className={`monster-image ${isMonster2Blinking ? 'blinking' : ''}`} // Apply blinking class
+            className={`monster-image ${isMonster2Blinking ? 'blinking' : ''}`}
           />
           <p>HP: {monster2Hp}</p>
           <div className="hp-bar">
