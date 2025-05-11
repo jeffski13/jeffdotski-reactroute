@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import ROUTES from '../consts/ROUTES';
 
 interface MonsterSelectionProps {
@@ -17,6 +18,23 @@ export default function MonsterSelection({
   currentUser,
   handleMonsterSelect,
 }: MonsterSelectionProps) {
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const key = parseInt(event.key, 10); // Convert the key to a number
+      if (!isNaN(key) && key > 0 && key <= monsters.length) {
+        const monster = monsters[key - 1];
+        if (!selectedMonstersNames.includes(monster.name)) {
+          handleMonsterSelect(monster);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [monsters, selectedMonstersNames, handleMonsterSelect]);
+
   return (
     <div className="PokePeruStart">
       <div className="header">
@@ -31,7 +49,7 @@ export default function MonsterSelection({
       </div>
       <h2>User {currentUser}, choose your monster:</h2>
       <div className="monster-grid">
-        {monsters.map((monster) => (
+        {monsters.map((monster, index) => (
           <button
             key={monster.name}
             onClick={() => handleMonsterSelect(monster)}
@@ -41,6 +59,7 @@ export default function MonsterSelection({
             <div>{monster.name}</div>
             <div>(Gym Leader: {monster.trainer})</div>
             <img src={monster.image} alt={monster.name} className="monster-image" />
+            <div className="shortcut-label">Press {index + 1}</div>
           </button>
         ))}
       </div>
