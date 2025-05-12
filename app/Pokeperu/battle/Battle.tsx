@@ -227,9 +227,6 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
       <div className="battle-background"
       style={{
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          background: 'rgba(205,206,255,0.2)',
         }}></div>
       <div
         className="battle-container"
