@@ -126,3 +126,28 @@
   font-size: 16px;
   color: #333;
 }
+
+.attacks-section {
+  margin-top: 20px;
+}
+
+.attacks-list {
+  list-style: none;
+  padding: 0;
+}
+
+.attack-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attack-name {
+  margin-right: 10px;
+}
+
+.attack-type-physical {
+  height: 17px;
+  width: 29px;
+  max-width: 200%;
+}

@@ -156,7 +156,54 @@ export default function Pokedex() {
                     </Col>
                   </Row>
                 </Container>
-                <div className="total-stats">Total Stats: {totalStats}
+                <div className="total-stats">Total Stats: {totalStats}</div>
+
+                {/* Attacks Section */}
+                <div className="attacks-section">
+                  <Container className="attacks-list">
+                    <Row className="attack-item">
+                      <Col md={1}>
+                        {monster.attack1.isPhysical ? 
+                        <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
+                        <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
+                      </Col>
+                      <Col md={4}>
+                        <span className="attack-name">{monster.attack1.name}</span>
+                      </Col>
+                      <Col md={4}>
+                        <span className="attack-name">Pow: {monster.attack1.damage}, PP: 2</span>
+                      </Col>
+                      <Col md={2}>
+                        <div
+                          className="type-badge"
+                          style={{ backgroundColor: getTypeColor(monster.attack1.type) }}
+                        >
+                          {monster.attack1.type}
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={1}>
+                        {monster.attack2.isPhysical ? 
+                        <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
+                        <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
+                      </Col>
+                      <Col md={4}>
+                        <span className="attack-name">{monster.attack2.name}</span>
+                      </Col>
+                      <Col md={4}>
+                        <span className="attack-name">Pow: {monster.attack2.damage}, PP: 2</span>
+                      </Col>
+                      <Col md={2}>
+                        <div
+                          className="type-badge"
+                          style={{ backgroundColor: getTypeColor(monster.attack2.type) }}
+                        >
+                          {monster.attack2.type}
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
                 </div>
               </div>
             </li>
