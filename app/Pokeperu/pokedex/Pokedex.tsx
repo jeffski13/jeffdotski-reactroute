@@ -121,7 +121,7 @@ export default function Pokedex() {
                           <span className="attack-name">{attack.name}</span>
                         </Col>
                         <Col md={4}>
-                          <span className="attack-name">Pow: {attack.damage}, PP: 2</span>
+                          <span className="attack-name">Pow: {attack.damage}<br />PP: {attack.powerPoints}</span>
                         </Col>
                         <Col md={2}>
                           <div
