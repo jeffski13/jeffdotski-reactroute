@@ -17,8 +17,8 @@ const mockSelectedMonsters: Monster[] = [
     type: ElementType.Electric,
     secondType: null,
     image: '/images/monsters/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: false },
-    attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: true },
+    attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20 },
+    attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: false, powerPoints: 20 },
   },
   {
     name: 'Charmander',
@@ -33,12 +33,12 @@ const mockSelectedMonsters: Monster[] = [
     type: ElementType.Fire,
     secondType: null,
     image: '/images/monsters/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: false },
-    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: true },
+    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20 },
+    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: false, powerPoints: 20 },
   },
 ];
 
-const mockSelectedMonstersSpeedMod = [{...mockSelectedMonsters[0]}, {...mockSelectedMonsters[1]}];
+const mockSelectedMonstersSpeedMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
 mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
 mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
 
@@ -64,7 +64,7 @@ describe('Battle Component', () => {
     // Verify that monster2's HP is reduced
     expect(screen.getByText(`HP: ${expectedHp}`)).toBeInTheDocument(); // Charmander's HP after attack
   });
-  
+
   test('when monster1 attacks, the results of the attack are displayed', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
 
@@ -130,38 +130,16 @@ describe('Battle Component', () => {
 
   it('should deal no damage when an Electric type attack is used against a Ground type monster', () => {
     const selectedMonsters = [
-      {...mockSelectedMonsters[0]},
-      {
-        name: 'Diglett',
-        trainer: 'Brock',
-        hp: 100,
-        attack: 55,
-        defense: 25,
-        specialAttack: 35,
-        specialDefense: 45,
-        speed: 95,
-        type: ElementType.Ground,
-        secondType: null,
-        image: '/images/monsters/diglett.jpg',
-        attack1: {
-          name: 'Scratch',
-          damage: 10,
-          type: ElementType.Normal,
-          isPhysical: true,
-        },
-        attack2: {
-          name: 'Earthquake',
-          damage: 50,
-          type: ElementType.Ground,
-          isPhysical: false,
-        },
-      },
+      { ...mockSelectedMonsters[0] },
+      { ...mockSelectedMonsters[1] },
     ];
+    selectedMonsters[1].type = ElementType.Ground;
+    selectedMonsters[1].hp = 100;
 
     render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Diglett)
-    const thunderboltButton = screen.getByText('Thunderbolt');
+    const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
     // Assert that Diglett's HP remains unchanged
@@ -169,39 +147,43 @@ describe('Battle Component', () => {
   });
 
   it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
-    const selectedMonsters = [
-      {...mockSelectedMonsters[0]},
-      {
-        name: 'Gengar',
-        trainer: 'Morty',
-        hp: 100,
-        attack: 65,
-        defense: 60,
-        specialAttack: 130,
-        specialDefense: 75,
-        speed: 110,
+    const gengar: Monster = {
+      name: 'Gengar',
+      trainer: 'Morty',
+      hp: 100,
+      attack: 65,
+      defense: 60,
+      specialAttack: 130,
+      specialDefense: 75,
+      speed: 110,
+      type: ElementType.Ghost,
+      secondType: ElementType.Ground,
+      image: '/images/monsters/gengar.jpg',
+      attack1: {
+        name: 'Shadow Ball',
+        damage: 50,
         type: ElementType.Ghost,
-        secondType: ElementType.Ground,
-        image: '/images/monsters/gengar.jpg',
-        attack1: {
-          name: 'Shadow Ball',
-          damage: 50,
-          type: ElementType.Ghost,
-          isPhysical: false,
-        },
-        attack2: {
-          name: 'Earthquake',
-          damage: 50,
-          type: ElementType.Ground,
-          isPhysical: false,
-        },
+        isPhysical: false,
+        powerPoints: 10
       },
+      attack2: {
+        name: 'Earthquake',
+        damage: 50,
+        type: ElementType.Ground,
+        isPhysical: false,
+        powerPoints: 10
+      },
+      description: null
+    };
+    const selectedMonsters = [
+      { ...mockSelectedMonsters[0] },
+      gengar,
     ];
 
     render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Gengar)
-    const thunderboltButton = screen.getByText('Thunderbolt');
+    const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
     // Assert that Gengar's HP remains unchanged
@@ -214,10 +196,38 @@ describe('Battle Component', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} />);
 
     // Simulate an attack by clicking the first monster's first attack button
-    const attackButton = screen.getByText('Quick Attack');
+    const attackButton = screen.getByText('Quick Attack', { exact: false });
     fireEvent.click(attackButton);
 
     // Assert that the "attack missed!" message is displayed
     expect(screen.getByText(/attack missed!/i)).toBeInTheDocument();
+  });
+
+  test('attack buttons are disabled once an attack has 0 power points', () => {
+    const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+    mockSelectedMonstersPowerPointsMod[0].attack1 = {
+      name: 'Quick Attack',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+    }
+
+    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} attackMissedPercentage={0} />);
+
+    // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
+    const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
+    fireEvent.click(attackButtonMonster1);
+    const attackButtonMonster2 = screen.getByText(/Scratch/i);
+    fireEvent.click(attackButtonMonster2);
+
+    // Verify that Monster 2's HP is 0
+    expect(screen.getByText(/PP: 0\/1/i)).toBeInTheDocument();
+
+    // Verify monster1's attack buttons are enabled
+    const monster1Attack1Button = screen.getByText(/Quick Attack/i);
+    expect(monster1Attack1Button).toBeDisabled();
+    const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
+    expect(monster1Attack2Button).toBeEnabled();
   });
 });
