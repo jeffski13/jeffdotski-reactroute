@@ -223,15 +223,22 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
   return (
     <div className="Battle">
-      <h1>Battle Time!</h1>
+      
       <div className="battle-background"
       style={{
           backgroundImage: `url(${backgroundImage})`,
         }}></div>
+      <div className="battle-container">
+        <div className="battle-text-with-backdrop">
+          {monster1Hp !== 0 && monster2Hp !== 0 ? <h1 className="battle-title">Battle Time!</h1> : ''}
+          {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}
+          {monster2Hp === 0 && <h2>{selectedMonsters[0].name} Wins!</h2>}
+        </div>
+      </div>
       <div
         className="battle-container"
       >
-        <div className="monster">
+        <div className="monster battle-text-with-backdrop">
           <div>
             <h3>Trainer: {selectedMonsters[0].trainer}</h3>
             <h2>{selectedMonsters[0].name}</h2>
@@ -271,7 +278,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             {selectedMonsters[0].attack2.name}<br />PP: {monster1Attack2PP}/{selectedMonsters[0].attack2.powerPoints}
           </button>
         </div>
-        <div className="monster">
+        <div className="monster battle-text-with-backdrop">
           <h3>Trainer: {selectedMonsters[1].trainer}</h3>
           <h2>{selectedMonsters[1].name}</h2>
           <img
@@ -309,10 +316,12 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
           </button>
         </div>
       </div>
-      {attackResult && <p className="attack-result">{attackResult}</p>}
-      {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
-      {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}
-      {monster2Hp === 0 && <h2>{selectedMonsters[0].name} Wins!</h2>}
+      <div className="battle-container">
+        <div className="battle-results battle-text-with-backdrop">
+          {attackResult && <p className="attack-result">{attackResult}</p>}
+          {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
+        </div>
+      </div>
     </div>
   );
 }
