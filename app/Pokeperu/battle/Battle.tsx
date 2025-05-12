@@ -83,9 +83,13 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
-  const [damageToMonster1Animation, setDamageToMonster1Animation] = useState<string | null>(null); // New state for attack animation
-  const [damageToMonster2Animation, setDamageToMonster2Animation] = useState<string | null>(null); // New state for attack animation
-  const [backgroundImage, setBackgroundImage] = useState<string>(''); // New state for background image
+  const [damageToMonster1Animation, setDamageToMonster1Animation] = useState<string | null>(null);
+  const [damageToMonster2Animation, setDamageToMonster2Animation] = useState<string | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string>('');
+  const [monster1Attack1PP, setMonster1Attack1PP] = useState(selectedMonsters[0].attack1.powerPoints);
+  const [monster1Attack2PP, setMonster1Attack2PP] = useState(selectedMonsters[0].attack2.powerPoints);
+  const [monster2Attack1PP, setMonster2Attack1PP] = useState(selectedMonsters[1].attack1.powerPoints);
+  const [monster2Attack2PP, setMonster2Attack2PP] = useState(selectedMonsters[1].attack2.powerPoints);
 
   useEffect(() => {
     // Randomly select an image from the /perulandscape folder
@@ -93,7 +97,13 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
     setBackgroundImage(`/images/perulandscape/peru-${randomImageIndex}.jpg`);
   }, []);
 
-  const handleAttack = (attacker: number, attackBaseDamage: number, attackType: ElementType, isPhysical: boolean) => {
+  const handleAttack = (
+    attacker: number,
+    attackBaseDamage: number,
+    attackType: ElementType,
+    isPhysical: boolean,
+    attackIndex: number
+  ) => {
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
@@ -106,6 +116,14 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
       adjustedDamage = 0;
     } else {
       adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
+      if(attacker === 1) {
+        setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
+        setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
+      }
+      else {
+        setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
+        setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
+      }
     }
 
     if (attacker === 1) {
@@ -115,6 +133,13 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
         setTimeout(() => setIsMonster2Blinking(false), 500);
       }
       setIsMonster1Turn(false);
+
+      // Reduce Power Points for Monster 1
+      if (attackIndex === 1) {
+        setMonster1Attack1PP((prevPP) => Math.max(prevPP - 1, 0));
+      } else {
+        setMonster1Attack2PP((prevPP) => Math.max(prevPP - 1, 0));
+      }
     } else {
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
@@ -122,17 +147,12 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
         setTimeout(() => setIsMonster1Blinking(false), 500);
       }
       setIsMonster1Turn(true);
-    }
 
-    // Trigger attack animation
-    if (!attackMissed) {
-      if(attacker === 1) {
-        setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
-        setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
-      }
-      else {
-        setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
-        setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
+      // Reduce Power Points for Monster 2
+      if (attackIndex === 1) {
+        setMonster2Attack1PP((prevPP) => Math.max(prevPP - 1, 0));
+      } else {
+        setMonster2Attack2PP((prevPP) => Math.max(prevPP - 1, 0));
       }
     }
 
@@ -159,6 +179,11 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
   const isGameOver = monster1Hp === 0 || monster2Hp === 0;
 
+  const isMonster1Attack1Enabled = !isMonster1Turn || monster2Hp === 0 || isGameOver || monster1Attack1PP === 0;
+  const isMonster1Attack2Enabled = !isMonster1Turn || monster2Hp === 0 || isGameOver || monster1Attack2PP === 0;
+  const isMonster2Attack1Enabled = isMonster1Turn || monster1Hp === 0 || isGameOver || monster2Attack1PP === 0;
+  const isMonster2Attack2Enabled = isMonster1Turn || monster1Hp === 0 || isGameOver || monster2Attack2PP === 0;
+
   // Add keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -166,23 +191,23 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
       switch (event.key) {
         case '1': // Monster 1, Attack 1
-          if (isMonster1Turn) {
-            handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical);
+          if (isMonster1Turn && !isMonster1Attack1Enabled) {
+            handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical, 1);
           }
           break;
         case '2': // Monster 1, Attack 2
-          if (isMonster1Turn) {
-            handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical);
+          if (isMonster1Turn && !isMonster1Attack2Enabled) {
+            handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical, 2);
           }
           break;
         case '3': // Monster 2, Attack 1
-          if (!isMonster1Turn) {
-            handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical);
+          if (!isMonster1Turn && !isMonster2Attack1Enabled) {
+            handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical, 1);
           }
           break;
         case '4': // Monster 2, Attack 2
-          if (!isMonster1Turn) {
-            handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical);
+          if (!isMonster1Turn && !isMonster2Attack2Enabled) {
+            handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical, 2);
           }
           break;
         default:
@@ -231,18 +256,22 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             </div>
           </div>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical)}
-            disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
-            className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
+            onClick={() =>
+              handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical, 1)
+            }
+            disabled={isMonster1Attack1Enabled}
+            className={isMonster1Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[0].attack1.name}
+            {selectedMonsters[0].attack1.name} (PP: {monster1Attack1PP})
           </button>
           <button
-            onClick={() => handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical)}
-            disabled={!isMonster1Turn || monster2Hp === 0 || isGameOver}
-            className={!isMonster1Turn || monster2Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
+            onClick={() =>
+              handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical, 2)
+            }
+            disabled={isMonster1Attack2Enabled}
+            className={isMonster1Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[0].attack2.name}
+            {selectedMonsters[0].attack2.name} (PP: {monster1Attack2PP})
           </button>
         </div>
         <div className="monster">
@@ -264,18 +293,22 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             ></div>
           </div>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical)}
-            disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
-            className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
+            onClick={() =>
+              handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical, 1)
+            }
+            disabled={isMonster2Attack1Enabled}
+            className={isMonster2Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[1].attack1.name}
+            {selectedMonsters[1].attack1.name} (PP: {monster2Attack1PP})
           </button>
           <button
-            onClick={() => handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical)}
-            disabled={isMonster1Turn || monster1Hp === 0 || isGameOver}
-            className={isMonster1Turn || monster1Hp === 0 || isGameOver ? 'attack-button disabled' : 'attack-button enabled'}
+            onClick={() =>
+              handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical, 2)
+            }
+            disabled={isMonster2Attack2Enabled}
+            className={isMonster2Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[1].attack2.name}
+            {selectedMonsters[1].attack2.name} (PP: {monster2Attack2PP})
           </button>
         </div>
       </div>
