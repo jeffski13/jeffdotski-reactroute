@@ -151,3 +151,7 @@
   width: 29px;
   max-width: 200%;
 }
+
+.type-badge-attack {
+  font-size: small;
+}

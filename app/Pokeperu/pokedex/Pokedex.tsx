@@ -18,6 +18,38 @@ export default function Pokedex() {
       </div>
       <ul className="monster-list">
         {monsters.map((monster: Monster) => {
+          const statsList = [
+            {
+              name: 'Hit Points',
+              value: monster.hp,
+              color: '#FF5959'
+            },
+            {
+              name: 'Attack',
+              value: monster.attack,
+              color: '#F5AC78'
+            },
+            {
+              name: 'Defense',
+              value: monster.defense,
+              color: '#FAE078'
+            },
+            {
+              name: 'Special Attack',
+              value: monster.specialAttack,
+              color: '#9DB7F5'
+            },
+            {
+              name: 'Special Defense',
+              value: monster.specialDefense,
+              color: '#A7DB8D'
+            },
+            {
+              name: 'Speed',
+              value: monster.speed,
+              color: '#FA92B2'
+            }
+          ];
           const totalStats =
             monster.hp +
             monster.attack +
@@ -25,6 +57,11 @@ export default function Pokedex() {
             monster.specialAttack +
             monster.specialDefense +
             monster.speed;
+
+          const attackList = [
+            monster.attack1,
+            monster.attack2,
+          ];
 
           return (
             <li key={monster.name} className="monster-item">
@@ -47,162 +84,55 @@ export default function Pokedex() {
                 )}
                 <p className="monster-description">{monster.description}</p>
                 <Container>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Hit Points:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.hp}%`,
-                            backgroundColor: '#FF5959',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Attack:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.attack}%`,
-                            backgroundColor: '#F5AC78',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Defense:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.defense}%`,
-                            backgroundColor: '#FAE078',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Special Attack:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.specialAttack}%`,
-                            backgroundColor: '#9DB7F5',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Special Defense:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.specialDefense}%`,
-                            backgroundColor: '#A7DB8D',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4} className="stats-container">
-                      <div className="stats-label-container">
-                        <span className="stats-label">Speed:</span>
-                      </div>
-                    </Col>
-                    <Col md={8}>
-                      <div className="stat-bar">
-                        <div
-                          className="bar"
-                          style={{
-                            width: `${monster.speed}%`,
-                            backgroundColor: '#FA92B2',
-                          }}
-                        ></div>
-                      </div>
-                    </Col>
-                  </Row>
+                  {statsList.map((stat) => (
+                    <Row key={stat.name}>
+                      <Col md={4} className="stats-container">
+                        <div className="stats-label-container">
+                          <span className="stats-label">{stat.name}:</span>
+                        </div>
+                      </Col>
+                      <Col md={8}>
+                        <div className="stat-bar">
+                          <div
+                            className="bar"
+                            style={{
+                              width: `${stat.value}%`,
+                              backgroundColor: stat.color,
+                            }}
+                          ></div>
+                        </div>
+                      </Col>
+                    </Row>
+                  ))}
                 </Container>
                 <div className="total-stats">Total Stats: {totalStats}</div>
 
                 {/* Attacks Section */}
                 <div className="attacks-section">
                   <Container className="attacks-list">
-                    <Row className="attack-item">
-                      <Col md={1}>
-                        {monster.attack1.isPhysical ? 
-                        <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
-                        <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
-                      </Col>
-                      <Col md={4}>
-                        <span className="attack-name">{monster.attack1.name}</span>
-                      </Col>
-                      <Col md={4}>
-                        <span className="attack-name">Pow: {monster.attack1.damage}, PP: 2</span>
-                      </Col>
-                      <Col md={2}>
-                        <div
-                          className="type-badge"
-                          style={{ backgroundColor: getTypeColor(monster.attack1.type) }}
-                        >
-                          {monster.attack1.type}
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md={1}>
-                        {monster.attack2.isPhysical ? 
-                        <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
-                        <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
-                      </Col>
-                      <Col md={4}>
-                        <span className="attack-name">{monster.attack2.name}</span>
-                      </Col>
-                      <Col md={4}>
-                        <span className="attack-name">Pow: {monster.attack2.damage}, PP: 2</span>
-                      </Col>
-                      <Col md={2}>
-                        <div
-                          className="type-badge"
-                          style={{ backgroundColor: getTypeColor(monster.attack2.type) }}
-                        >
-                          {monster.attack2.type}
-                        </div>
-                      </Col>
-                    </Row>
+                    {attackList.map((attack, index) => (
+                      <Row key={index} className="attack-item">
+                        <Col md={1}>
+                          {attack.isPhysical ? 
+                          <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
+                          <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
+                        </Col>
+                        <Col md={4}>
+                          <span className="attack-name">{attack.name}</span>
+                        </Col>
+                        <Col md={4}>
+                          <span className="attack-name">Pow: {attack.damage}, PP: 2</span>
+                        </Col>
+                        <Col md={2}>
+                          <div
+                            className="type-badge type-badge-attack"
+                            style={{ backgroundColor: getTypeColor(attack.type) }}
+                          >
+                            {attack.type}
+                          </div>
+                        </Col>
+                      </Row>
+                    ))}
                   </Container>
                 </div>
               </div>
