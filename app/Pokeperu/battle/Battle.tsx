@@ -79,7 +79,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First);
-  const [attackResult, setAttackResult] = useState<string | null>(null);
+  const [attackResult, setAttackResult] = useState<string | null>(`${isMonster1First ? selectedMonsters[0].name : selectedMonsters[1].name} attacks first.`);
   const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);

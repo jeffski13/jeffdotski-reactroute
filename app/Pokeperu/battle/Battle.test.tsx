@@ -38,11 +38,6 @@ const mockSelectedMonsters: Monster[] = [
   },
 ];
 
-const mockSelectedMonstersSpeedMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
-mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
-mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
-
-
 describe('Battle Component', () => {
   test('verify initial HP', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
@@ -94,8 +89,15 @@ describe('Battle Component', () => {
   });
 
   test('monster with the highest speed attacks first', () => {
+    const mockSelectedMonstersSpeedMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+    mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
+    mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
+
     render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} />);
 
+    // Verify that the initial message indicates that the monster with the highest speed attacks first
+    expect(screen.getByText(/Charmander attacks first./i)).toBeInTheDocument();
+    
     // Verify that the monster with the highest speed (Pikachu) attacks first
     const monster2Attack1Button = screen.getByText(/Scratch/i);
     const monster2Attack2Button = screen.getByText(/Flamethrower/i);
