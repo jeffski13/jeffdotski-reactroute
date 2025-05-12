@@ -259,7 +259,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             disabled={isMonster1Attack1Enabled}
             className={isMonster1Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[0].attack1.name} (PP: {monster1Attack1PP})
+            {selectedMonsters[0].attack1.name}<br />PP: {monster1Attack1PP}/{selectedMonsters[0].attack1.powerPoints}
           </button>
           <button
             onClick={() =>
@@ -268,7 +268,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             disabled={isMonster1Attack2Enabled}
             className={isMonster1Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[0].attack2.name} (PP: {monster1Attack2PP})
+            {selectedMonsters[0].attack2.name}<br />PP: {monster1Attack2PP}/{selectedMonsters[0].attack2.powerPoints}
           </button>
         </div>
         <div className="monster">
@@ -296,7 +296,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             disabled={isMonster2Attack1Enabled}
             className={isMonster2Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[1].attack1.name} (PP: {monster2Attack1PP})
+            {selectedMonsters[1].attack1.name}<br />PP: {monster2Attack1PP}/{selectedMonsters[1].attack1.powerPoints}
           </button>
           <button
             onClick={() =>
@@ -305,7 +305,7 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
             disabled={isMonster2Attack2Enabled}
             className={isMonster2Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}
           >
-            {selectedMonsters[1].attack2.name} (PP: {monster2Attack2PP})
+            {selectedMonsters[1].attack2.name}<br />PP: {monster2Attack2PP}/{selectedMonsters[1].attack2.powerPoints}
           </button>
         </div>
       </div>
