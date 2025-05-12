@@ -231,8 +231,8 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
       <div className="battle-container">
         <div className="battle-text-with-backdrop">
           {monster1Hp !== 0 && monster2Hp !== 0 ? <h1 className="battle-title">Battle Time!</h1> : ''}
-          {monster1Hp === 0 && <h2>{selectedMonsters[1].name} Wins!</h2>}
-          {monster2Hp === 0 && <h2>{selectedMonsters[0].name} Wins!</h2>}
+          {monster1Hp === 0 && <h1 className="battle-title">{selectedMonsters[1].name} Wins!</h1>}
+          {monster2Hp === 0 && <h1 className="battle-title">{selectedMonsters[0].name} Wins!</h1>}
         </div>
       </div>
       <div
