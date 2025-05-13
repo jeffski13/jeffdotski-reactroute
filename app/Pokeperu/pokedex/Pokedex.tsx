@@ -1,10 +1,15 @@
 import ROUTES from '../../consts/ROUTES';
-import { monsters, type Monster } from '../monsters';
 import { getTypeColor } from './typeColors';
 import { Container, Row, Col } from 'react-bootstrap';
+import type { Monster } from '../monsters';
 import './pokedex.css';
+interface BattleProps {
+  selectedMonsters: Monster[];
+}
 
-export default function Pokedex() {
+export default function Pokedex({ 
+  selectedMonsters, 
+}: BattleProps) {
   return (
     <div className="Pokedex">
       <div className="header">
@@ -17,7 +22,7 @@ export default function Pokedex() {
         </div>
       </div>
       <ul className="monster-list">
-        {monsters.map((monster: Monster) => {
+        {selectedMonsters.map((monster: Monster) => {
           const statsList = [
             {
               name: 'Hit Points',
