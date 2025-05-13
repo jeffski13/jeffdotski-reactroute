@@ -109,18 +109,29 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
 
     let adjustedDamage = 0;
 
+    const selectedAttack =
+      attackIndex === 1
+        ? attackerMonster.attack1
+        : attackerMonster.attack2;
+
     const missChance = attackMissedPercentage ?? 0.1;
-    const attackMissed = Math.random() < missChance;
+    const attackMissed =
+      Math.random() < missChance || Math.random() > selectedAttack.accuracy;
 
     if (attackMissed) {
       adjustedDamage = 0;
     } else {
-      adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, attackBaseDamage, attackType, isPhysical);
-      if(attacker === 1) {
+      adjustedDamage = calculateAdjustedDamage(
+        attackerMonster,
+        defenderMonster,
+        attackBaseDamage,
+        attackType,
+        isPhysical
+      );
+      if (attacker === 1) {
         setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
         setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
-      }
-      else {
+      } else {
         setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
         setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
       }
@@ -156,13 +167,24 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
       }
     }
 
-    setAttackResult(`${attackerMonster.name} did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
+    setAttackResult(
+      `${attackerMonster.name} did ${Math.round(
+        adjustedDamage
+      )} damage to ${defenderMonster.name}.`
+    );
     if (attackMissed) {
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
     } else {
-      const primaryEffectiveness = typeEffectiveness(attackType, defenderMonster.type);
-      const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
-      const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
+      const primaryEffectiveness = typeEffectiveness(
+        attackType,
+        defenderMonster.type
+      );
+      const secondaryEffectiveness = typeEffectiveness(
+        attackType,
+        defenderMonster.secondType
+      );
+      const effectivenessFactor =
+        primaryEffectiveness * secondaryEffectiveness;
       if (effectivenessFactor === 0.5) {
         setEffectivenessResult(`It's not very effective.`);
       } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {

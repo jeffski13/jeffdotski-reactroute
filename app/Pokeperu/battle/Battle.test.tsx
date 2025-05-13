@@ -17,8 +17,8 @@ const mockSelectedMonsters: Monster[] = [
     type: ElementType.Electric,
     secondType: null,
     image: '/images/monsters/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20 },
-    attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: false, powerPoints: 20 },
+    attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20, accuracy: 1 },
+    attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: false, powerPoints: 20, accuracy: 1 },
   },
   {
     name: 'Charmander',
@@ -33,8 +33,8 @@ const mockSelectedMonsters: Monster[] = [
     type: ElementType.Fire,
     secondType: null,
     image: '/images/monsters/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20 },
-    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: false, powerPoints: 20 },
+    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20, accuracy: 1 },
+    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: false, powerPoints: 20, accuracy: 1 },
   },
 ];
 
@@ -166,16 +166,18 @@ describe('Battle Component', () => {
         damage: 50,
         type: ElementType.Ghost,
         isPhysical: false,
-        powerPoints: 10
+        powerPoints: 10,
+        accuracy: 1,
       },
       attack2: {
         name: 'Earthquake',
         damage: 50,
         type: ElementType.Ground,
         isPhysical: false,
-        powerPoints: 10
+        powerPoints: 10,
+        accuracy: 1,
       },
-      description: null
+      description: null,
     };
     const selectedMonsters = [
       { ...mockSelectedMonsters[0] },
@@ -205,6 +207,27 @@ describe('Battle Component', () => {
     expect(screen.getByText(/attack missed!/i)).toBeInTheDocument();
   });
 
+  it('displays "attack missed!" when the attack misses due to accuracy', () => {
+    const mockSelectedMonstersAccuracyMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+    mockSelectedMonstersAccuracyMod[0].attack1 = {
+      name: 'Quick Attack',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 0,
+    }
+
+    render(<Battle selectedMonsters={mockSelectedMonstersAccuracyMod} attackMissedPercentage={0} />);
+
+    // Simulate an attack by clicking the first monster's first attack button
+    const attackButton = screen.getByText('Quick Attack', { exact: false });
+    fireEvent.click(attackButton);
+
+    // Assert that the "attack missed!" message is displayed
+    expect(screen.getByText(/attack missed!/i)).toBeInTheDocument();
+  });
+
   test('attack buttons are disabled once an attack has 0 power points', () => {
     const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
     mockSelectedMonstersPowerPointsMod[0].attack1 = {
@@ -213,6 +236,7 @@ describe('Battle Component', () => {
       type: ElementType.Normal,
       isPhysical: true,
       powerPoints: 1,
+      accuracy: 1,
     }
 
     render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} attackMissedPercentage={0} />);

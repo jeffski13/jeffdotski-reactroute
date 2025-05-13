@@ -7,6 +7,7 @@ interface MonsterAttack {
   type: ElementType;
   isPhysical: boolean; // True for physical attacks, false for special attacks
   powerPoints: number; // New attribute for Power Points (PP)
+  accuracy: Number;
 }
 
 // Define the structure of a monster
@@ -47,14 +48,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 2, // Added PP
+      powerPoints: 20,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Thunderbolt',
       damage: 20,
       type: ElementType.Electric,
       isPhysical: false,
-      powerPoints: 15, // Added PP
+      powerPoints: 15,
+      accuracy: 0.9, // Added accuracy
     },
   },
   {
@@ -75,14 +78,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 35, // Added PP
+      powerPoints: 20,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Flamethrower',
       damage: 20,
       type: ElementType.Fire,
       isPhysical: false,
-      powerPoints: 15, // Added PP
+      powerPoints: 20,
+      accuracy: 0.85, // Added accuracy
     },
   },
   {
@@ -103,14 +108,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 35, // Added PP
+      powerPoints: 35,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Vine Whip',
       damage: 20,
       type: ElementType.Grass,
       isPhysical: false,
-      powerPoints: 25, // Added PP
+      powerPoints: 25,
+      accuracy: 0.9, // Added accuracy
     },
   },
   {
@@ -131,14 +138,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 35, // Added PP
+      powerPoints: 35,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Water Gun',
       damage: 20,
       type: ElementType.Water,
       isPhysical: false,
-      powerPoints: 25, // Added PP
+      powerPoints: 25,
+      accuracy: 0.9, // Added accuracy
     },
   },
   {
@@ -159,14 +168,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 30, // Added PP
+      powerPoints: 30,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Bite',
       damage: 20,
       type: ElementType.Dark,
       isPhysical: true,
-      powerPoints: 25, // Added PP
+      powerPoints: 25,
+      accuracy: 0.9, // Added accuracy
     },
   },
   {
@@ -187,14 +198,16 @@ export const monsters: Monster[] = [
       damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 35, // Added PP
+      powerPoints: 35,
+      accuracy: 0.95, // Added accuracy
     },
     attack2: {
       name: 'Sing',
       damage: 0,
       type: ElementType.Fairy,
       isPhysical: false,
-      powerPoints: 15, // Added PP
+      powerPoints: 15,
+      accuracy: 0.8, // Added accuracy
     },
   },
 ];
