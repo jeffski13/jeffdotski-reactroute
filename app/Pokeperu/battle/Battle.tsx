@@ -6,6 +6,7 @@ import './battle.css';
 interface BattleProps {
   selectedMonsters: Monster[];
   attackMissedPercentage?: number; // Optional property to dynamically control the miss chance
+  isAttackRandomDamage?: boolean; // Optional property to dynamically control the attack random damage
 }
 
 // Moved the typeEffectiveness function to the top level of the file to ensure it is accessible
@@ -44,7 +45,8 @@ export const calculateAdjustedDamage = (
   defenderMonster: Monster,
   attackBaseDamage: number,
   attackType: ElementType,
-  isPhysical: boolean
+  isPhysical: boolean,
+  isAttackRandomDamage: boolean
 ): number => {
 
   // Calculate adjusted damage using the provided formula
@@ -66,15 +68,21 @@ export const calculateAdjustedDamage = (
     adjustedDamage *= 2;
   }
 
-  const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
-  const randomFactor = Z / 255; // Normalize to 0-1 range
-  adjustedDamage *= randomFactor; // Apply random factor
+  if(isAttackRandomDamage) {
+    const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
+    const randomFactor = Z / 255; // Normalize to 0-1 range
+    adjustedDamage *= randomFactor; // Apply random factor
+  }
 
   // Round the final adjusted damage to remove decimals
   return Math.round(adjustedDamage);
 };
 
-export default function Battle({ selectedMonsters, attackMissedPercentage }: BattleProps) {
+export default function Battle({ 
+  selectedMonsters, 
+  attackMissedPercentage, 
+  isAttackRandomDamage: attackRandomDamage = true, 
+}: BattleProps) {
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
@@ -126,7 +134,8 @@ export default function Battle({ selectedMonsters, attackMissedPercentage }: Bat
         defenderMonster,
         attackBaseDamage,
         attackType,
-        isPhysical
+        isPhysical,
+        attackRandomDamage // Pass attackRandomDamage here
       );
       if (attacker === 1) {
         setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType

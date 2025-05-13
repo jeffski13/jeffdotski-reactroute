@@ -40,7 +40,7 @@ const mockSelectedMonsters: Monster[] = [
 
 describe('Battle Component', () => {
   test('verify initial HP', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Verify initial HP values
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
@@ -48,20 +48,20 @@ describe('Battle Component', () => {
   });
 
   test('when monster1 attacks, monster2Hp is reduced', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
     fireEvent.click(attackButton);
 
-    const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type, mockSelectedMonsters[0].attack1.isPhysical);
+    const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type, mockSelectedMonsters[0].attack1.isPhysical, false);
     const expectedHp = mockSelectedMonsters[1].hp - damage;
     // Verify that monster2's HP is reduced
     expect(screen.getByText(`HP: ${expectedHp}`)).toBeInTheDocument(); // Charmander's HP after attack
   });
 
   test('when monster1 attacks, the results of the attack are displayed', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Find and click the attack button for monster1 (Pikachu)
     const attackButton = screen.getByText(/Quick Attack/i);
@@ -73,7 +73,7 @@ describe('Battle Component', () => {
   });
 
   test('monster2 attack buttons are disabled and monster1 attack buttons are enabled when the UI appears', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Verify monster1's attack buttons are enabled
     const monster1Attack1Button = screen.getByText(/Quick Attack/i);
@@ -93,7 +93,7 @@ describe('Battle Component', () => {
     mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
     mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
 
-    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Verify that the initial message indicates that the monster with the highest speed attacks first
     expect(screen.getByText(/Charmander attacks first./i)).toBeInTheDocument();
@@ -110,7 +110,7 @@ describe('Battle Component', () => {
   });
 
   test('attack buttons are disabled once a monster has won', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
@@ -138,7 +138,7 @@ describe('Battle Component', () => {
     selectedMonsters[1].type = ElementType.Ground;
     selectedMonsters[1].hp = 100;
 
-    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Diglett)
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
@@ -184,7 +184,7 @@ describe('Battle Component', () => {
       gengar,
     ];
 
-    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Gengar)
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
@@ -197,7 +197,7 @@ describe('Battle Component', () => {
 
   it('displays "attack missed!" when the attack misses', () => {
     // Render the Battle component with attackMissedPercentage set to 1 (guaranteed miss)
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} />);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} isAttackRandomDamage={false} />);
 
     // Simulate an attack by clicking the first monster's first attack button
     const attackButton = screen.getByText('Quick Attack', { exact: false });
@@ -218,7 +218,7 @@ describe('Battle Component', () => {
       accuracy: 0,
     }
 
-    render(<Battle selectedMonsters={mockSelectedMonstersAccuracyMod} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonstersAccuracyMod} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Simulate an attack by clicking the first monster's first attack button
     const attackButton = screen.getByText('Quick Attack', { exact: false });
@@ -239,7 +239,7 @@ describe('Battle Component', () => {
       accuracy: 1,
     }
 
-    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} attackMissedPercentage={0} />);
+    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
