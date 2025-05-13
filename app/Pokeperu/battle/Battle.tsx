@@ -53,7 +53,7 @@ export const calculateAdjustedDamage = (
   const A = isPhysical ? attackerMonster.attack : attackerMonster.specialAttack;
   const D = isPhysical ? defenderMonster.defense : defenderMonster.specialDefense;
 
-  let level = 25;
+  let level = 10;
   let criticalHitFactor = 1;
   let adjustedDamage = (((((2 * level * criticalHitFactor) / 5) + 2) * attackBaseDamage * (A / D)) / 50) + 2
 
@@ -107,9 +107,6 @@ export default function Battle({
 
   const handleAttack = (
     attacker: number,
-    attackBaseDamage: number,
-    attackType: ElementType,
-    isPhysical: boolean,
     attackIndex: number
   ) => {
     const attackerMonster = selectedMonsters[attacker - 1];
@@ -123,8 +120,8 @@ export default function Battle({
         : attackerMonster.attack2;
 
     const missChance = attackMissedPercentage ?? 0.1;
-    const attackMissed =
-      Math.random() < missChance || Math.random() > selectedAttack.accuracy;
+    const attackHitChance = selectedAttack.accuracy ?? 1; // Default to 1 if not provided
+    const attackMissed = (Math.random() < missChance) || (attackHitChance < Math.random());
 
     if (attackMissed) {
       adjustedDamage = 0;
@@ -132,16 +129,16 @@ export default function Battle({
       adjustedDamage = calculateAdjustedDamage(
         attackerMonster,
         defenderMonster,
-        attackBaseDamage,
-        attackType,
-        isPhysical,
+        selectedAttack.damage,
+        selectedAttack.type,
+        selectedAttack.isPhysical,
         attackRandomDamage // Pass attackRandomDamage here
       );
       if (attacker === 1) {
-        setDamageToMonster2Animation(attackType); // Set the attack animation based on the attackType
+        setDamageToMonster2Animation(selectedAttack.type); // Set the attack animation based on the attackType
         setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
       } else {
-        setDamageToMonster1Animation(attackType); // Set the attack animation based on the attackType
+        setDamageToMonster1Animation(selectedAttack.type); // Set the attack animation based on the attackType
         setTimeout(() => setDamageToMonster1Animation(null), 500); // Clear the animation after 500ms
       }
     }
@@ -185,11 +182,11 @@ export default function Battle({
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
     } else {
       const primaryEffectiveness = typeEffectiveness(
-        attackType,
+        selectedAttack.type,
         defenderMonster.type
       );
       const secondaryEffectiveness = typeEffectiveness(
-        attackType,
+        selectedAttack.type,
         defenderMonster.secondType
       );
       const effectivenessFactor =
@@ -223,22 +220,22 @@ export default function Battle({
       switch (event.key) {
         case '1': // Monster 1, Attack 1
           if (isMonster1Turn && !isMonster1Attack1Enabled) {
-            handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical, 1);
+            handleAttack(1, 1);
           }
           break;
         case '2': // Monster 1, Attack 2
           if (isMonster1Turn && !isMonster1Attack2Enabled) {
-            handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical, 2);
+            handleAttack(1, 2);
           }
           break;
         case '3': // Monster 2, Attack 1
           if (!isMonster1Turn && !isMonster2Attack1Enabled) {
-            handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical, 1);
+            handleAttack(2, 1);
           }
           break;
         case '4': // Monster 2, Attack 2
           if (!isMonster1Turn && !isMonster2Attack2Enabled) {
-            handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical, 2);
+            handleAttack(2, 2);
           }
           break;
         default:
@@ -292,7 +289,7 @@ export default function Battle({
           </div>
           <button
             onClick={() =>
-              handleAttack(1, selectedMonsters[0].attack1.damage, selectedMonsters[0].attack1.type, selectedMonsters[0].attack1.isPhysical, 1)
+              handleAttack(1, 1)
             }
             disabled={isMonster1Attack1Enabled}
             className={isMonster1Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
@@ -301,7 +298,7 @@ export default function Battle({
           </button>
           <button
             onClick={() =>
-              handleAttack(1, selectedMonsters[0].attack2.damage, selectedMonsters[0].attack2.type, selectedMonsters[0].attack2.isPhysical, 2)
+              handleAttack(1, 2)
             }
             disabled={isMonster1Attack2Enabled}
             className={isMonster1Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}
@@ -329,7 +326,7 @@ export default function Battle({
           </div>
           <button
             onClick={() =>
-              handleAttack(2, selectedMonsters[1].attack1.damage, selectedMonsters[1].attack1.type, selectedMonsters[1].attack1.isPhysical, 1)
+              handleAttack(2, 1)
             }
             disabled={isMonster2Attack1Enabled}
             className={isMonster2Attack1Enabled ? 'attack-button disabled' : 'attack-button enabled'}
@@ -338,7 +335,7 @@ export default function Battle({
           </button>
           <button
             onClick={() =>
-              handleAttack(2, selectedMonsters[1].attack2.damage, selectedMonsters[1].attack2.type, selectedMonsters[1].attack2.isPhysical, 2)
+              handleAttack(2, 2)
             }
             disabled={isMonster2Attack2Enabled}
             className={isMonster2Attack2Enabled ? 'attack-button disabled' : 'attack-button enabled'}

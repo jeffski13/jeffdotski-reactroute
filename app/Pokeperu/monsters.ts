@@ -3,9 +3,9 @@ import { ElementType } from './ElementType';
 // Define the structure of an attack
 interface MonsterAttack {
   name: string;
-  damage: number;
   type: ElementType;
   isPhysical: boolean; // True for physical attacks, false for special attacks
+  damage: number;
   powerPoints: number; // New attribute for Power Points (PP)
   accuracy: Number;
 }
@@ -45,19 +45,19 @@ export const monsters: Monster[] = [
     description: 'Pikachu is an Electric-type Pokémon known for its agility and powerful Thunderbolt attack.',
     attack1: {
       name: 'Quick Attack',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 20,
-      accuracy: 0.95, // Added accuracy
+      damage: 30,
+      powerPoints: 10,
+      accuracy: 1,
     },
     attack2: {
       name: 'Thunderbolt',
-      damage: 20,
       type: ElementType.Electric,
       isPhysical: false,
-      powerPoints: 15,
-      accuracy: 0.9, // Added accuracy
+      damage: 50,
+      powerPoints: 4,
+      accuracy: 0.8,
     },
   },
   {
@@ -75,19 +75,19 @@ export const monsters: Monster[] = [
     description: 'Charmander is a Fire-type Pokémon that uses its fiery tail to intimidate opponents.',
     attack1: {
       name: 'Scratch',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 20,
-      accuracy: 0.95, // Added accuracy
+      damage: 30,
+      powerPoints: 10,
+      accuracy: 1,
     },
     attack2: {
       name: 'Flamethrower',
-      damage: 20,
       type: ElementType.Fire,
       isPhysical: false,
-      powerPoints: 20,
-      accuracy: 0.85, // Added accuracy
+      damage: 75,
+      powerPoints: 2,
+      accuracy: 0.5,
     },
   },
   {
@@ -105,19 +105,19 @@ export const monsters: Monster[] = [
     description: 'Bulbasaur is a Grass/Poison-type Pokémon that uses its bulb to unleash powerful attacks.',
     attack1: {
       name: 'Tackle',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
+      damage: 10,
       powerPoints: 35,
-      accuracy: 0.95, // Added accuracy
+      accuracy: 0.95,
     },
     attack2: {
       name: 'Vine Whip',
-      damage: 20,
       type: ElementType.Grass,
       isPhysical: false,
+      damage: 20,
       powerPoints: 25,
-      accuracy: 0.9, // Added accuracy
+      accuracy: 0.9,
     },
   },
   {
@@ -135,19 +135,19 @@ export const monsters: Monster[] = [
     description: 'Squirtle is a Water-type Pokémon that uses its shell for defense and Water Gun for offense.',
     attack1: {
       name: 'Tackle',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
+      damage: 10,
       powerPoints: 35,
-      accuracy: 0.95, // Added accuracy
+      accuracy: 0.95,
     },
     attack2: {
       name: 'Water Gun',
-      damage: 20,
       type: ElementType.Water,
       isPhysical: false,
+      damage: 20,
       powerPoints: 25,
-      accuracy: 0.9, // Added accuracy
+      accuracy: 0.9,
     },
   },
   {
@@ -165,19 +165,19 @@ export const monsters: Monster[] = [
     description: 'Eevee is a Normal-type Pokémon known for its adaptability and potential to evolve into various forms.',
     attack1: {
       name: 'Quick Attack',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 30,
-      accuracy: 0.95, // Added accuracy
+      damage: 30,
+      powerPoints: 10,
+      accuracy: 1,
     },
     attack2: {
       name: 'Bite',
-      damage: 20,
       type: ElementType.Dark,
       isPhysical: true,
-      powerPoints: 25,
-      accuracy: 0.9, // Added accuracy
+      damage: 50,
+      powerPoints: 4,
+      accuracy: 0.8,
     },
   },
   {
@@ -195,19 +195,19 @@ export const monsters: Monster[] = [
     description: 'Jigglypuff is a Normal/Fairy-type Pokémon that uses its singing ability to put opponents to sleep.',
     attack1: {
       name: 'Pound',
-      damage: 10,
       type: ElementType.Normal,
       isPhysical: true,
-      powerPoints: 35,
-      accuracy: 0.95, // Added accuracy
+      damage: 30,
+      powerPoints: 10,
+      accuracy: 1,
     },
     attack2: {
       name: 'Sing',
-      damage: 0,
       type: ElementType.Fairy,
       isPhysical: false,
-      powerPoints: 15,
-      accuracy: 0.8, // Added accuracy
+      damage: 50,
+      powerPoints: 4,
+      accuracy: 0.8,
     },
   },
 ];
