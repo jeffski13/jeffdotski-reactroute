@@ -80,6 +80,10 @@
   text-align: center;
 }
 
+.monster-inspiration {
+  margin-top: 10px;
+}
+
 .monster-description {
   font-style: italic;
   color: #555;

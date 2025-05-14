@@ -23,9 +23,10 @@ export interface Monster {
   type: ElementType;
   secondType: ElementType | null;
   image: string;
-  description: string | null; // New description attribute
+  description: string | null;
   attack1: MonsterAttack;
   attack2: MonsterAttack;
+  inspiration: string; // New property for inspiration
 }
 
 // Use the Monster interface for the monsters array
@@ -43,6 +44,7 @@ export const monsters: Monster[] = [
     secondType: null,
     image: '/images/monsters/pikachu.jpg',
     description: 'Pikachu is an Electric-type Pokémon known for its agility and powerful Thunderbolt attack.',
+    inspiration: 'Mouse', // Added inspiration
     attack1: {
       name: 'Quick Attack',
       type: ElementType.Normal,
@@ -73,6 +75,7 @@ export const monsters: Monster[] = [
     secondType: null,
     image: '/images/monsters/charmander.jpg',
     description: 'Charmander is a Fire-type Pokémon that uses its fiery tail to intimidate opponents.',
+    inspiration: 'Lizard', // Added inspiration
     attack1: {
       name: 'Scratch',
       type: ElementType.Normal,
@@ -103,6 +106,7 @@ export const monsters: Monster[] = [
     secondType: ElementType.Poison,
     image: '/images/monsters/bulbasaur.jpg',
     description: 'Bulbasaur is a Grass/Poison-type Pokémon that uses its bulb to unleash powerful attacks.',
+    inspiration: 'Seed and Frog', // Added inspiration
     attack1: {
       name: 'Tackle',
       type: ElementType.Normal,
@@ -133,6 +137,7 @@ export const monsters: Monster[] = [
     secondType: null,
     image: '/images/monsters/squirtle.png',
     description: 'Squirtle is a Water-type Pokémon that uses its shell for defense and Water Gun for offense.',
+    inspiration: 'Turtle', // Added inspiration
     attack1: {
       name: 'Tackle',
       type: ElementType.Normal,
@@ -163,6 +168,7 @@ export const monsters: Monster[] = [
     secondType: null,
     image: '/images/monsters/eevee.png',
     description: 'Eevee is a Normal-type Pokémon known for its adaptability and potential to evolve into various forms.',
+    inspiration: 'Fox and Dog', // Added inspiration
     attack1: {
       name: 'Quick Attack',
       type: ElementType.Normal,
@@ -193,6 +199,7 @@ export const monsters: Monster[] = [
     secondType: ElementType.Fairy,
     image: '/images/monsters/jigglypuff.jpg',
     description: 'Jigglypuff is a Normal/Fairy-type Pokémon that uses its singing ability to put opponents to sleep.',
+    inspiration: 'Balloon', // Added inspiration
     attack1: {
       name: 'Pound',
       type: ElementType.Normal,

@@ -10,8 +10,8 @@ interface BattleProps {
 export default function PokedexContainer() {
   return (<Pokedex selectedMonsters={monsters} />);
 }
-export function Pokedex({ 
-  selectedMonsters, 
+export function Pokedex({
+  selectedMonsters,
 }: BattleProps) {
   return (
     <div className="Pokedex">
@@ -90,7 +90,9 @@ export function Pokedex({
                     {monster.secondType}
                   </div>
                 )}
-                <p className="monster-description">{monster.description}</p>
+
+                <p className="monster-description">
+                  <span className="monster-inspiration">The {monster.inspiration} Pokemon: </span>{monster.description}</p>
                 <Container>
                   {statsList.map((stat) => (
                     <Row key={stat.name}>
@@ -121,9 +123,9 @@ export function Pokedex({
                     {attackList.map((attack, index) => (
                       <Row key={index} className="attack-item">
                         <Col md={1}>
-                          {attack.isPhysical ? 
-                          <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> : 
-                          <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
+                          {attack.isPhysical ?
+                            <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> :
+                            <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
                         </Col>
                         <Col md={4}>
                           <span className="attack-name">{attack.name}</span>
