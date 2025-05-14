@@ -1,13 +1,16 @@
 import ROUTES from '../../consts/ROUTES';
 import { getTypeColor } from './typeColors';
 import { Container, Row, Col } from 'react-bootstrap';
-import type { Monster } from '../monsters';
+import { monsters, type Monster } from '../monsters';
 import './pokedex.css';
 interface BattleProps {
   selectedMonsters: Monster[];
 }
 
-export default function Pokedex({ 
+export default function PokedexContainer() {
+  return (<Pokedex selectedMonsters={monsters} />);
+}
+export function Pokedex({ 
   selectedMonsters, 
 }: BattleProps) {
   return (
