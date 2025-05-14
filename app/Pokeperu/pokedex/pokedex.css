@@ -66,8 +66,16 @@
 }
 
 .monster-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: bold;
   margin: 0 0 10px 0;
+}
+
+.monster-types {
+  display: flex;
+  gap: 5px;
 }
 
 .type-badge {

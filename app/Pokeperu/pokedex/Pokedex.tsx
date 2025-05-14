@@ -75,21 +75,25 @@ export function Pokedex({
             <li key={monster.name} className="monster-item">
               <img src={monster.image} alt={monster.name} className="monster-image-dex" />
               <div className="monster-details">
-                <h2 className="monster-name">{monster.name}</h2>
-                <div
-                  className="type-badge"
-                  style={{ backgroundColor: getTypeColor(monster.type) }}
-                >
-                  {monster.type}
-                </div>
-                {monster.secondType && (
-                  <div
-                    className="type-badge"
-                    style={{ backgroundColor: getTypeColor(monster.secondType) }}
-                  >
-                    {monster.secondType}
-                  </div>
-                )}
+                <h2 className="monster-name">
+                  {monster.name}
+                  <span className="monster-types">
+                    <span
+                      className="type-badge"
+                      style={{ backgroundColor: getTypeColor(monster.type) }}
+                    >
+                      {monster.type}
+                    </span>
+                    {monster.secondType && (
+                      <span
+                        className="type-badge"
+                        style={{ backgroundColor: getTypeColor(monster.secondType) }}
+                      >
+                        {monster.secondType}
+                      </span>
+                    )}
+                  </span>
+                </h2>
 
                 <p className="monster-description">
                   <span className="monster-inspiration">The {monster.inspiration} Pokemon: </span>{monster.description}</p>
