@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster } from '../monsters';
 import './battle.css';
+import Typewriter from './Typewriter';
 
 interface BattleProps {
   selectedMonsters: Monster[];
   attackMissedPercentage?: number; // Optional property to dynamically control the miss chance
   isAttackRandomDamage?: boolean; // Optional property to dynamically control the attack random damage
+  isTextRenderInstant?: boolean; // Optional property to dynamically control the attack random damage
 }
 
 // Moved the typeEffectiveness function to the top level of the file to ensure it is accessible
@@ -68,7 +70,7 @@ export const calculateAdjustedDamage = (
     adjustedDamage *= 2;
   }
 
-  if(isAttackRandomDamage) {
+  if (isAttackRandomDamage) {
     const Z = Math.random() * (255 - 217) + 217; // Random number between 217 and 255
     const randomFactor = Z / 255; // Normalize to 0-1 range
     adjustedDamage *= randomFactor; // Apply random factor
@@ -78,17 +80,18 @@ export const calculateAdjustedDamage = (
   return Math.round(adjustedDamage);
 };
 
-export default function Battle({ 
-  selectedMonsters, 
-  attackMissedPercentage, 
-  isAttackRandomDamage: attackRandomDamage = true, 
+export default function Battle({
+  selectedMonsters,
+  attackMissedPercentage,
+  isAttackRandomDamage: attackRandomDamage = true,
+  isTextRenderInstant = false
 }: BattleProps) {
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
   const [monster2Hp, setMonster2Hp] = useState(selectedMonsters[1].hp);
   const [isMonster1Turn, setIsMonster1Turn] = useState(isMonster1First);
   const [attackResult, setAttackResult] = useState<string | null>(`${isMonster1First ? selectedMonsters[0].name : selectedMonsters[1].name} attacks first.`);
-  const [effectivenessResult, setEffectivenessResult] = useState<string | null>(null);
+  const [effectivenessResult, setEffectivenessResult] = useState<string | null>('');
   const [isMonster1Blinking, setIsMonster1Blinking] = useState(false);
   const [isMonster2Blinking, setIsMonster2Blinking] = useState(false);
   const [damageToMonster1Animation, setDamageToMonster1Animation] = useState<string | null>(null);
@@ -109,6 +112,8 @@ export default function Battle({
     attacker: number,
     attackIndex: number
   ) => {
+    setAttackResult('');
+
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
@@ -223,17 +228,17 @@ export default function Battle({
             handleAttack(1, 1);
           }
           break;
-        case '2': // Monster 1, Attack 2
+          case '2': // Monster 1, Attack 2
           if (isMonster1Turn && !isMonster1Attack2Enabled) {
             handleAttack(1, 2);
           }
           break;
-        case '3': // Monster 2, Attack 1
+          case '3': // Monster 2, Attack 1
           if (!isMonster1Turn && !isMonster2Attack1Enabled) {
             handleAttack(2, 1);
           }
           break;
-        case '4': // Monster 2, Attack 2
+          case '4': // Monster 2, Attack 2
           if (!isMonster1Turn && !isMonster2Attack2Enabled) {
             handleAttack(2, 2);
           }
@@ -249,18 +254,24 @@ export default function Battle({
     };
   }, [isMonster1Turn, isGameOver, selectedMonsters]);
 
+
+  let battleTitle = 'Battle Time!'
+  if(monster1Hp === 0) {
+    battleTitle = `${selectedMonsters[1].name} Wins!`
+  }
+  else if(monster2Hp === 0) {
+    battleTitle = `${selectedMonsters[0].name} Wins!`
+  }
+
   return (
     <div className="Battle">
-      
       <div className="battle-background"
-      style={{
+        style={{
           backgroundImage: `url(${backgroundImage})`,
         }}></div>
       <div className="battle-container">
         <div className="battle-text-with-backdrop">
-          {monster1Hp !== 0 && monster2Hp !== 0 ? <h1 className="battle-title">Battle Time!</h1> : ''}
-          {monster1Hp === 0 && <h1 className="battle-title">{selectedMonsters[1].name} Wins!</h1>}
-          {monster2Hp === 0 && <h1 className="battle-title">{selectedMonsters[0].name} Wins!</h1>}
+          <h1 className="battle-title"><Typewriter text={battleTitle} isInstantTextRender={isTextRenderInstant} /></h1>
         </div>
       </div>
       <div
@@ -346,8 +357,9 @@ export default function Battle({
       </div>
       <div className="battle-container">
         <div className="battle-results battle-text-with-backdrop">
-          {attackResult && <p className="attack-result">{attackResult}</p>}
-          {effectivenessResult && <p className="attack-result">{effectivenessResult}</p>}
+          <Typewriter text={attackResult} isInstantTextRender={isTextRenderInstant} />
+          <br />
+          <Typewriter text={effectivenessResult} isInstantTextRender={isTextRenderInstant} />
         </div>
       </div>
     </div>

@@ -46,7 +46,6 @@ describe('BattleStartScreen Component', () => {
     fireEvent.click(startBattleButton);
 
     // Verify the UI transitions to the battle phase
-    expect(screen.getByText(/Battle Time!/i)).toBeInTheDocument();
     expect(screen.getByText(/Trainer: Ash/i)).toBeInTheDocument();
     expect(screen.getByText(/Trainer: Brock/i)).toBeInTheDocument();
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
