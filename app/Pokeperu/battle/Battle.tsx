@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
-import type { Monster } from '../monsters';
+import type { Monster, MonsterAttack } from '../monsters';
 import './battle.css';
 import Typewriter from './Typewriter';
 
@@ -80,6 +80,15 @@ export const calculateAdjustedDamage = (
   return Math.round(adjustedDamage);
 };
 
+const STRUGGLE_ATTACK: MonsterAttack = {
+  name: 'Struggle',
+  damage: 10,
+  type: ElementType.Normal,
+  isPhysical: true,
+  powerPoints: 999, // Not used, just for compatibility
+  accuracy: 1,
+};
+
 export default function Battle({
   selectedMonsters,
   attackMissedPercentage,
@@ -107,6 +116,29 @@ export default function Battle({
     const randomImageIndex = Math.floor(Math.random() * 8) + 1; // Random number between 1 and 8
     setBackgroundImage(`/images/perulandscape/peru-${randomImageIndex}.jpg`);
   }, []);
+
+  const handleStruggle = (attacker: number) => {
+    console.log('Struggle attack triggered with attacker:', attacker);
+    const attackerMonster = selectedMonsters[attacker - 1];
+    const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
+    const selfDamage = 0.1 * attackerMonster.hp;
+    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, STRUGGLE_ATTACK.damage, STRUGGLE_ATTACK.type, STRUGGLE_ATTACK.isPhysical, attackRandomDamage);
+    if (attacker === 1) {
+      console.log('Struggle with: ', selfDamage, adjustedDamage);
+      console.log('alternating turn...');
+      setIsMonster1Turn(false);
+      setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
+      setMonster1Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
+    } else {
+      console.log('Struggle with: ', selfDamage, adjustedDamage);
+      console.log('alternating turn...');
+      setIsMonster1Turn(true);
+      setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
+      setMonster2Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
+    }
+    setAttackResult(`${attackerMonster.name} used ${STRUGGLE_ATTACK.name}! It did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
+    setEffectivenessResult(`${attackerMonster.name} is hurt by recoil!`);
+  }
 
   const handleAttack = (
     attacker: number,
@@ -204,6 +236,28 @@ export default function Battle({
         setEffectivenessResult(``);
       }
     }
+
+
+    const isMonster1StruggleEnabled = monster1Attack1PP === 0 && monster1Attack2PP === 0;
+    const isMonster2StruggleEnabled = monster2Attack1PP === 0 && monster2Attack2PP === 0;
+    const struggleDelay = 2000;
+
+    if (attacker === 2 && isMonster1StruggleEnabled) {
+      console.log('Monster 1 strugggle condish met!');
+      setTimeout(() => {
+        console.log('Monster 1 is executing delay!');
+        setIsMonster1Turn(false);
+        handleStruggle(1);
+      }, struggleDelay);
+    }
+    if (attacker === 1 && isMonster2StruggleEnabled) {
+      console.log('Monster 2 strugggle condish met!');
+      setTimeout(() => {
+        console.log('Monster 2 is executing delay!');
+        setIsMonster1Turn(true);
+        handleStruggle(2);
+      }, struggleDelay);
+    }
   };
 
   const calculateHpPercentage = (currentHp: number, maxHp: number) => {
@@ -228,17 +282,17 @@ export default function Battle({
             handleAttack(1, 1);
           }
           break;
-          case '2': // Monster 1, Attack 2
+        case '2': // Monster 1, Attack 2
           if (isMonster1Turn && !isMonster1Attack2Enabled) {
             handleAttack(1, 2);
           }
           break;
-          case '3': // Monster 2, Attack 1
+        case '3': // Monster 2, Attack 1
           if (!isMonster1Turn && !isMonster2Attack1Enabled) {
             handleAttack(2, 1);
           }
           break;
-          case '4': // Monster 2, Attack 2
+        case '4': // Monster 2, Attack 2
           if (!isMonster1Turn && !isMonster2Attack2Enabled) {
             handleAttack(2, 2);
           }
@@ -256,10 +310,10 @@ export default function Battle({
 
 
   let battleTitle = 'Battle Time!'
-  if(monster1Hp === 0) {
+  if (monster1Hp === 0) {
     battleTitle = `${selectedMonsters[1].name} Wins!`
   }
-  else if(monster2Hp === 0) {
+  else if (monster2Hp === 0) {
     battleTitle = `${selectedMonsters[0].name} Wins!`
   }
 

@@ -1,7 +1,7 @@
 import { ElementType } from './ElementType';
 
 // Define the structure of an attack
-interface MonsterAttack {
+export interface MonsterAttack {
   name: string;
   type: ElementType;
   isPhysical: boolean; // True for physical attacks, false for special attacks
@@ -49,16 +49,16 @@ export const monsters: Monster[] = [
       name: 'Quick Attack',
       type: ElementType.Normal,
       isPhysical: true,
-      damage: 20,
-      powerPoints: 10,
+      damage: 1,
+      powerPoints: 1,
       accuracy: 1,
     },
     attack2: {
       name: 'Thunderbolt',
       type: ElementType.Electric,
       isPhysical: false,
-      damage: 60,
-      powerPoints: 2,
+      damage: 1,
+      powerPoints: 1,
       accuracy: 0.4,
     },
   },
