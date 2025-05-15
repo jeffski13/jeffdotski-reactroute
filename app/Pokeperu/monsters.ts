@@ -57,7 +57,7 @@ export const monsters: Monster[] = [
       name: 'Thunderbolt',
       type: ElementType.Electric,
       isPhysical: false,
-      damage: 70,
+      damage: 60,
       powerPoints: 2,
       accuracy: 0.4,
     },
