@@ -73,39 +73,45 @@ export function Pokedex({
 
           return (
             <li key={monster.name} className="monster-item">
-              <img src={monster.image} alt={monster.name} className="monster-image-dex" />
               <div className="monster-details">
-                <h2 className="monster-name">
-                  {monster.name}
-                  <span className="monster-types">
-                    <span
-                      className="type-badge"
-                      style={{ backgroundColor: getTypeColor(monster.type) }}
-                    >
-                      {monster.type}
-                    </span>
-                    {monster.secondType && (
-                      <span
-                        className="type-badge"
-                        style={{ backgroundColor: getTypeColor(monster.secondType) }}
-                      >
-                        {monster.secondType}
+                <div className='monster-details-top '>
+                  <img src={monster.image} alt={monster.name} className="monster-image-dex" />
+                  <div>
+                    <h2 className="monster-name">
+                      {monster.name}
+                      <span className="monster-types">
+                        <span
+                          className="type-badge"
+                          style={{ backgroundColor: getTypeColor(monster.type) }}
+                        >
+                          {monster.type}
+                        </span>
+                        {monster.secondType && (
+                          <span
+                            className="type-badge"
+                            style={{ backgroundColor: getTypeColor(monster.secondType) }}
+                          >
+                            {monster.secondType}
+                          </span>
+                        )}
                       </span>
-                    )}
-                  </span>
-                </h2>
-
-                <p className="monster-description">
-                  <span className="monster-inspiration">The {monster.inspiration} Pokemon: </span>{monster.description}</p>
+                    </h2>
+                    <p className="monster-description">
+                      <span className="monster-inspiration">The {monster.inspiration} Pokemon: </span>{monster.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="monster-stats-section monster-details">
                 <Container>
                   {statsList.map((stat) => (
                     <Row key={stat.name}>
-                      <Col md={4} className="stats-container">
+                      <Col md={3} className="stats-container">
                         <div className="stats-label-container">
                           <span className="stats-label">{stat.name}:</span>
                         </div>
                       </Col>
-                      <Col md={8}>
+                      <Col md={9}>
                         <div className="stat-bar">
                           <div
                             className="bar"
@@ -119,36 +125,40 @@ export function Pokedex({
                     </Row>
                   ))}
                 </Container>
+              </div>
+              <div className="total-statstotal-container monster-details">
                 <div className="total-stats">Total Stats: {totalStats}</div>
-
-                {/* Attacks Section */}
-                <div className="attacks-section">
-                  <Container className="attacks-list">
-                    {attackList.map((attack, index) => (
-                      <Row key={index} className="attack-item">
-                        <Col md={1}>
+              </div>
+              {/* Attacks Section */}
+              <div className="attacks-section monster-details">
+                <Container className="attacks-list">
+                  {attackList.map((attack, index) => (
+                    <Row key={index} className="attack-item">
+                      <Col md={4} className="attack-name-container">
+                        <span>
                           {attack.isPhysical ?
                             <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> :
                             <img className="attack-type-physical" src="/images/pokedex/attack_special.png" />}
-                        </Col>
-                        <Col md={4}>
-                          <span className="attack-name">{attack.name}</span>
-                        </Col>
-                        <Col md={4}>
-                          <span className="attack-name">Pow: {attack.damage}<br />PP: {attack.powerPoints}</span>
-                        </Col>
-                        <Col md={2}>
-                          <div
-                            className="type-badge type-badge-attack"
-                            style={{ backgroundColor: getTypeColor(attack.type) }}
-                          >
-                            {attack.type}
-                          </div>
-                        </Col>
-                      </Row>
-                    ))}
-                  </Container>
-                </div>
+                        </span>
+                        <span className="attack-name">{attack.name}</span>
+                      </Col>
+                      <Col md={2} className="attack-name-container">
+                        <span className="attack-name">PP: {attack.powerPoints}</span>
+                      </Col>
+                      <Col md={2} className="attack-name-container">
+                        <span className="attack-name">Pow: {attack.damage}</span>
+                      </Col>
+                      <Col md={4}>
+                        <div
+                          className="type-badge type-badge-attack"
+                          style={{ backgroundColor: getTypeColor(attack.type) }}
+                        >
+                          {attack.type}
+                        </div>
+                      </Col>
+                    </Row>
+                  ))}
+                </Container>
               </div>
             </li>
           );
