@@ -1,7 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import BattleContainer from './BattleParent';
+import type { Monster } from '../monsters';
+import { ElementType } from '../ElementType';
 
-const mockSelectedMonsters = [
+const mockSelectedMonsters: Monster[] = [
   {
     name: 'Pikachu',
     trainer: 'Ash',
@@ -11,10 +13,19 @@ const mockSelectedMonsters = [
     specialAttack: 50,
     specialDefense: 50,
     speed: 90,
-    type: 'Electric',
+    type: ElementType.Electric,
     image: '/images/pikachu.jpg',
-    attack1: { name: 'Quick Attack', damage: 10, type: 'Normal' },
-    attack2: { name: 'Thunderbolt', damage: 20, type: 'Electric' },
+    attack1: {
+      name: 'Quick Attack', damage: 10, type: ElementType.Normal,
+      isPhysical: false, powerPoints: 0, accuracy: 1
+    },
+    attack2: {
+      name: 'Thunderbolt', damage: 20, type: ElementType.Electric,
+      isPhysical: false, powerPoints: 0, accuracy: 1
+    },
+    secondType: null,
+    description: null,
+    inspiration: ''
   },
   {
     name: 'Charmander',
@@ -25,10 +36,17 @@ const mockSelectedMonsters = [
     specialAttack: 60,
     specialDefense: 50,
     speed: 65,
-    type: 'Fire',
+    type: ElementType.Fire,
     image: '/images/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: 'Normal' },
-    attack2: { name: 'Flamethrower', damage: 20, type: 'Fire' },
+    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal,
+      isPhysical: false, powerPoints: 0, accuracy: 1
+     },
+    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire,
+      isPhysical: false, powerPoints: 0, accuracy: 1
+     },
+    secondType: null,
+    description: null,
+    inspiration: ''
   },
 ];
 
@@ -46,8 +64,6 @@ describe('BattleStartScreen Component', () => {
     fireEvent.click(startBattleButton);
 
     // Verify the UI transitions to the battle phase
-    expect(screen.getByText(/Trainer: Ash/i)).toBeInTheDocument();
-    expect(screen.getByText(/Trainer: Brock/i)).toBeInTheDocument();
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
     expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
   });

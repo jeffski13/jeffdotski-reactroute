@@ -52,7 +52,7 @@ describe('Battle Component', () => {
   test('verify initial title message', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
-    expect(screen.getByText(/Battle Time!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ash vs Brock/i)).toBeInTheDocument();
   });
 
   test('when monster1 attacks, monster2Hp is reduced', () => {
@@ -159,7 +159,7 @@ describe('Battle Component', () => {
       fireEvent.click(attackButtonMonster1);
     }
 
-    expect(screen.getByText(/Pikachu Wins!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ash Wins!/i)).toBeInTheDocument();
   });
 
   it('should deal no damage when an Electric type attack is used against a Ground type monster', () => {
@@ -395,6 +395,6 @@ describe('Battle Component', () => {
     fireEvent.click(attackButtonMonster2Attack2);
 
     // Verify that attack 1's power points is 0
-    expect(screen.getByText(/Pikachu wins!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ash wins!/i)).toBeInTheDocument();
   });
 });

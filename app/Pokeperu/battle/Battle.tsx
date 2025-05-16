@@ -327,12 +327,12 @@ export default function Battle({
   }, [isMonster1Turn, isGameOver, monster1Attack1PP, monster1Attack2PP, monster2Attack1PP, monster2Attack2PP]);
 
 
-  let battleTitle = 'Battle Time!'
+  let battleTitle = `${selectedMonsters[0].trainer} vs ${selectedMonsters[1].trainer}`;
   if (isMonster2Winner) {
-    battleTitle = `${selectedMonsters[1].name} Wins!`
+    battleTitle = `${selectedMonsters[1].trainer} Wins!`
   }
   else if (isMonster1Winner) {
-    battleTitle = `${selectedMonsters[0].name} Wins!`
+    battleTitle = `${selectedMonsters[0].trainer} Wins!`
   }
 
   return (
@@ -351,7 +351,6 @@ export default function Battle({
       >
         <div className={`monster battle-text-with-backdrop ${isMonster1Winner ? 'monster-winner' : ''} ${isMonster2Winner ? 'monster-loser' : ''}`}>
           <div>
-            <h3>Trainer: {selectedMonsters[0].trainer}</h3>
             <h2>{selectedMonsters[0].name}</h2>
             <img
               src={selectedMonsters[0].image}
@@ -390,7 +389,6 @@ export default function Battle({
           </button>
         </div>
         <div className={`monster battle-text-with-backdrop ${isMonster2Winner ? 'monster-winner' : ''} ${isMonster1Winner ? 'monster-loser' : ''}`}>
-          <h3>Trainer: {selectedMonsters[1].trainer}</h3>
           <h2>{selectedMonsters[1].name}</h2>
           <img
             src={selectedMonsters[1].image}

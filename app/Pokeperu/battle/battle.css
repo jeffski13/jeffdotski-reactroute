@@ -27,27 +27,26 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
 }
 
 .battle-text-with-backdrop {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.8); /* Light background with some transparency */
   border-radius: 15px; /* Rounded corners */
-  padding: 10px; /* Add some padding inside the container */
+  padding: 5px; /* Add some padding inside the container */
   margin: 5px; /* Add some padding inside the container */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
 }
 
 .battle-results {
-  width: 50%;
+  width: 60%;
 }
 
 .monster {
   opacity: 1;
   text-align: center;
   position: relative; /* Make the monster container a positioning context */
-  margin: 10px; /* Add spacing between monsters */
+  margin: 5px; /* Add spacing between monsters */
 }
 
 .monster-winner {
@@ -64,8 +63,8 @@
   display: block;
   margin: auto;
   width: 50%;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
 }
 
 .monster .attack-animation {
