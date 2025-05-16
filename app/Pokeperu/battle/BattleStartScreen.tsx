@@ -42,31 +42,12 @@ export default function BattleStartScreen({
             <img
               src={trainer1Image}
               alt="Trainer 1"
-              className="trainer-image"
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: 180,
-                height: 180,
-                objectFit: 'contain',
-                zIndex: 1,
-                filter: 'brightness(0.6)',
-              }}
+              className="trainer-image trainer1"
             />
             <img
               src={monster1Image}
               alt={monster1}
-              className="monster-selected"
-              style={{
-                position: 'absolute',
-                left: 80,
-                top: 60,
-                width: 170,
-                height: 170,
-                objectFit: 'contain',
-                zIndex: 2,
-              }}
+              className="monster-selected monster1"
             />
           </div>
           <div style={{ marginLeft: 16 }}>
@@ -82,31 +63,12 @@ export default function BattleStartScreen({
             <img
               src={trainer2Image}
               alt="Trainer 2"
-              className="trainer-image"
-              style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                width: 180,
-                height: 180,
-                objectFit: 'contain',
-                zIndex: 1,
-                filter: 'brightness(0.6)',
-              }}
+              className="trainer-image trainer2"
             />
             <img
               src={monster2Image}
               alt={monster2}
-              className="monster-selected"
-              style={{
-                position: 'absolute',
-                right: 80,
-                top: 60,
-                width: 170,
-                height: 170,
-                objectFit: 'contain',
-                zIndex: 2,
-              }}
+              className="monster-selected monster2"
             />
           </div>
         </div>
