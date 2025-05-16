@@ -56,6 +56,10 @@ export default function BattleStartScreen({
             </div>
           </div>
         </div>
+        {/* VS */}
+        <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
+          <h2>VS</h2>
+        </div>
         {/* User 2 */}
         <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
