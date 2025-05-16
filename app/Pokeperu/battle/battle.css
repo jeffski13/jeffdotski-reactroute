@@ -120,6 +120,25 @@ button {
   opacity: 0.6;
 }
 
+
+/* On small screens, display attack buttons side by side */
+@media (max-width: 600px) {
+  .monster .attack-button {
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 8px;
+    margin-right: 2%;
+    margin-left: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .monster .attack-button:last-child {
+    margin-right: 0;
+  width: 50%;
+  }
+}
+
 .blinking {
   animation: blink 0.2s ease-in-out 2; /* Loop the animation 3 times */
 }
