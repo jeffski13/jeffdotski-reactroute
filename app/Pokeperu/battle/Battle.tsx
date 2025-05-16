@@ -247,7 +247,9 @@ export default function Battle({
     return (currentHp / maxHp) * 100;
   };
 
-  const isGameOver = monster1Hp === 0 || monster2Hp === 0;
+  const isMonster1Winner = monster2Hp === 0;
+  const isMonster2Winner = monster1Hp === 0;
+  const isGameOver = isMonster1Winner || isMonster2Winner;
 
   const isMonster1Attack1Enabled = !isMonster1Turn || monster2Hp === 0 || isGameOver || monster1Attack1PP === 0;
   const isMonster1Attack2Enabled = !isMonster1Turn || monster2Hp === 0 || isGameOver || monster1Attack2PP === 0;
@@ -326,10 +328,10 @@ export default function Battle({
 
 
   let battleTitle = 'Battle Time!'
-  if (monster1Hp === 0) {
+  if (isMonster2Winner) {
     battleTitle = `${selectedMonsters[1].name} Wins!`
   }
-  else if (monster2Hp === 0) {
+  else if (isMonster1Winner) {
     battleTitle = `${selectedMonsters[0].name} Wins!`
   }
 
@@ -347,7 +349,7 @@ export default function Battle({
       <div
         className="battle-container"
       >
-        <div className="monster battle-text-with-backdrop">
+        <div className={`monster battle-text-with-backdrop ${isMonster1Winner ? 'monster-winner' : ''} ${isMonster2Winner ? 'monster-loser' : ''}`}>
           <div>
             <h3>Trainer: {selectedMonsters[0].trainer}</h3>
             <h2>{selectedMonsters[0].name}</h2>
@@ -387,7 +389,7 @@ export default function Battle({
             {selectedMonsters[0].attack2.name}<br />PP: {monster1Attack2PP}/{selectedMonsters[0].attack2.powerPoints}
           </button>
         </div>
-        <div className="monster battle-text-with-backdrop">
+        <div className={`monster battle-text-with-backdrop ${isMonster2Winner ? 'monster-winner' : ''} ${isMonster1Winner ? 'monster-loser' : ''}`}>
           <h3>Trainer: {selectedMonsters[1].trainer}</h3>
           <h2>{selectedMonsters[1].name}</h2>
           <img
