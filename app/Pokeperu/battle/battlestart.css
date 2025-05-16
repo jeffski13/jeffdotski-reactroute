@@ -8,13 +8,6 @@
   text-align: center;
 }
 
-.monster-selected {
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
-  margin-top: 10px;
-}
-
 .MonsterSelectionResults {
   text-align: center;
 }
@@ -33,4 +26,11 @@
 
 .start-battle-button:hover {
   background-color: #0056b3;
+}
+
+.trainer-image {
+  margin-left: 16;
+  width: 80;
+  height: 80;
+  object-fit: 'contain';
 }
