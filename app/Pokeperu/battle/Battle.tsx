@@ -181,12 +181,12 @@ export default function Battle({
     }
 
     if (attacker === 1) {
+      setIsMonster1Turn(false);
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
         setIsMonster2Blinking(true);
         setTimeout(() => setIsMonster2Blinking(false), 500);
       }
-      setIsMonster1Turn(false);
 
       // Reduce Power Points for Monster 1
       if (attackIndex === 1) {
@@ -195,18 +195,25 @@ export default function Battle({
         setMonster1Attack2PP((prevPP) => Math.max(prevPP - 1, 0));
       }
     } else {
+      setIsMonster1Turn(true);
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
         setIsMonster1Blinking(true);
         setTimeout(() => setIsMonster1Blinking(false), 500);
       }
-      setIsMonster1Turn(true);
 
       // Reduce Power Points for Monster 2
       if (attackIndex === 1) {
+        console.log('Monster 2 attack 1 PP:', monster2Attack1PP);
         setMonster2Attack1PP((prevPP) => Math.max(prevPP - 1, 0));
       } else {
-        setMonster2Attack2PP((prevPP) => Math.max(prevPP - 1, 0));
+        console.log('Monster 2 attack 2 PP:', monster2Attack2PP);
+        setMonster2Attack2PP((prevPP) => {
+          console.log('prevPP:', prevPP);
+          const nextPP = prevPP - 1;
+          console.log('prevPP - 1:', nextPP);
+          return Math.max(nextPP, 0)
+        });
       }
     }
 
@@ -235,28 +242,6 @@ export default function Battle({
       } else {
         setEffectivenessResult(``);
       }
-    }
-
-
-    const isMonster1StruggleEnabled = monster1Attack1PP === 0 && monster1Attack2PP === 0;
-    const isMonster2StruggleEnabled = monster2Attack1PP === 0 && monster2Attack2PP === 0;
-    const struggleDelay = 2000;
-
-    if (attacker === 2 && isMonster1StruggleEnabled) {
-      console.log('Monster 1 strugggle condish met!');
-      setTimeout(() => {
-        console.log('Monster 1 is executing delay!');
-        setIsMonster1Turn(false);
-        handleStruggle(1);
-      }, struggleDelay);
-    }
-    if (attacker === 1 && isMonster2StruggleEnabled) {
-      console.log('Monster 2 strugggle condish met!');
-      setTimeout(() => {
-        console.log('Monster 2 is executing delay!');
-        setIsMonster1Turn(true);
-        handleStruggle(2);
-      }, struggleDelay);
     }
   };
 
@@ -307,6 +292,34 @@ export default function Battle({
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, [isMonster1Turn, isGameOver, selectedMonsters]);
+
+  // Add keyboard shortcuts
+  useEffect(() => {
+    console.log('useEffect for struggle...')
+    const isMonster1StruggleEnabled = monster1Attack1PP === 0 && monster1Attack2PP === 0;
+    const isMonster2StruggleEnabled = monster2Attack1PP === 0 && monster2Attack2PP === 0;
+    const struggleDelay = 2000;
+
+    if(!isGameOver) {
+      if (isMonster1Turn && isMonster1StruggleEnabled) {
+        console.log('Monster 1 strugggle condish met!');
+        setTimeout(() => {
+          console.log('Monster 1 is executing delay!');
+          handleStruggle(1);
+        }, struggleDelay);
+      }
+      if (!isMonster1Turn && isMonster2StruggleEnabled) {
+        console.log('Monster 2 strugggle condish met!');
+        setTimeout(() => {
+          console.log('Monster 2 is executing delay!');
+          handleStruggle(2);
+        }, struggleDelay);
+      }
+    }
+
+    return () => {
+    };
+  }, [isMonster1Turn, isGameOver, monster1Attack1PP, monster1Attack2PP, monster2Attack1PP, monster2Attack2PP]);
 
 
   let battleTitle = 'Battle Time!'
