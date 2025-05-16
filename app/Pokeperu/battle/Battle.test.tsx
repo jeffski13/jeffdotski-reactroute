@@ -289,4 +289,58 @@ describe('Battle Component', () => {
     const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
     expect(monster1Attack2Button).toBeEnabled();
   });
+  
+  test('pokemon struggles once both attacks have 0 power points', () => {
+    const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+    mockSelectedMonstersPowerPointsMod[0].attack1 = {
+      name: 'Quick Attack',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 1,
+    }
+    mockSelectedMonstersPowerPointsMod[0].attack2 = {
+      name: 'Tackle',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 1,
+    }
+    mockSelectedMonstersPowerPointsMod[1].attack1 = {
+      name: 'Scratch',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 1,
+    }
+    mockSelectedMonstersPowerPointsMod[1].attack2 = {
+      name: 'Bite',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 2,
+      accuracy: 1,
+    }
+
+    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} 
+      attackMissedPercentage={0} isAttackRandomDamage={false} 
+      isTextRenderInstant={true} isInstantStruggleEnabled={true} />);
+
+    // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
+    const attackButtonMonster1Attack1 = screen.getByText(/Quick Attack/i);
+    fireEvent.click(attackButtonMonster1Attack1);
+    const attackButtonMonster2Attack1 = screen.getByText(/Scratch/i);
+    fireEvent.click(attackButtonMonster2Attack1);
+    const attackButtonMonster1Attack2 = screen.getByText(/Tackle/i);
+    fireEvent.click(attackButtonMonster1Attack2);
+    const attackButtonMonster2Attack2 = screen.getByText(/Bite/i);
+    fireEvent.click(attackButtonMonster2Attack2);
+
+    // Verify that attack 1's power points is 0
+    expect(screen.getByText(/Pikachu used struggle!/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pikachu is hurt by recoil!/i)).toBeInTheDocument();
+  });
 });

@@ -9,6 +9,7 @@ interface BattleProps {
   attackMissedPercentage?: number; // Optional property to dynamically control the miss chance
   isAttackRandomDamage?: boolean; // Optional property to dynamically control the attack random damage
   isTextRenderInstant?: boolean; // Optional property to dynamically control the attack random damage
+  isInstantStruggleEnabled?: boolean; // Optional property to dynamically control the attack random damage
 }
 
 // Moved the typeEffectiveness function to the top level of the file to ensure it is accessible
@@ -93,7 +94,8 @@ export default function Battle({
   selectedMonsters,
   attackMissedPercentage,
   isAttackRandomDamage: attackRandomDamage = true,
-  isTextRenderInstant = false
+  isTextRenderInstant = false,
+  isInstantStruggleEnabled = false,
 }: BattleProps) {
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
@@ -297,14 +299,24 @@ export default function Battle({
 
     if(!isGameOver) {
       if (isMonster1Turn && isMonster1StruggleEnabled) {
-        setTimeout(() => {
+        if(isInstantStruggleEnabled) {
           handleStruggle(1);
-        }, struggleDelay);
+        }
+        else {
+          setTimeout(() => {
+            handleStruggle(1);
+          }, struggleDelay);
+        }
       }
       if (!isMonster1Turn && isMonster2StruggleEnabled) {
-        setTimeout(() => {
+        if(isInstantStruggleEnabled) {
           handleStruggle(2);
-        }, struggleDelay);
+        }
+        else {
+          setTimeout(() => {
+            handleStruggle(2);
+          }, struggleDelay);
+        }
       }
     }
 
