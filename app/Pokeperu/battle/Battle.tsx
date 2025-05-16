@@ -112,26 +112,21 @@ export default function Battle({
   const [monster2Attack2PP, setMonster2Attack2PP] = useState(selectedMonsters[1].attack2.powerPoints);
 
   useEffect(() => {
-    // Randomly select an image from the /perulandscape folder
+    // Randomly select an image from the /perulandscape folder on mount
     const randomImageIndex = Math.floor(Math.random() * 8) + 1; // Random number between 1 and 8
     setBackgroundImage(`/images/perulandscape/peru-${randomImageIndex}.jpg`);
   }, []);
 
   const handleStruggle = (attacker: number) => {
-    console.log('Struggle attack triggered with attacker:', attacker);
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
-    const selfDamage = 0.1 * attackerMonster.hp;
+    const selfDamage = Math.round(0.1 * attackerMonster.hp);
     const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, STRUGGLE_ATTACK.damage, STRUGGLE_ATTACK.type, STRUGGLE_ATTACK.isPhysical, attackRandomDamage);
     if (attacker === 1) {
-      console.log('Struggle with: ', selfDamage, adjustedDamage);
-      console.log('alternating turn...');
       setIsMonster1Turn(false);
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       setMonster1Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
     } else {
-      console.log('Struggle with: ', selfDamage, adjustedDamage);
-      console.log('alternating turn...');
       setIsMonster1Turn(true);
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       setMonster2Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
@@ -204,15 +199,10 @@ export default function Battle({
 
       // Reduce Power Points for Monster 2
       if (attackIndex === 1) {
-        console.log('Monster 2 attack 1 PP:', monster2Attack1PP);
         setMonster2Attack1PP((prevPP) => Math.max(prevPP - 1, 0));
       } else {
-        console.log('Monster 2 attack 2 PP:', monster2Attack2PP);
         setMonster2Attack2PP((prevPP) => {
-          console.log('prevPP:', prevPP);
-          const nextPP = prevPP - 1;
-          console.log('prevPP - 1:', nextPP);
-          return Math.max(nextPP, 0)
+          return Math.max(prevPP - 1, 0)
         });
       }
     }
@@ -245,6 +235,12 @@ export default function Battle({
     }
   };
 
+  /**
+   * for rendering the HP bar
+   * @param currentHp 
+   * @param maxHp 
+   * @returns 
+   */
   const calculateHpPercentage = (currentHp: number, maxHp: number) => {
     return (currentHp / maxHp) * 100;
   };
@@ -256,7 +252,7 @@ export default function Battle({
   const isMonster2Attack1Enabled = isMonster1Turn || monster1Hp === 0 || isGameOver || monster2Attack1PP === 0;
   const isMonster2Attack2Enabled = isMonster1Turn || monster1Hp === 0 || isGameOver || monster2Attack2PP === 0;
 
-  // Add keyboard shortcuts
+  // Add keyboard shortcuts for attacks
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (isGameOver) return;
@@ -293,25 +289,20 @@ export default function Battle({
     };
   }, [isMonster1Turn, isGameOver, selectedMonsters]);
 
-  // Add keyboard shortcuts
+  // Struggle mechanics
   useEffect(() => {
-    console.log('useEffect for struggle...')
     const isMonster1StruggleEnabled = monster1Attack1PP === 0 && monster1Attack2PP === 0;
     const isMonster2StruggleEnabled = monster2Attack1PP === 0 && monster2Attack2PP === 0;
     const struggleDelay = 2000;
 
     if(!isGameOver) {
       if (isMonster1Turn && isMonster1StruggleEnabled) {
-        console.log('Monster 1 strugggle condish met!');
         setTimeout(() => {
-          console.log('Monster 1 is executing delay!');
           handleStruggle(1);
         }, struggleDelay);
       }
       if (!isMonster1Turn && isMonster2StruggleEnabled) {
-        console.log('Monster 2 strugggle condish met!');
         setTimeout(() => {
-          console.log('Monster 2 is executing delay!');
           handleStruggle(2);
         }, struggleDelay);
       }
