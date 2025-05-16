@@ -1,12 +1,12 @@
 /* Container for both monsters */
-.monster-container {
+.selection-results-container {
   display: flex;
   justify-content: space-between;
   margin: 32px 0;
 }
 
 /* Shared monster block styling */
-.monster {
+.monster-trainer-container {
   display: flex;
   align-items: center;
   margin: 0 24px;

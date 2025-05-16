@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster, MonsterAttack } from '../monsters';
-import './battle.css';
 import Typewriter from './Typewriter';
+import './battle.css';
 
 interface BattleProps {
   selectedMonsters: Monster[];

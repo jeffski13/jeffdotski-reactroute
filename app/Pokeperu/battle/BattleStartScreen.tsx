@@ -35,9 +35,9 @@ export default function BattleStartScreen({
   return (
     <div className="MonsterSelectionResults">
       <h1>Selection Results</h1>
-      <div className="monster-container">
+      <div className="selection-results-container">
         {/* User 1 */}
-        <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ position: 'relative', width: 220, height: 200 }}>
             <img
               src={trainer1Image}
@@ -55,7 +55,7 @@ export default function BattleStartScreen({
           </div>
         </div>
         {/* User 2 */}
-        <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ marginRight: 16 }}>
             <p>User 2 chose: {monster2}</p>
           </div>
