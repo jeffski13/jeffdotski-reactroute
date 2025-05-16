@@ -44,7 +44,7 @@ export const monsters: Monster[] = [
     speed: 90,
     type: ElementType.Electric,
     secondType: null,
-    image: '/images/monsters/pikachu.jpg',
+    image: '/images/monsters/pikachu.png',
     description: 'Pikachu is an Electric-type Pokémon known for its agility and powerful Thunderbolt attack.',
     inspiration: 'Mouse', // Added inspiration
     attack1: {
@@ -76,7 +76,7 @@ export const monsters: Monster[] = [
     speed: 65,
     type: ElementType.Fire,
     secondType: null,
-    image: '/images/monsters/charmander.jpg',
+    image: '/images/monsters/charmander.png',
     description: 'Charmander is a Fire-type Pokémon that uses its fiery tail to intimidate opponents.',
     inspiration: 'Lizard', // Added inspiration
     attack1: {

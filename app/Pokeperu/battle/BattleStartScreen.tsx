@@ -36,29 +36,79 @@ export default function BattleStartScreen({
     <div className="MonsterSelectionResults">
       <h1>Selection Results</h1>
       <div className="monster-container">
+        {/* User 1 */}
         <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src={trainer1Image}
-            alt="Trainer 1"
-            className="trainer-image"
-            style={{ marginRight: 16, width: 200, height: 200, objectFit: 'contain' }}
-          />
-          <div>
+          <div style={{ position: 'relative', width: 220, height: 200 }}>
+            <img
+              src={trainer1Image}
+              alt="Trainer 1"
+              className="trainer-image"
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: 200,
+                height: 200,
+                objectFit: 'contain',
+                zIndex: 1,
+                filter: 'brightness(0.6)',
+              }}
+            />
+            <img
+              src={monster1Image}
+              alt={monster1}
+              className="monster-selected"
+              style={{
+                position: 'absolute',
+                left: 80,
+                top: 60,
+                width: 170,
+                height: 170,
+                objectFit: 'contain',
+                zIndex: 2,
+              }}
+            />
+          </div>
+          <div style={{ marginLeft: 16 }}>
             <p>User 1 chose: {monster1}</p>
-            <img src={monster1Image} alt={monster1} className="monster-selected" />
           </div>
         </div>
+        {/* User 2 */}
         <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
-          <div>
+          <div style={{ marginRight: 16 }}>
             <p>User 2 chose: {monster2}</p>
-            <img src={monster2Image} alt={monster2} className="monster-selected" />
           </div>
-          <img
-            src={trainer2Image}
-            alt="Trainer 2"
-            className="trainer-image"
-            style={{ marginLeft: 16, width: 200, height: 200, objectFit: 'contain' }}
-          />
+          <div style={{ position: 'relative', width: 220, height: 200 }}>
+            <img
+              src={trainer2Image}
+              alt="Trainer 2"
+              className="trainer-image"
+              style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                width: 200,
+                height: 200,
+                objectFit: 'contain',
+                zIndex: 1,
+                filter: 'brightness(0.6)',
+              }}
+            />
+            <img
+              src={monster2Image}
+              alt={monster2}
+              className="monster-selected"
+              style={{
+                position: 'absolute',
+                right: 80,
+                top: 60,
+                width: 170,
+                height: 170,
+                objectFit: 'contain',
+                zIndex: 2,
+              }}
+            />
+          </div>
         </div>
       </div>
       <Button onClick={setBattleClicked}>Start Battle</Button>
