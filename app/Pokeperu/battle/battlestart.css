@@ -5,11 +5,40 @@
   margin: 32px 0;
 }
 
+.results-vs {
+  align-items: right;
+  justify-content: right;
+  text-align: right;
+  color: #333;
+}
+
+@media only screen and (max-width: 770px) {
+    .results-vs {
+        display: none;
+    }
+
+    /* Monster 1 image */
+    .monster-selected.monster1 {
+      scale: 1;
+    }
+    .monster-selected.monster2 {
+      scale: 1;
+    }
+    .trainer-image.trainer1 {
+      scale: 1;
+    }
+    .trainer-image.trainer2 {
+      scale: 1;
+    }
+}
+
 /* Shared monster block styling */
 .monster-trainer-container {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center horizontally in the column */
   margin: 0 24px;
+  width: 100%;
 }
 
 /* Monster 1 image */
@@ -60,6 +89,12 @@
 
 .MonsterSelectionResults {
   text-align: center;
+}
+
+.startButtonContainer {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 20px; /* Add some space above the button */
 }
 
 .start-battle-button {

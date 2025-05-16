@@ -5,7 +5,8 @@
   left: 0;
   background-color: grey;
   text-align: center;
-  }
+  z-index: 10;
+}
 
 .footerBarskiLinkWrapper{
   color: white;
