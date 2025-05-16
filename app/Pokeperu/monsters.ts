@@ -14,6 +14,7 @@ export interface MonsterAttack {
 export interface Monster {
   name: string;
   trainer: string;
+  trainerImage: string; // Add this line for the trainer image
   hp: number;
   attack: number;
   defense: number;
@@ -34,6 +35,7 @@ export const monsters: Monster[] = [
   {
     name: 'Pikachu',
     trainer: 'Lt. Surge',
+    trainerImage: '/images/gymleaders/ltsurge.png', // Added trainer image
     hp: 35,
     attack: 55,
     defense: 40,
@@ -65,6 +67,7 @@ export const monsters: Monster[] = [
   {
     name: 'Charmander',
     trainer: 'Blaine',
+    trainerImage: '/images/gymleaders/blaine.png', // Added trainer image
     hp: 39,
     attack: 52,
     defense: 43,
@@ -96,6 +99,7 @@ export const monsters: Monster[] = [
   {
     name: 'Bulbasaur',
     trainer: 'Erika',
+    trainerImage: '/images/gymleaders/erika.jpg', // Added trainer image
     hp: 45,
     attack: 49,
     defense: 49,
@@ -127,6 +131,7 @@ export const monsters: Monster[] = [
   {
     name: 'Squirtle',
     trainer: 'Misty',
+    trainerImage: '/images/gymleaders/misty.png', // Added trainer image
     hp: 44,
     attack: 48,
     defense: 65,
@@ -157,7 +162,8 @@ export const monsters: Monster[] = [
   },
   {
     name: 'Eevee',
-    trainer: 'Erika',
+    trainer: 'Brock',
+    trainerImage: '/images/gymleaders/brock.png', // Added trainer image
     hp: 55,
     attack: 55,
     defense: 50,
@@ -189,6 +195,7 @@ export const monsters: Monster[] = [
   {
     name: 'Jigglypuff',
     trainer: 'Whitney',
+    trainerImage: '/images/gymleaders/whitney.jpg', // Added trainer image
     hp: 115,
     attack: 45,
     defense: 20,

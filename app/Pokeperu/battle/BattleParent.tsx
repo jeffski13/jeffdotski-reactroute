@@ -2,15 +2,10 @@ import { useState } from 'react';
 import BattleStartScreen from './BattleStartScreen';
 import Battle from './Battle';
 import './battle.css';
+import type { Monster } from '../monsters';
 
 interface BattleProps {
-  selectedMonsters: {
-    name: string;
-    hp: number;
-    image: string;
-    type: string;
-    secondType: string | null;
-  }[];
+  selectedMonsters: Monster[]
 }
 
 export default function BattleContainer({ selectedMonsters }: BattleProps) {
@@ -30,6 +25,8 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
           monster2={selectedMonsters[1].name}
           monster1Image={selectedMonsters[0].image}
           monster2Image={selectedMonsters[1].image}
+          trainer1Image={selectedMonsters[0].trainerImage}
+          trainer2Image={selectedMonsters[1].trainerImage}
           setBattleClicked={() => setBattleClicked(true)}
         />
       )}

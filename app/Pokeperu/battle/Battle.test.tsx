@@ -7,6 +7,7 @@ const mockSelectedMonsters: Monster[] = [
   {
     name: 'Pikachu',
     trainer: 'Ash',
+    trainerImage: '', // Added trainerImage as empty string for test data
     description: '',
     inspiration: '',
     hp: 35,
@@ -24,6 +25,7 @@ const mockSelectedMonsters: Monster[] = [
   {
     name: 'Charmander',
     trainer: 'Brock',
+    trainerImage: '', // Added trainerImage as empty string for test data
     description: '',
     inspiration: '',
     hp: 47,
@@ -184,6 +186,7 @@ describe('Battle Component', () => {
     const gengar: Monster = {
       name: 'Gengar',
       trainer: 'Morty',
+      trainerImage: '',
       hp: 100,
       attack: 65,
       defense: 60,

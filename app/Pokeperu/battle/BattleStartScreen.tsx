@@ -7,6 +7,8 @@ interface MonsterSelectionResultsProps {
   monster2: string;
   monster1Image: string;
   monster2Image: string;
+  trainer1Image: string;
+  trainer2Image: string;
   setBattleClicked: () => void;
 }
 
@@ -15,6 +17,8 @@ export default function BattleStartScreen({
   monster2,
   monster1Image,
   monster2Image,
+  trainer1Image,
+  trainer2Image,
   setBattleClicked,
 }: MonsterSelectionResultsProps) {
   useEffect(() => {
@@ -30,17 +34,35 @@ export default function BattleStartScreen({
     };
   }, [setBattleClicked]);
 
+  console.log(trainer1Image)
+  console.log(trainer2Image)
   return (
     <div className="MonsterSelectionResults">
       <h1>Selection Results</h1>
       <div className="monster-container">
-        <div className="monster">
-          <p>User 1 chose: {monster1}</p>
-          <img src={monster1Image} alt={monster1} className="monster-selected" />
+        <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src={trainer1Image}
+            alt="Trainer 1"
+            className="trainer-image"
+            style={{ marginRight: 16, width: 80, height: 80, objectFit: 'contain' }}
+          />
+          <div>
+            <p>User 1 chose: {monster1}</p>
+            <img src={monster1Image} alt={monster1} className="monster-selected" />
+          </div>
         </div>
-        <div className="monster">
-          <p>User 2 chose: {monster2}</p>
-          <img src={monster2Image} alt={monster2} className="monster-selected" />
+        <div className="monster" style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <p>User 2 chose: {monster2}</p>
+            <img src={monster2Image} alt={monster2} className="monster-selected" />
+          </div>
+          <img
+            src={trainer2Image}
+            alt="Trainer 2"
+            className="trainer-image"
+            style={{ marginLeft: 16, width: 80, height: 80, objectFit: 'contain' }}
+          />
         </div>
       </div>
       <Button onClick={setBattleClicked}>Start Battle</Button>
