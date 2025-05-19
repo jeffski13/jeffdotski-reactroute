@@ -157,14 +157,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  text-align: left; 
 }
 
 .attack-name {
   margin-right: 5px;
 }
 
-.attack-name-container {
-  text-align: left; 
+.attack-stats {
+  white-space: nowrap;
 }
 
 .attack-type-physical {
