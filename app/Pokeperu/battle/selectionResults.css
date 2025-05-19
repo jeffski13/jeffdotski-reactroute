@@ -111,3 +111,44 @@
 .start-battle-button:hover {
   background-color: #0056b3;
 }
+
+/* Slide-in animation for trainer 1 and monster 1 */
+@keyframes slideInLeftTrainer {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Slide-in animation for trainer 1 and monster 1 */
+@keyframes slideInLeftTrainer {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Slide-in animation for trainer 1 and monster 1 */
+@keyframes slideInLeftMonster {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.trainer-image.trainer1 {
+  animation: slideInLeftTrainer 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.monster-selected.monster1 {
+  animation: slideInLeftMonster 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
