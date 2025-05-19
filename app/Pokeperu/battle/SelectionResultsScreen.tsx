@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import ROUTES from '~/consts/ROUTES';
 import './selectionResults.css';
@@ -22,6 +22,8 @@ export default function SelectionResults({
   trainer1Image,
   trainer2Image,
 }: MonsterSelectionResultsProps & { trainer1Image: string; trainer2Image: string }) {
+  const [showBackConfirm, setShowBackConfirm] = useState(false);
+
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === '1') {
@@ -37,9 +39,14 @@ export default function SelectionResults({
 
   return (
     <div>
-      <a href={ROUTES.pokePeru.battle} className="back-button selection-results-back-button">
+      <button
+        type="button"
+        className="back-button selection-results-back-button"
+        onClick={() => setShowBackConfirm(true)}
+        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+      >
         <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
-      </a>
+      </button>
       <Container>
         <Row>
           <h1>Selection Results</h1>
@@ -101,6 +108,15 @@ export default function SelectionResults({
           </Col>
         </Row>
       </Container>
+      {showBackConfirm && (
+        <div className="back-confirm-modal">
+          <div className="back-confirm-content">
+            <p>Are you sure?</p>
+            <button onClick={() => window.location.href = ROUTES.pokePeru.battle}>Yes</button>
+            <button onClick={() => setShowBackConfirm(false)}>No</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

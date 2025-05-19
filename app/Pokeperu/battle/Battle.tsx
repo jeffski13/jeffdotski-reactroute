@@ -117,6 +117,7 @@ export default function Battle({
   const [monster2Attack2PP, setMonster2Attack2PP] = useState(selectedMonsters[1].attack2.powerPoints);
   const [monster1AttackAnim, setMonster1AttackAnim] = useState(false);
   const [monster2AttackAnim, setMonster2AttackAnim] = useState(false);
+  const [showBackConfirm, setShowBackConfirm] = useState(false);
 
   useEffect(() => {
     // Randomly select an image from the /perulandscape folder on mount
@@ -351,9 +352,14 @@ export default function Battle({
           backgroundImage: `url(${backgroundImage})`,
         }}></div>
       <div className="battle-container">
-        <a href={ROUTES.pokePeru.battle} className="back-button battle-back-button">
+        <button
+          type="button"
+          className="back-button battle-back-button"
+          onClick={() => setShowBackConfirm(true)}
+          style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+        >
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
-        </a>
+        </button>
         <div className="battle-text-with-backdrop">
           <h1 className="battle-title"><Typewriter text={battleTitle} isInstantTextRender={isTextRenderInstant} /></h1>
         </div>
@@ -444,6 +450,15 @@ export default function Battle({
           <Typewriter text={effectivenessResult} isInstantTextRender={isTextRenderInstant} />
         </div>
       </div>
+      {showBackConfirm && (
+        <div className="back-confirm-modal">
+          <div className="back-confirm-content">
+            <p>Are you sure?</p>
+            <button onClick={() => window.location.href = ROUTES.pokePeru.battle}>Yes</button>
+            <button onClick={() => setShowBackConfirm(false)}>No</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
