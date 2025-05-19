@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BattleStartScreen from './BattleStartScreen';
+import SelectionResults from './SelectionResultsScreen';
 import Battle from './Battle';
 import './battle.css';
 import type { Monster } from '../monsters';
@@ -17,10 +17,8 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
 
   return (
     <div className="MonsterSelectionResults">
-      {isBattleClicked ? (
-        <Battle selectedMonsters={selectedMonsters} />
-      ) : (
-        <BattleStartScreen
+      {!isBattleClicked ? (
+        <SelectionResults
           monster1={selectedMonsters[0].name}
           monster2={selectedMonsters[1].name}
           monster1Image={selectedMonsters[0].image}
@@ -29,6 +27,8 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
           trainer2Image={selectedMonsters[1].trainerImage}
           setBattleClicked={() => setBattleClicked(true)}
         />
+      ) : (
+        <Battle selectedMonsters={selectedMonsters} />
       )}
     </div>
   );

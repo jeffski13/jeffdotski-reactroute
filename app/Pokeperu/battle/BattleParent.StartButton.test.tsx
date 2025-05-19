@@ -25,7 +25,8 @@ const mockSelectedMonsters: Monster[] = [
     },
     secondType: null,
     description: null,
-    inspiration: ''
+    inspiration: '',
+    trainerImage: ''
   },
   {
     name: 'Charmander',
@@ -38,15 +39,18 @@ const mockSelectedMonsters: Monster[] = [
     speed: 65,
     type: ElementType.Fire,
     image: '/images/charmander.jpg',
-    attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal,
+    attack1: {
+      name: 'Scratch', damage: 10, type: ElementType.Normal,
       isPhysical: false, powerPoints: 0, accuracy: 1
-     },
-    attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire,
+    },
+    attack2: {
+      name: 'Flamethrower', damage: 20, type: ElementType.Fire,
       isPhysical: false, powerPoints: 0, accuracy: 1
-     },
+    },
     secondType: null,
     description: null,
-    inspiration: ''
+    inspiration: '',
+    trainerImage: ''
   },
 ];
 

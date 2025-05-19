@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import './battlestart.css';
+import './selectionResults.css';
 
 interface MonsterSelectionResultsProps {
   monster1: string;
@@ -10,7 +10,7 @@ interface MonsterSelectionResultsProps {
   setBattleClicked: () => void;
 }
 
-export default function BattleStartScreen({
+export default function SelectionResults({
   monster1,
   monster2,
   monster1Image,
