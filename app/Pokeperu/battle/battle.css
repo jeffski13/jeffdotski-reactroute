@@ -263,3 +263,22 @@ button {
 .monster-battle-image.monster1-attack-anim {
   animation: monster1-attack-move 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@keyframes monster2-attack-move {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-30px);
+  }
+  60% {
+    transform: translateX(-63px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.monster-battle-image.monster2-attack-anim {
+  animation: monster2-attack-move 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}

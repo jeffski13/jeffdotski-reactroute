@@ -113,6 +113,7 @@ export default function Battle({
   const [monster2Attack1PP, setMonster2Attack1PP] = useState(selectedMonsters[1].attack1.powerPoints);
   const [monster2Attack2PP, setMonster2Attack2PP] = useState(selectedMonsters[1].attack2.powerPoints);
   const [monster1AttackAnim, setMonster1AttackAnim] = useState(false);
+  const [monster2AttackAnim, setMonster2AttackAnim] = useState(false);
 
   useEffect(() => {
     // Randomly select an image from the /perulandscape folder on mount
@@ -195,6 +196,8 @@ export default function Battle({
         setMonster1Attack2PP((prevPP) => Math.max(prevPP - 1, 0));
       }
     } else {
+      setMonster2AttackAnim(true);
+      setTimeout(() => setMonster2AttackAnim(false), 400); // duration matches animation
       setIsMonster1Turn(true);
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       if (!attackMissed) {
@@ -396,7 +399,7 @@ export default function Battle({
           <img
             src={selectedMonsters[1].image}
             alt={selectedMonsters[1].name}
-            className={`monster-battle-image ${isMonster2Blinking ? 'blinking' : ''}`}
+            className={`monster-battle-image ${isMonster2Blinking ? 'blinking' : ''} ${monster2AttackAnim ? 'monster2-attack-anim' : ''}`}
           />
           {damageToMonster2Animation && <div className={`attack-animation ${damageToMonster2Animation}`}></div>}
           <p>HP: {monster2Hp}</p>
