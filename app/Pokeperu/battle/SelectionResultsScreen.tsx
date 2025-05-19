@@ -38,7 +38,7 @@ export default function SelectionResults({
         <h1>Selection Results</h1>
       </Row>
       <Row>
-        <Col style={{ position: 'relative' }}>
+        <Col sm={5}>
           {/* User 1 */}
           <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -58,12 +58,14 @@ export default function SelectionResults({
                 />
               </div>
             </div>
-            <div className='results-vs' style={{ marginLeft: 'auto', alignSelf: 'flex-start' }}>
-              <h2>VS</h2>
-            </div>
           </div>
         </Col>
-        <Col>
+        <Col sm={2}>
+          <div className='results-vs' style={{ marginLeft: 'auto', alignSelf: 'flex-start' }}>
+            <h2>VS</h2>
+          </div>
+        </Col>
+        <Col sm={5}>
           {/* User 2 */}
           <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
