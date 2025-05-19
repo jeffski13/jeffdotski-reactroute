@@ -351,7 +351,7 @@ export default function Battle({
           backgroundImage: `url(${backgroundImage})`,
         }}></div>
       <div className="battle-container">
-        <a href={ROUTES.pokePeru.battle} className="back-button">
+        <a href={ROUTES.pokePeru.battle} className="back-button battle-back-button">
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
         </a>
         <div className="battle-text-with-backdrop">
