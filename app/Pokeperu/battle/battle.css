@@ -67,21 +67,6 @@
   height: 180px;
 }
 
-.monster .attack-animation {
-  opacity: 1;
-  top: 50%; /* Center vertically relative to the monster */
-  left: 50%; /* Center horizontally relative to the monster */
-  transform: translate(-50%, -50%); /* Adjust for exact centering */
-}
-
-button {
-  opacity: 1;
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .hp-bar {
   width: 100%;
   height: 20px;
@@ -96,6 +81,14 @@ button {
   height: 100%;
   background-color: #4caf50; /* Green for remaining HP */
   transition: width 0.3s ease-in-out;
+}
+
+button {
+  opacity: 1;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .attack-button {
@@ -150,6 +143,13 @@ button {
   50% {
     opacity: 0;
   }
+}
+
+.monster .attack-animation {
+  opacity: 1;
+  top: 40%; /* Center vertically relative to the monster */
+  left: 50%; /* Center horizontally relative to the monster */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
 }
 
 .attack-animation {

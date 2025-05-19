@@ -61,7 +61,7 @@ export const monsters: Monster[] = [
       isPhysical: false,
       damage: 30,
       powerPoints: 10,
-      accuracy: 0.4,
+      accuracy: 1,
     },
   },
   {
@@ -93,7 +93,7 @@ export const monsters: Monster[] = [
       isPhysical: false,
       damage: 30,
       powerPoints: 10,
-      accuracy: 0.4,
+      accuracy: 1,
     },
   },
   {
