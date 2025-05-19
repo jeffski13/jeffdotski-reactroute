@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import ROUTES from '~/consts/ROUTES';
+import NavigationConfirmModal from './NavigationConfirmModal';
 import './selectionResults.css';
 import './navigationOverride.css';
 import '../navigation.css';
-
 interface MonsterSelectionResultsProps {
   monster1: string;
   monster2: string;
@@ -108,15 +107,7 @@ export default function SelectionResults({
           </Col>
         </Row>
       </Container>
-      {showBackConfirm && (
-        <div className="back-confirm-modal">
-          <div className="back-confirm-content">
-            <p>Are you sure?</p>
-            <button onClick={() => window.location.href = ROUTES.pokePeru.battle}>Yes</button>
-            <button onClick={() => setShowBackConfirm(false)}>No</button>
-          </div>
-        </div>
-      )}
+      {showBackConfirm && (<NavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></NavigationConfirmModal>)}
     </div>
   );
 }

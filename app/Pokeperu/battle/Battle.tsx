@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster, MonsterAttack } from '../monsters';
+import NavigationConfirmModal from './NavigationConfirmModal';
 import Typewriter from './Typewriter';
-import ROUTES from '~/consts/ROUTES';
 import '../navigation.css';
 import './battle.css';
 import './navigationOverride.css';
@@ -450,15 +450,7 @@ export default function Battle({
           <Typewriter text={effectivenessResult} isInstantTextRender={isTextRenderInstant} />
         </div>
       </div>
-      {showBackConfirm && (
-        <div className="back-confirm-modal">
-          <div className="back-confirm-content">
-            <p>Are you sure?</p>
-            <button onClick={() => window.location.href = ROUTES.pokePeru.battle}>Yes</button>
-            <button onClick={() => setShowBackConfirm(false)}>No</button>
-          </div>
-        </div>
-      )}
+      {showBackConfirm && (<NavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></NavigationConfirmModal>)}
     </div>
   );
 }
