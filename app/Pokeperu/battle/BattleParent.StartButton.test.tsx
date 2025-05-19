@@ -71,4 +71,17 @@ describe('BattleStartScreen Component', () => {
     expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
     expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
   });
+
+  test('shows "Are you sure?" popup with Yes and No buttons when back button is clicked', () => {
+      render(<BattleContainer selectedMonsters={mockSelectedMonsters} />);
+  
+      // Click the back button (find by alt text of the image or by role)
+      const backButton = screen.getByRole('button', { name: /back/i });
+      fireEvent.click(backButton);
+  
+      // Assert that the confirmation popup appears
+      expect(screen.getByText(/Are you sure\?/i)).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Yes/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /No/i })).toBeInTheDocument();
+    });
 });

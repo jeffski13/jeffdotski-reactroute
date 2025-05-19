@@ -133,11 +133,15 @@ describe('Battle Component', () => {
     // Verify that Monster 2's HP is 0
     expect(screen.getByText(/HP: 0/i)).toBeInTheDocument();
 
-    // Verify that all attack buttons are disabled
-    const allButtons = screen.getAllByRole('button');
-    allButtons.forEach((button) => {
-      expect(button).toBeDisabled();
-    });
+    const monster1Attack1Button = screen.getByText(/Quick Attack/i);
+    const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
+    const monster2Attack1Button = screen.getByText(/Scratch/i);
+    const monster2Attack2Button = screen.getByText(/Flamethrower/i);
+
+    expect(monster1Attack1Button).toBeDisabled();
+    expect(monster1Attack2Button).toBeDisabled();
+    expect(monster2Attack1Button).toBeDisabled();
+    expect(monster2Attack2Button).toBeDisabled();
   });
 
   test('correct messages when monster has won', () => {
@@ -399,5 +403,25 @@ describe('Battle Component', () => {
 
     // Verify that attack 1's power points is 0
     expect(screen.getByText(/Ash wins!/i)).toBeInTheDocument();
+  });
+
+  test('shows "Are you sure?" popup with Yes and No buttons when back button is clicked', () => {
+    render(
+      <Battle
+        selectedMonsters={mockSelectedMonsters}
+        attackMissedPercentage={0}
+        isAttackRandomDamage={false}
+        isTextRenderInstant={true}
+      />
+    );
+
+    // Click the back button (find by alt text of the image or by role)
+    const backButton = screen.getByRole('button', { name: /back/i });
+    fireEvent.click(backButton);
+
+    // Assert that the confirmation popup appears
+    expect(screen.getByText(/Are you sure\?/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Yes/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /No/i })).toBeInTheDocument();
   });
 });
