@@ -3,6 +3,7 @@ import { getTypeColor } from './typeColors';
 import { Container, Row, Col } from 'react-bootstrap';
 import { monsters, type Monster } from '../monsters';
 import './pokedex.css';
+import '../navigation.css';
 interface BattleProps {
   selectedMonsters: Monster[];
 }

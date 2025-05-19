@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster, MonsterAttack } from '../monsters';
 import Typewriter from './Typewriter';
+import ROUTES from '~/consts/ROUTES';
+import '../navigation.css';
 import './battle.css';
+import './navigationOverride.css';
 
 interface BattleProps {
   selectedMonsters: Monster[];
@@ -305,9 +308,9 @@ export default function Battle({
     const isMonster2StruggleEnabled = monster2Attack1PP === 0 && monster2Attack2PP === 0;
     const struggleDelay = 2000;
 
-    if(!isGameOver) {
+    if (!isGameOver) {
       if (isMonster1Turn && isMonster1StruggleEnabled) {
-        if(isInstantStruggleEnabled) {
+        if (isInstantStruggleEnabled) {
           handleStruggle(1);
         }
         else {
@@ -317,7 +320,7 @@ export default function Battle({
         }
       }
       if (!isMonster1Turn && isMonster2StruggleEnabled) {
-        if(isInstantStruggleEnabled) {
+        if (isInstantStruggleEnabled) {
           handleStruggle(2);
         }
         else {
@@ -348,6 +351,9 @@ export default function Battle({
           backgroundImage: `url(${backgroundImage})`,
         }}></div>
       <div className="battle-container">
+        <a href={ROUTES.pokePeru.battle} className="back-button">
+          <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
+        </a>
         <div className="battle-text-with-backdrop">
           <h1 className="battle-title"><Typewriter text={battleTitle} isInstantTextRender={isTextRenderInstant} /></h1>
         </div>
