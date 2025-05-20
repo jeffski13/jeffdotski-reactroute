@@ -377,10 +377,10 @@ export default function Battle({
             />
             {damageToMonster1Animation && <div className={`attack-animation ${damageToMonster1Animation}`}></div>}
           </div>
-          <p>HP: {monster1Hp}</p>
+          <p>HP: <span className='hp-value-monster1'>{monster1Hp}</span></p>
           <div className="hp-bar">
             <div
-              className="hp-bar-fill"
+              className={`hp-bar-fill${monster1Hp / selectedMonsters[0].hp < 0.5 ? ' low' : ''}`}
               style={{
                 width: `${calculateHpPercentage(monster1Hp, selectedMonsters[0].hp)}%`,
               }}
@@ -414,10 +414,10 @@ export default function Battle({
             className={`monster-battle-image ${isMonster2Blinking ? 'blinking' : ''} ${monster2AttackAnim ? 'monster2-attack-anim' : ''}`}
           />
           {damageToMonster2Animation && <div className={`attack-animation ${damageToMonster2Animation}`}></div>}
-          <p>HP: {monster2Hp}</p>
+          <p>HP: <span className='hp-value-monster2'>{monster2Hp}</span></p>
           <div className="hp-bar">
             <div
-              className="hp-bar-fill"
+              className={`hp-bar-fill${monster2Hp / selectedMonsters[1].hp < 0.5 ? ' low' : ''}`}
               style={{
                 width: `${calculateHpPercentage(monster2Hp, selectedMonsters[1].hp)}%`,
               }}

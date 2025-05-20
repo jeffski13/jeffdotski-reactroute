@@ -424,4 +424,56 @@ describe('Battle Component', () => {
     expect(screen.getByRole('button', { name: /Yes/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /No/i })).toBeInTheDocument();
   });
+
+  test('hp bar has "low" class when monster hp is below 50%', () => {
+    const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+    mockSelectedMonstersPowerPointsMod[0].hp = 60
+    mockSelectedMonstersPowerPointsMod[0].attack1 = {
+      name: 'Quick Attack',
+      damage: 10,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 0,
+    }
+    mockSelectedMonstersPowerPointsMod[1].attack1 = {
+      name: 'Scratch',
+      damage: 30,
+      type: ElementType.Normal,
+      isPhysical: true,
+      powerPoints: 1,
+      accuracy: 1,
+    }
+    
+    // Render with Pikachu at 40 HP (less than 50% of 100)
+    render(
+      <Battle
+        selectedMonsters={mockSelectedMonsters}
+        attackMissedPercentage={0}
+        isAttackRandomDamage={false}
+        isTextRenderInstant={true}
+      />
+    );
+    
+    // Simulate reducing Pikachu's HP to less than 50%
+    const attackButtonMonster1Attack1 = screen.getByText(/Quick Attack/i);
+    const attackButtonMonster2Attack1 = screen.getByText(/Scratch/i);
+    const hpValueMonster1 = document.querySelector('.hp-value-monster1');
+    fireEvent.click(attackButtonMonster1Attack1);
+    fireEvent.click(attackButtonMonster2Attack1);
+    console.error(hpValueMonster1)
+
+    // while( > 30) {
+    //   fireEvent.click(attackButtonMonster1Attack1);
+    //   fireEvent.click(attackButtonMonster2Attack1);
+    // }
+
+    const hpBar = document.querySelector('.hp-bar-fill');
+    // You may need to trigger an attack or set state if the component doesn't allow direct HP setting.
+    // For this test, you may want to expose a way to set HP or simulate attacks until HP < 50%.
+
+    // For now, check that the class is present (assuming initial render or after attack)
+    // This selector assumes the first .hp-bar-fill is for monster 1
+    expect(hpBar?.className).toMatch(/low/);
+  });
 });

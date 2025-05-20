@@ -79,8 +79,12 @@
 
 .hp-bar-fill {
   height: 100%;
-  background-color: #4caf50; /* Green for remaining HP */
-  transition: width 0.3s ease-in-out;
+  background-color: #4caf50; /* Default green */
+  transition: width 0.3s ease-in-out, background-color 0.3s;
+}
+
+.hp-bar-fill.low {
+  background-color: #ffd600; /* Yellow for <50% */
 }
 
 button {
