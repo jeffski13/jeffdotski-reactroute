@@ -380,7 +380,7 @@ export default function Battle({
           <p>HP: <span className='hp-value-monster1'>{monster1Hp}</span></p>
           <div className="hp-bar">
             <div id="hp-bar-ui-monster1"
-              className={`${isTextRenderInstant ? 'hp-bar-fill-instant' : 'hp-bar-fill'}${(monster1Hp / selectedMonsters[0].hp) < 0.5 ? ' low' : ''}`}
+              className={`hp-bar-fill${(monster1Hp / selectedMonsters[0].hp) < 0.5 ? ' low' : ''}`}
               style={{
                 width: `${calculateHpPercentage(monster1Hp, selectedMonsters[0].hp)}%`,
               }}
