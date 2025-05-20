@@ -462,6 +462,7 @@ describe('Battle Component', () => {
     fireEvent.click(attackButtonMonster1Attack1);
     fireEvent.click(attackButtonMonster2Attack1);
     console.error(hpValueMonster1)
+    expect(hpValueMonster1).toHaveTextContent('HP: ');
 
     // while( > 30) {
     //   fireEvent.click(attackButtonMonster1Attack1);
