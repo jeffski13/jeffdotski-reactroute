@@ -42,15 +42,43 @@ const mockSelectedMonsters: Monster[] = [
   },
 ];
 
+const mocksWithMonster1VeryWeak = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
+mocksWithMonster1VeryWeak[0].hp = 60;
+mocksWithMonster1VeryWeak[0].defense = 100;
+mocksWithMonster1VeryWeak[0].attack = 100;
+mocksWithMonster1VeryWeak[0].attack1 = {
+  name: 'Quick Attack',
+  damage: 10,
+  type: ElementType.Normal,
+  isPhysical: true,
+  powerPoints: 10,
+  accuracy: 0,
+}
+mocksWithMonster1VeryWeak[1].hp = 100;
+mocksWithMonster1VeryWeak[1].defense = 100;
+mocksWithMonster1VeryWeak[1].attack = 100;
+mocksWithMonster1VeryWeak[1].attack1 = {
+  name: 'Scratch',
+  damage: 100,
+  type: ElementType.Normal,
+  isPhysical: true,
+  powerPoints: 10,
+  accuracy: 1,
+}
+
 describe('Battle Component', () => {
   test('verify initial HP', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
     // Verify initial HP values
-    expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
-    expect(screen.getByText(/HP: 47/i)).toBeInTheDocument(); // Charmander's HP
+    const hpValueMonster1 = document.querySelector('.hp-value-monster1');
+    const monster1Hp = parseInt(hpValueMonster1?.innerHTML);
+    expect(monster1Hp).toBe(35);
+    const hpValueMonster2 = document.querySelector('.hp-value-monster2');
+    const monster2Hp = parseInt(hpValueMonster2?.innerHTML);
+    expect(monster2Hp).toBe(47);
   });
-  
+
   test('verify initial title message', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
@@ -67,7 +95,9 @@ describe('Battle Component', () => {
     const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type, mockSelectedMonsters[0].attack1.isPhysical, false);
     const expectedHp = mockSelectedMonsters[1].hp - damage;
     // Verify that monster2's HP is reduced
-    expect(screen.getByText(`HP: ${expectedHp}`)).toBeInTheDocument(); // Charmander's HP after attack
+    const hpValueMonster = document.querySelector('.hp-value-monster2');
+    const monsterHp = parseInt(hpValueMonster?.innerHTML);
+    expect(monsterHp).toBe(expectedHp);
   });
 
   test('when monster1 attacks, the results of the attack are displayed', () => {
@@ -103,7 +133,7 @@ describe('Battle Component', () => {
     mockSelectedMonstersSpeedMod[0].speed = 50; // Pikachu's speed
     mockSelectedMonstersSpeedMod[1].speed = 60; // Charmander's speed
 
-    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true}/>);
+    render(<Battle selectedMonsters={mockSelectedMonstersSpeedMod} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
     // Verify that the initial message indicates that the monster with the highest speed attacks first
     expect(screen.getByText(/Charmander attacks first./i)).toBeInTheDocument();
@@ -120,7 +150,7 @@ describe('Battle Component', () => {
   });
 
   test('attack buttons are disabled once a monster has won', () => {
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
+    render(<Battle selectedMonsters={mocksWithMonster1VeryWeak} attackMissedPercentage={0} isAttackRandomDamage={false} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
     const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
@@ -130,8 +160,9 @@ describe('Battle Component', () => {
       fireEvent.click(attackButtonMonster2);
     }
 
-    // Verify that Monster 2's HP is 0
-    expect(screen.getByText(/HP: 0/i)).toBeInTheDocument();
+    const hpValueMonster = document.querySelector('.hp-value-monster1');
+    const monsterHp = parseInt(hpValueMonster?.innerHTML);
+    expect(monsterHp).toBe(0);
 
     const monster1Attack1Button = screen.getByText(/Quick Attack/i);
     const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
@@ -182,8 +213,10 @@ describe('Battle Component', () => {
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
+    const hpValueMonster = document.querySelector('.hp-value-monster2');
+    const monsterHp = parseInt(hpValueMonster?.innerHTML);
     // Assert that Diglett's HP remains unchanged
-    expect(screen.getByText(/HP: 100/i)).toBeInTheDocument();
+    expect(monsterHp).toBe(100);
   });
 
   it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
@@ -230,14 +263,15 @@ describe('Battle Component', () => {
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
+    const hpValueMonster = document.querySelector('.hp-value-monster2');
+    const monsterHp = parseInt(hpValueMonster?.innerHTML);
     // Assert that Gengar's HP remains unchanged
-    const gengarHp = screen.getByText('HP: 100');
-    expect(gengarHp).toBeInTheDocument();
+    expect(monsterHp).toBe(100);
   });
 
   it('displays "attack missed!" when the attack misses', () => {
     // Render the Battle component with attackMissedPercentage set to 1 (guaranteed miss)
-    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} isAttackRandomDamage={false} isTextRenderInstant={true}/>);
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={1} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
     // Simulate an attack by clicking the first monster's first attack button
     const attackButton = screen.getByText('Quick Attack', { exact: false });
@@ -296,7 +330,7 @@ describe('Battle Component', () => {
     const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
     expect(monster1Attack2Button).toBeEnabled();
   });
-  
+
   test('pokemon struggles once both attacks have 0 power points', () => {
     const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
     mockSelectedMonstersPowerPointsMod[0].attack1 = {
@@ -332,8 +366,8 @@ describe('Battle Component', () => {
       accuracy: 1,
     }
 
-    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} 
-      attackMissedPercentage={0} isAttackRandomDamage={false} 
+    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod}
+      attackMissedPercentage={0} isAttackRandomDamage={false}
       isTextRenderInstant={true} isInstantStruggleEnabled={true} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
@@ -387,8 +421,8 @@ describe('Battle Component', () => {
       accuracy: 1,
     }
 
-    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod} 
-      attackMissedPercentage={0} isAttackRandomDamage={false} 
+    render(<Battle selectedMonsters={mockSelectedMonstersPowerPointsMod}
+      attackMissedPercentage={0} isAttackRandomDamage={false}
       isTextRenderInstant={true} isInstantStruggleEnabled={true} />);
 
     // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
@@ -426,59 +460,33 @@ describe('Battle Component', () => {
   });
 
   test('hp bar has "low" class when monster hp is below 50%', () => {
-    const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
-    mockSelectedMonstersPowerPointsMod[0].hp = 60
-    mockSelectedMonstersPowerPointsMod[0].attack1 = {
-      name: 'Quick Attack',
-      damage: 10,
-      type: ElementType.Normal,
-      isPhysical: true,
-      powerPoints: 2,
-      accuracy: 0,
-    }
-    mockSelectedMonstersPowerPointsMod[1].attack1 = {
-      name: 'Scratch',
-      damage: 100,
-      type: ElementType.Normal,
-      isPhysical: true,
-      powerPoints: 10,
-      accuracy: 1,
-    }
-    
+
     // Render with Pikachu at 40 HP (less than 50% of 100)
     render(
       <Battle
-        selectedMonsters={mockSelectedMonstersPowerPointsMod}
+        selectedMonsters={mocksWithMonster1VeryWeak}
         attackMissedPercentage={0}
         isAttackRandomDamage={false}
         isTextRenderInstant={true}
       />
     );
-    
+
     // Simulate reducing Pikachu's HP to less than 50%
     const attackButtonMonster1Attack1 = screen.getByText(/Quick Attack/i);
     const attackButtonMonster2Attack1 = screen.getByText(/Scratch/i);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    fireEvent.click(attackButtonMonster1Attack1);
-    fireEvent.click(attackButtonMonster2Attack1);
-    
     const hpValueMonster1 = document.querySelector('.hp-value-monster1');
-    const hpValueMonster1Num = parseInt(hpValueMonster1?.innerHTML)
-    // expect(screen.getByText(/Are you sure\?/i)).toBeInTheDocument();
-    expect(hpValueMonster1Num < (mockSelectedMonstersPowerPointsMod[0].hp/2)).toBe(true);
+
+    let monster1Hp = 500;
+    while (monster1Hp > (0.5 * mocksWithMonster1VeryWeak[0].hp)) {
+      fireEvent.click(attackButtonMonster1Attack1);
+      fireEvent.click(attackButtonMonster2Attack1);
+      monster1Hp = parseInt(hpValueMonster1?.innerHTML);
+    }
+
+    expect(monster1Hp < (mocksWithMonster1VeryWeak[0].hp / 2)).toBe(true);
     const hpBar = document.querySelector('#hp-bar-ui-monster1');
 
-    // For now, check that the class is present (assuming initial render or after attack)
-    // This selector assumes the first .hp-bar-fill is for monster 1
+    expect(hpBar?.className).toMatch(/hp-bar-fill/);
     expect(hpBar?.className).toMatch(/low/);
   });
 });

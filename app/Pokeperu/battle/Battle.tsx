@@ -416,7 +416,7 @@ export default function Battle({
           {damageToMonster2Animation && <div className={`attack-animation ${damageToMonster2Animation}`}></div>}
           <p>HP: <span className='hp-value-monster2'>{monster2Hp}</span></p>
           <div className="hp-bar">
-            <div
+            <div id="hp-bar-ui-monster1"
               className={`hp-bar-fill${monster2Hp / selectedMonsters[1].hp < 0.5 ? ' low' : ''}`}
               style={{
                 width: `${calculateHpPercentage(monster2Hp, selectedMonsters[1].hp)}%`,

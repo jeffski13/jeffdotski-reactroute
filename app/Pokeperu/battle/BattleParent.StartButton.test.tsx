@@ -68,8 +68,12 @@ describe('BattleStartScreen Component', () => {
     fireEvent.click(startBattleButton);
 
     // Verify the UI transitions to the battle phase
-    expect(screen.getByText(/HP: 35/i)).toBeInTheDocument(); // Pikachu's HP
-    expect(screen.getByText(/HP: 39/i)).toBeInTheDocument(); // Charmander's HP
+    const hpValueMonster1 = document.querySelector('.hp-value-monster1');
+    const monster1Hp = parseInt(hpValueMonster1?.innerHTML);
+    expect(monster1Hp).toBe(35);
+    const hpValueMonster2 = document.querySelector('.hp-value-monster2');
+    const monster2Hp = parseInt(hpValueMonster2?.innerHTML);
+    expect(monster2Hp).toBe(39);
   });
 
   test('shows "Are you sure?" popup with Yes and No buttons when back button is clicked', () => {
