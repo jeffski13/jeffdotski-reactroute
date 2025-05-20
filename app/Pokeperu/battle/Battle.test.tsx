@@ -66,17 +66,23 @@ mocksWithMonster1VeryWeak[1].attack1 = {
   accuracy: 1,
 }
 
+const testMonster1Hp = (hpExpected) => {
+  const hpValueMonster1 = document.querySelector('.hp-value-monster1');
+  const monster1Hp = parseInt(hpValueMonster1?.innerHTML);
+  expect(monster1Hp).toBe(hpExpected);
+}
+const testMonster2Hp = (hpExpected) => {
+  const hpValueMonster2 = document.querySelector('.hp-value-monster2');
+  const monster2Hp = parseInt(hpValueMonster2?.innerHTML);
+  expect(monster2Hp).toBe(hpExpected);
+}
+
 describe('Battle Component', () => {
   test('verify initial HP', () => {
     render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
-
     // Verify initial HP values
-    const hpValueMonster1 = document.querySelector('.hp-value-monster1');
-    const monster1Hp = parseInt(hpValueMonster1?.innerHTML);
-    expect(monster1Hp).toBe(35);
-    const hpValueMonster2 = document.querySelector('.hp-value-monster2');
-    const monster2Hp = parseInt(hpValueMonster2?.innerHTML);
-    expect(monster2Hp).toBe(47);
+    testMonster1Hp(35);
+    testMonster2Hp(47);
   });
 
   test('verify initial title message', () => {
@@ -95,9 +101,7 @@ describe('Battle Component', () => {
     const damage = calculateAdjustedDamage(mockSelectedMonsters[0], mockSelectedMonsters[1], mockSelectedMonsters[0].attack1.damage, mockSelectedMonsters[0].attack1.type, mockSelectedMonsters[0].attack1.isPhysical, false);
     const expectedHp = mockSelectedMonsters[1].hp - damage;
     // Verify that monster2's HP is reduced
-    const hpValueMonster = document.querySelector('.hp-value-monster2');
-    const monsterHp = parseInt(hpValueMonster?.innerHTML);
-    expect(monsterHp).toBe(expectedHp);
+    testMonster2Hp(expectedHp);
   });
 
   test('when monster1 attacks, the results of the attack are displayed', () => {
@@ -160,9 +164,7 @@ describe('Battle Component', () => {
       fireEvent.click(attackButtonMonster2);
     }
 
-    const hpValueMonster = document.querySelector('.hp-value-monster1');
-    const monsterHp = parseInt(hpValueMonster?.innerHTML);
-    expect(monsterHp).toBe(0);
+    testMonster1Hp(0);
 
     const monster1Attack1Button = screen.getByText(/Quick Attack/i);
     const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
@@ -213,10 +215,8 @@ describe('Battle Component', () => {
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
-    const hpValueMonster = document.querySelector('.hp-value-monster2');
-    const monsterHp = parseInt(hpValueMonster?.innerHTML);
     // Assert that Diglett's HP remains unchanged
-    expect(monsterHp).toBe(100);
+    testMonster2Hp(100);
   });
 
   it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
@@ -263,10 +263,8 @@ describe('Battle Component', () => {
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
 
-    const hpValueMonster = document.querySelector('.hp-value-monster2');
-    const monsterHp = parseInt(hpValueMonster?.innerHTML);
     // Assert that Gengar's HP remains unchanged
-    expect(monsterHp).toBe(100);
+    testMonster2Hp(100);
   });
 
   it('displays "attack missed!" when the attack misses', () => {
@@ -476,7 +474,7 @@ describe('Battle Component', () => {
     const attackButtonMonster2Attack1 = screen.getByText(/Scratch/i);
     const hpValueMonster1 = document.querySelector('.hp-value-monster1');
 
-    let monster1Hp = 500;
+    let monster1Hp = 50000; //set too  a high initial value to enter the loop
     while (monster1Hp > (0.5 * mocksWithMonster1VeryWeak[0].hp)) {
       fireEvent.click(attackButtonMonster1Attack1);
       fireEvent.click(attackButtonMonster2Attack1);
