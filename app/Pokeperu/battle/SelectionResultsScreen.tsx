@@ -38,7 +38,8 @@ export default function SelectionResults({
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div className="selection-results-bg-fade"></div>
+      <div className="selection-results-bg-fade-monster1"></div>
+      <div className="selection-results-bg-fade-monster2"></div>
       <button
         type="button"
         className="back-button selection-results-back-button"
@@ -49,14 +50,14 @@ export default function SelectionResults({
       </button>
       <Container>
         <Row>
-          <h1>Selection Results</h1>
+          <h1 className='selection-results-ui-element'>Selection Results</h1>
         </Row>
         <Row>
           <Col sm={5}>
             {/* User 1 */}
             <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
+                <div className='selection-results-ui-element' style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
                   User 1 chose: {monster1}
                 </div>
                 <div style={{ position: 'relative', width: 220, height: 200 }}>
@@ -83,7 +84,7 @@ export default function SelectionResults({
             {/* User 2 */}
             <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
+                <div className='selection-results-ui-element' style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
                   User 2 chose: {monster2}
                 </div>
                 <div style={{ position: 'relative', width: 220, height: 200 }}>
@@ -103,7 +104,7 @@ export default function SelectionResults({
           </Col>
         </Row>
         <Row>
-          <Col className="startButtonContainer" xs={12}>
+          <Col className="startButtonContainer selection-results-ui-element" xs={12}>
             <Button onClick={setBattleClicked}>Start Battle</Button>
           </Col>
         </Row>
