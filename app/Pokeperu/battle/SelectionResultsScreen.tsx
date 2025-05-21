@@ -7,6 +7,7 @@ import '../navigation.css';
 import type { Monster } from '../monsters';
 import { ElementType } from '../ElementType';
 import { getTypeColor } from '../typeColors';
+
 interface MonsterSelectionResultsProps {
   monster1: Monster;
   monster2: Monster;
@@ -19,6 +20,15 @@ export default function SelectionResultsScreen({
   setBattleClicked,
 }: MonsterSelectionResultsProps) {
   const [showBackConfirm, setShowBackConfirm] = useState(false);
+
+  // Get color for monster1's second type, fallback to a neutral color if null
+  const monster1SecondTypeColor = monster1.secondType
+    ? getTypeColor(monster1.secondType)
+    : getTypeColor(monster1.type);
+  // Get color for monster1's second type, fallback to a neutral color if null
+  const monster2SecondTypeColor = monster2.secondType
+    ? getTypeColor(monster2.secondType)
+    : getTypeColor(monster2.type);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -39,11 +49,13 @@ export default function SelectionResultsScreen({
         position: 'relative',
         minHeight: '90vh',
         '--monster1-gradient-color': getTypeColor(monster1.type),
+        '--monster1-second-gradient-color': monster1SecondTypeColor,
         '--monster2-gradient-color': getTypeColor(monster2.type),
+        '--monster2-second-gradient-color': monster2SecondTypeColor,
       } as React.CSSProperties}
     >
-      <div className="selection-results-bg-fade-monster1"></div>
-      <div className="selection-results-bg-fade-monster2"></div>
+      {/* Top left fade for monster1.type */}
+      <div className="selection-results-types-fades"></div>
       <button
         type="button"
         className="back-button"
