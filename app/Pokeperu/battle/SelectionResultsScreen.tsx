@@ -37,7 +37,8 @@ export default function SelectionResults({
   }, [setBattleClicked]);
 
   return (
-    <div>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <div className="selection-results-bg-fade"></div>
       <button
         type="button"
         className="back-button selection-results-back-button"
