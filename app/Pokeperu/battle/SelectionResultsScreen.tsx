@@ -15,44 +15,44 @@ interface MonsterSelectionResultsProps {
 // Utility function to map ElementType to a color
 const getElementTypeColor = (type: ElementType) => {
   switch (type) {
+    case ElementType.Normal:
+      return '#b2bec3';
     case ElementType.Fire:
       return '#ff7675';
     case ElementType.Water:
       return '#74b9ff';
-    case ElementType.Grass:
-      return '#55efc4';
     case ElementType.Electric:
       return '#ffe066';
-    case ElementType.Normal:
-      return '#b2bec3';
-    case ElementType.Poison:
-      return '#a29bfe';
-    case ElementType.Fairy:
-      return '#fab1a0';
-    case ElementType.Dark:
-      return '#636e72';
+    case ElementType.Grass:
+      return '#55efc4';
+    case ElementType.Ice:
+      return '#74b9ff';
     case ElementType.Fighting:
       return '#e17055';
-    case ElementType.Flying:
-      return '#81ecec';
+    case ElementType.Poison:
+      return '#a29bfe';
     case ElementType.Ground:
       return '#e1b382';
-    case ElementType.Rock:
-      return '#b8a77e';
+    case ElementType.Flying:
+      return '#81ecec';
+    case ElementType.Psychic:
+      return '#fd79a8';
+    case ElementType.Dark:
+      return '#636e72';
     case ElementType.Bug:
       return '#badc58';
+    case ElementType.Rock:
+      return '#b8a77e';
     case ElementType.Ghost:
       return '#a29bfe';
     case ElementType.Steel:
       return '#b2bec3';
-    case ElementType.Ice:
-      return '#74b9ff';
     case ElementType.Dragon:
       return '#6c5ce7';
-    case ElementType.Psychic:
-      return '#fd79a8';
+    case ElementType.Fairy:
+      return '#fab1a0';
     default:
-      return '#ffe066'; // fallback yellow
+      return '#b2bec3'; // fallback normal
   }
 };
 
