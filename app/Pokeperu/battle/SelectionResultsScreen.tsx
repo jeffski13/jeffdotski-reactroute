@@ -5,11 +5,36 @@ import './selectionResults.css';
 import './navigationOverride.css';
 import '../navigation.css';
 import type { Monster } from '../monsters';
+import { ElementType } from '../ElementType';
 interface MonsterSelectionResultsProps {
   monster1: Monster;
   monster2: Monster;
   setBattleClicked: () => void;
 }
+
+// Utility function to map ElementType to a color
+const getElementTypeColor = (type: ElementType) => {
+  switch (type) {
+    case ElementType.Fire:
+      return '#ff7675';
+    case ElementType.Water:
+      return '#74b9ff';
+    case ElementType.Grass:
+      return '#55efc4';
+    case ElementType.Electric:
+      return '#ffe066';
+    case ElementType.Normal:
+      return '#b2bec3';
+    case ElementType.Poison:
+      return '#a29bfe';
+    case ElementType.Fairy:
+      return '#fab1a0';
+    case ElementType.Dark:
+      return '#636e72';
+    default:
+      return '#ffe066'; // fallback yellow
+  }
+};
 
 export default function SelectionResults({
   monster1,
@@ -32,7 +57,14 @@ export default function SelectionResults({
   }, [setBattleClicked]);
 
   return (
-    <div style={{ position: 'relative', minHeight: '90vh' }}>
+    <div
+      style={{
+        position: 'relative',
+        minHeight: '90vh',
+        '--monster1-gradient-color': getElementTypeColor(monster1.type),
+        '--monster2-gradient-color': getElementTypeColor(monster2.type),
+      } as React.CSSProperties}
+    >
       <div className="selection-results-bg-fade-monster1"></div>
       <div className="selection-results-bg-fade-monster2"></div>
       <button
