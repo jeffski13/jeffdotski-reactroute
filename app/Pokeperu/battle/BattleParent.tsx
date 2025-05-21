@@ -19,12 +19,8 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
     <div className="MonsterSelectionResults">
       {!isBattleClicked ? (
         <SelectionResults
-          monster1={selectedMonsters[0].name}
-          monster2={selectedMonsters[1].name}
-          monster1Image={selectedMonsters[0].image}
-          monster2Image={selectedMonsters[1].image}
-          trainer1Image={selectedMonsters[0].trainerImage}
-          trainer2Image={selectedMonsters[1].trainerImage}
+          monster1={selectedMonsters[0]}
+          monster2={selectedMonsters[1]}
           setBattleClicked={() => setBattleClicked(true)}
         />
       ) : (

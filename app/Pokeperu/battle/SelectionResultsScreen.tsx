@@ -4,23 +4,18 @@ import NavigationConfirmModal from './NavigationConfirmModal';
 import './selectionResults.css';
 import './navigationOverride.css';
 import '../navigation.css';
+import type { Monster } from '../monsters';
 interface MonsterSelectionResultsProps {
-  monster1: string;
-  monster2: string;
-  monster1Image: string;
-  monster2Image: string;
+  monster1: Monster;
+  monster2: Monster;
   setBattleClicked: () => void;
 }
 
 export default function SelectionResults({
   monster1,
   monster2,
-  monster1Image,
-  monster2Image,
   setBattleClicked,
-  trainer1Image,
-  trainer2Image,
-}: MonsterSelectionResultsProps & { trainer1Image: string; trainer2Image: string }) {
+}: MonsterSelectionResultsProps) {
   const [showBackConfirm, setShowBackConfirm] = useState(false);
 
   useEffect(() => {
@@ -58,17 +53,17 @@ export default function SelectionResults({
             <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className='selection-results-ui-element' style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
-                  User 1 chose: {monster1}
+                  User 1 chose: {monster1.name}
                 </div>
                 <div style={{ position: 'relative', width: 220, height: 200 }}>
                   <img
-                    src={trainer1Image}
+                    src={monster1.trainerImage}
                     alt="Trainer 1"
                     className="trainer-image trainer1"
                   />
                   <img
-                    src={monster1Image}
-                    alt={monster1}
+                    src={monster1.image}
+                    alt={monster1.name}
                     className="monster-selected monster1"
                   />
                 </div>
@@ -85,17 +80,17 @@ export default function SelectionResults({
             <div className="monster-trainer-container" style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className='selection-results-ui-element' style={{ marginBottom: 8, fontWeight: 'bold', textAlign: 'center' }}>
-                  User 2 chose: {monster2}
+                  User 2 chose: {monster2.name}
                 </div>
                 <div style={{ position: 'relative', width: 220, height: 200 }}>
                   <img
-                    src={trainer2Image}
+                    src={monster2.trainerImage}
                     alt="Trainer 2"
                     className="trainer-image trainer2"
                   />
                   <img
-                    src={monster2Image}
-                    alt={monster2}
+                    src={monster2.image}
+                    alt={monster2.name}
                     className="monster-selected monster2"
                   />
                 </div>
