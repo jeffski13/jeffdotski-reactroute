@@ -6,55 +6,12 @@ import './navigationOverride.css';
 import '../navigation.css';
 import type { Monster } from '../monsters';
 import { ElementType } from '../ElementType';
+import { getTypeColor } from '../typeColors';
 interface MonsterSelectionResultsProps {
   monster1: Monster;
   monster2: Monster;
   setBattleClicked: () => void;
 }
-
-// Utility function to map ElementType to a color
-const getElementTypeColor = (type: ElementType) => {
-  switch (type) {
-    case ElementType.Normal:
-      return '#b2bec3';
-    case ElementType.Fire:
-      return '#ff7675';
-    case ElementType.Water:
-      return '#74b9ff';
-    case ElementType.Electric:
-      return '#ffe066';
-    case ElementType.Grass:
-      return '#55efc4';
-    case ElementType.Ice:
-      return '#74b9ff';
-    case ElementType.Fighting:
-      return '#e17055';
-    case ElementType.Poison:
-      return '#a29bfe';
-    case ElementType.Ground:
-      return '#e1b382';
-    case ElementType.Flying:
-      return '#81ecec';
-    case ElementType.Psychic:
-      return '#fd79a8';
-    case ElementType.Dark:
-      return '#636e72';
-    case ElementType.Bug:
-      return '#badc58';
-    case ElementType.Rock:
-      return '#b8a77e';
-    case ElementType.Ghost:
-      return '#a29bfe';
-    case ElementType.Steel:
-      return '#b2bec3';
-    case ElementType.Dragon:
-      return '#6c5ce7';
-    case ElementType.Fairy:
-      return '#fab1a0';
-    default:
-      return '#b2bec3'; // fallback normal
-  }
-};
 
 export default function SelectionResults({
   monster1,
@@ -81,8 +38,8 @@ export default function SelectionResults({
       style={{
         position: 'relative',
         minHeight: '90vh',
-        '--monster1-gradient-color': getElementTypeColor(monster1.type),
-        '--monster2-gradient-color': getElementTypeColor(monster2.type),
+        '--monster1-gradient-color': getTypeColor(monster1.type),
+        '--monster2-gradient-color': getTypeColor(monster2.type),
       } as React.CSSProperties}
     >
       <div className="selection-results-bg-fade-monster1"></div>
@@ -124,7 +81,7 @@ export default function SelectionResults({
           </Col>
           <Col sm={2}>
             <div className='results-vs' style={{ marginLeft: 'auto', alignSelf: 'flex-start' }}>
-              <h2>VS</h2>
+              <h2 className='selection-results-ui-element' >VS</h2>
             </div>
           </Col>
           <Col sm={5}>

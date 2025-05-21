@@ -1,5 +1,5 @@
 import ROUTES from '../../consts/ROUTES';
-import { getTypeColor } from './typeColors';
+import { getTypeColor } from '../typeColors';
 import { Container, Row, Col } from 'react-bootstrap';
 import { monsters, type Monster } from '../monsters';
 import './pokedex.css';
