@@ -32,12 +32,12 @@ export default function SelectionResults({
   }, [setBattleClicked]);
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
+    <div style={{ position: 'relative', minHeight: '90vh' }}>
       <div className="selection-results-bg-fade-monster1"></div>
       <div className="selection-results-bg-fade-monster2"></div>
       <button
         type="button"
-        className="back-button selection-results-back-button"
+        className="back-button"
         onClick={() => setShowBackConfirm(true)}
         style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
       >
