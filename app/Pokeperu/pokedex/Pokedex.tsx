@@ -107,12 +107,12 @@ export function Pokedex({
                 <Container>
                   {statsList.map((stat) => (
                     <Row key={stat.name}>
-                      <Col md={3} className="stats-container">
+                      <Col xs={4} md={3} className="stats-container">
                         <div className="stats-label-container">
                           <span className="stats-label">{stat.name}:</span>
                         </div>
                       </Col>
-                      <Col md={9}>
+                      <Col xs={8} md={9}>
                         <div className="stat-bar">
                           <div
                             className="bar"
@@ -135,7 +135,7 @@ export function Pokedex({
                 <Container className="attacks-list">
                   {attackList.map((attack, index) => (
                     <Row key={index} className="attack-item">
-                      <Col md={4} className="attack-name-container">
+                      <Col xs={4} md={4} className="attack-name-container">
                         <span>
                           {attack.isPhysical ?
                             <img className="attack-type-physical" src="/images/pokedex/attack_physical.png" /> :
@@ -143,10 +143,10 @@ export function Pokedex({
                         </span>
                         <span className="attack-name">{attack.name}</span>
                       </Col>
-                      <Col md={4} className="attack-name-container attack-stats">
+                      <Col xs={5} md={4} className="attack-name-container attack-stats">
                         <span className="attack-name"><strong>PP:</strong> {attack.powerPoints}  <strong>Pow:</strong> {attack.damage}  <strong>Acc:</strong> {(attack.accuracy * 100)}%</span>
                       </Col>
-                      <Col md={4}>
+                      <Col xs={3} md={4}>
                         <div
                           className="type-badge type-badge-attack"
                           style={{ backgroundColor: getTypeColor(attack.type) }}
