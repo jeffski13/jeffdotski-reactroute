@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster, MonsterAttack } from '../monsters';
-import NavigationConfirmModal from './NavigationConfirmModal';
+import NavigationConfirmModal from '../NavigationConfirmModal';
 import Typewriter from './Typewriter';
 import '../navigation.css';
 import './battle.css';
 import './battleAttacks.css';
-import './navigationOverride.css';
+import '../navigationOverride.css';
 import { calculateAdjustedDamage, typeEffectiveness } from './battleAttack';
 
 interface BattleProps {

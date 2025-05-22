@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SelectionResultsScreen from './SelectionResultsScreen';
+import SelectionResultsScreen from '../selectionResults/SelectionResultsScreen';
 import Battle from './Battle';
 import './battle.css';
 import type { Monster } from '../monsters';

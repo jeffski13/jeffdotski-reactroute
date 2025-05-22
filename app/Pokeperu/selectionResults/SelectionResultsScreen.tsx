@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import NavigationConfirmModal from './NavigationConfirmModal';
+import NavigationConfirmModal from '../NavigationConfirmModal';
 import './selectionResults.css';
-import './navigationOverride.css';
+import '../navigationOverride.css';
 import '../navigation.css';
 import type { Monster } from '../monsters';
 import { getTypeColor } from '../typeColors';
