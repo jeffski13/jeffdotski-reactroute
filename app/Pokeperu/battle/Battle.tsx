@@ -29,7 +29,7 @@ const STRUGGLE_ATTACK: MonsterAttack = {
 export default function Battle({
   selectedMonsters,
   attackMissedPercentage,
-  isAttackRandomDamage: attackRandomDamage = true,
+  isAttackRandomDamage = true,
   isTextRenderInstant = false,
   isInstantStruggleEnabled = false,
 }: BattleProps) {
@@ -62,7 +62,7 @@ export default function Battle({
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
     const selfDamage = Math.round(0.1 * attackerMonster.hp);
-    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, STRUGGLE_ATTACK.damage, STRUGGLE_ATTACK.type, STRUGGLE_ATTACK.isPhysical, attackRandomDamage);
+    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, STRUGGLE_ATTACK.damage, STRUGGLE_ATTACK.type, STRUGGLE_ATTACK.isPhysical, isAttackRandomDamage);
     if (attacker === 1) {
       setIsMonster1Turn(false);
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
@@ -86,6 +86,7 @@ export default function Battle({
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
 
     let adjustedDamage = 0;
+    let isCritical = false;
 
     const selectedAttack =
       attackIndex === 1
@@ -105,8 +106,15 @@ export default function Battle({
         selectedAttack.damage,
         selectedAttack.type,
         selectedAttack.isPhysical,
-        attackRandomDamage // Pass attackRandomDamage here
+        isAttackRandomDamage // Pass attackRandomDamage here
+        // Critical Hit: 10% chance
       );
+      
+      if (isAttackRandomDamage && Math.random() < 0.1) {
+        adjustedDamage *= 2;
+        isCritical = true;
+      }
+
       if (attacker === 1) {
         setDamageToMonster2Animation(selectedAttack.type); // Set the attack animation based on the attackType
         setTimeout(() => setDamageToMonster2Animation(null), 500); // Clear the animation after 500ms
@@ -155,7 +163,7 @@ export default function Battle({
     setAttackResult(
       `${attackerMonster.name} did ${Math.round(
         adjustedDamage
-      )} damage to ${defenderMonster.name}.`
+      )} damage to ${defenderMonster.name}.${isCritical ? ' Critical Hit!' : ''}`
     );
     if (attackMissed) {
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
