@@ -65,7 +65,7 @@
 .pokedex-link {
   position: absolute;
   right: 10px; /* Position the link on the right side */
-  top: 50%;
+  top: 80%;
   transform: translateY(-50%); /* Vertically center the link */
 }
 
