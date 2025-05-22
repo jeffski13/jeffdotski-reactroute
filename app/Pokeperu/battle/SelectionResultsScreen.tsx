@@ -44,9 +44,10 @@ export default function SelectionResultsScreen({
 
   return (
     <div
+    className='selection-results-screen'
       style={{
         position: 'relative',
-        minHeight: '90vh',
+        minHeight: '75vh',
         '--monster1-gradient-color': getTypeColor(monster1.type),
         '--monster1-second-gradient-color': monster1SecondTypeColor,
         '--monster2-gradient-color': getTypeColor(monster2.type),

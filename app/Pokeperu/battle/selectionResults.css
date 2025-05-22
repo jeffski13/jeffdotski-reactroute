@@ -189,8 +189,8 @@
   z-index: 0;
   opacity: 0.7;
   background: 
-  radial-gradient(circle at top left, var(--monster1-gradient-color), transparent 70%),
-  radial-gradient(circle at bottom left, var(--monster1-second-gradient-color), transparent 70%),
-  radial-gradient(circle at top right, var(--monster2-gradient-color), transparent 70%),
-  radial-gradient(circle at bottom right, var(--monster2-second-gradient-color), transparent 70%);
+  radial-gradient(circle at top left, var(--monster1-gradient-color), transparent 75%),
+  radial-gradient(circle at bottom left, var(--monster1-second-gradient-color), transparent 75%),
+  radial-gradient(circle at top right, var(--monster2-gradient-color), transparent 75%),
+  radial-gradient(circle at bottom right, var(--monster2-second-gradient-color), transparent 75%);
 }
