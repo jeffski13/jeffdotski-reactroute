@@ -1,6 +1,7 @@
 .back-button {
   position: absolute; /* Position the back button on the left */
   left: 10px;
+  z-index: 10;
 }
 
 .back-arrow {

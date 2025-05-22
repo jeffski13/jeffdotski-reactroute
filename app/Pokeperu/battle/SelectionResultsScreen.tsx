@@ -5,7 +5,6 @@ import './selectionResults.css';
 import './navigationOverride.css';
 import '../navigation.css';
 import type { Monster } from '../monsters';
-import { ElementType } from '../ElementType';
 import { getTypeColor } from '../typeColors';
 
 interface MonsterSelectionResultsProps {
