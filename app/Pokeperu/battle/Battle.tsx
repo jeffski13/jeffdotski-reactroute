@@ -165,7 +165,7 @@ export default function Battle({
     setAttackResult(
       `${attackerMonster.name} did ${Math.round(
         adjustedDamage
-      )} damage to ${defenderMonster.name}.${isCritical ? ' Critical Hit!' : ''}`
+      )} damage to ${defenderMonster.name}.`
     );
     if (attackMissed) {
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
@@ -184,6 +184,8 @@ export default function Battle({
         setEffectivenessResult(`It's not very effective.`);
       } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {
         setEffectivenessResult(`It's super effective!`);
+      } else if (isCritical) {
+        setEffectivenessResult(`Critical Hit!`);
       } else {
         setEffectivenessResult(``);
       }
