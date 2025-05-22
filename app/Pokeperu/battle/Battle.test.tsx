@@ -329,6 +329,17 @@ describe('Battle Component', () => {
     const monster1Attack2Button = screen.getByText(/Thunderbolt/i);
     expect(monster1Attack2Button).toBeEnabled();
   });
+  test('attack buttons are disabled once an attack has 0 power points', () => {
+
+    render(<Battle selectedMonsters={mockSelectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isAllAttackCriticalHit={true} isTextRenderInstant={true} />);
+
+    // Simulate Monster 1 attacking Monster 2 until Monster 2's HP reaches 0
+    const attackButtonMonster1 = screen.getByText(/Quick Attack/i);
+    fireEvent.click(attackButtonMonster1);
+
+    // Verify that attack 1's power points is 0
+    expect(screen.getByText(/Critical Hit!/i)).toBeInTheDocument();
+  });
 
   test('pokemon struggles once both attacks have 0 power points', () => {
     const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
@@ -383,6 +394,7 @@ describe('Battle Component', () => {
     expect(screen.getByText(/Pikachu used struggle!/i)).toBeInTheDocument();
     expect(screen.getByText(/Pikachu is hurt by recoil!/i)).toBeInTheDocument();
   });
+
   test('pokemon struggle loop once all attacks have 0 power points', () => {
     const mockSelectedMonstersPowerPointsMod = [{ ...mockSelectedMonsters[0] }, { ...mockSelectedMonsters[1] }];
     mockSelectedMonstersPowerPointsMod[0].hp = 500

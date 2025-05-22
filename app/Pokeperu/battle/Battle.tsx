@@ -15,6 +15,7 @@ interface BattleProps {
   isAttackRandomDamage?: boolean; // Optional property to dynamically control the attack random damage
   isTextRenderInstant?: boolean; // Optional property to dynamically control the attack random damage
   isInstantStruggleEnabled?: boolean; // Optional property to dynamically control the attack random damage
+  isAllAttackCriticalHit?: boolean; // Optional property to dynamically control the attack random damage
 }
 
 const STRUGGLE_ATTACK: MonsterAttack = {
@@ -32,6 +33,7 @@ export default function Battle({
   isAttackRandomDamage = true,
   isTextRenderInstant = false,
   isInstantStruggleEnabled = false,
+  isAllAttackCriticalHit = false,
 }: BattleProps) {
   const isMonster1First = selectedMonsters[0].speed >= selectedMonsters[1].speed;
   const [monster1Hp, setMonster1Hp] = useState(selectedMonsters[0].hp);
@@ -110,7 +112,7 @@ export default function Battle({
         // Critical Hit: 10% chance
       );
       
-      if (isAttackRandomDamage && Math.random() < 0.1) {
+      if (isAllAttackCriticalHit || (isAttackRandomDamage && Math.random() < 0.1)) {
         adjustedDamage *= 2;
         isCritical = true;
       }
