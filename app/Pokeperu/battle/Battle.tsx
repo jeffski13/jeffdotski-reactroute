@@ -108,8 +108,7 @@ export default function Battle({
         selectedAttack.damage,
         selectedAttack.type,
         selectedAttack.isPhysical,
-        isAttackRandomDamage // Pass attackRandomDamage here
-        // Critical Hit: 10% chance
+        isAttackRandomDamage
       );
       
       if (isAllAttackCriticalHit || (isAttackRandomDamage && Math.random() < 0.1)) {
@@ -170,18 +169,13 @@ export default function Battle({
     if (attackMissed) {
       setEffectivenessResult(`${attackerMonster.name}'s attack missed!`);
     } else {
-      const primaryEffectiveness = typeEffectiveness(
-        selectedAttack.type,
-        defenderMonster.type
-      );
-      const secondaryEffectiveness = typeEffectiveness(
-        selectedAttack.type,
-        defenderMonster.secondType
-      );
-      const effectivenessFactor =
-        primaryEffectiveness * secondaryEffectiveness;
+      const primaryEffectiveness = typeEffectiveness(selectedAttack.type, defenderMonster.type);
+      const secondaryEffectiveness = typeEffectiveness(selectedAttack.type, defenderMonster.secondType);
+      const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
       if (effectivenessFactor === 0.5) {
         setEffectivenessResult(`It's not very effective.`);
+      } else if (effectivenessFactor === 0) {
+        setEffectivenessResult(`It doesn't affect ${defenderMonster.name}`);
       } else if (effectivenessFactor === 2 || effectivenessFactor === 4) {
         setEffectivenessResult(`It's super effective!`);
       } else if (isCritical) {

@@ -201,7 +201,7 @@ describe('Battle Component', () => {
 
     expect(screen.getByText(/Ash Wins!/i)).toBeInTheDocument();
   });
-
+  
   it('should deal no damage when an Electric type attack is used against a Ground type monster', () => {
     const selectedMonsters = [
       { ...mockSelectedMonsters[0] },
@@ -209,15 +209,16 @@ describe('Battle Component', () => {
     ];
     selectedMonsters[1].type = ElementType.Ground;
     selectedMonsters[1].hp = 100;
-
-    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
-
+    
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
+    
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Diglett)
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
     fireEvent.click(thunderboltButton);
-
+    
     // Assert that Diglett's HP remains unchanged
     testMonster2Hp(100);
+    expect(screen.getByText(/It doesn't affect/i)).toBeInTheDocument();
   });
 
   it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
@@ -258,7 +259,7 @@ describe('Battle Component', () => {
       gengar,
     ];
 
-    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} />);
+    render(<Battle selectedMonsters={selectedMonsters} attackMissedPercentage={0} isAttackRandomDamage={false} isTextRenderInstant={true} />);
 
     // Monster 1 (Pikachu) uses Thunderbolt on Monster 2 (Gengar)
     const thunderboltButton = screen.getByText('Thunderbolt', { exact: false });
@@ -266,6 +267,7 @@ describe('Battle Component', () => {
 
     // Assert that Gengar's HP remains unchanged
     testMonster2Hp(100);
+    expect(screen.getByText(/It doesn't affect/i)).toBeInTheDocument();
   });
 
   it('displays "attack missed!" when the attack misses', () => {
