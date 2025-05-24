@@ -66,7 +66,7 @@ export const monsters: Monster[] = [
   },
   {
     name: '',
-    image: '/images/monsters/pkmnsquad1b.jpg',
+    image: '/images/monsters/pkmnsquad1b.png',
     trainer: 'Lilly',
     trainerImage: '/images/gymleaders/trainersquad1.png', // Added trainer image
     description: '',
@@ -142,7 +142,7 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Normal,
     secondType: null,
-    image: '/images/monsters/pkmnsquad2b.jpg',
+    image: '/images/monsters/pkmnsquad2b.png',
     attack1: {
       name: '',
       type: ElementType.Normal,
@@ -270,7 +270,7 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Normal,
     secondType: null,
-    image: '/images/monsters/pkmnsquad4b.jpg',
+    image: '/images/monsters/pkmnsquad4b.png',
     attack1: {
       name: '',
       type: ElementType.Normal,
@@ -334,7 +334,7 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Normal,
     secondType: null,
-    image: '/images/monsters/pkmnsquad5b.jpg',
+    image: '/images/monsters/pkmnsquad5b.png',
     attack1: {
       name: '',
       type: ElementType.Normal,
@@ -398,7 +398,7 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Normal,
     secondType: null,
-    image: '/images/monsters/pkmnsquad6b.jpg',
+    image: '/images/monsters/pkmnsquad6b.png',
     attack1: {
       name: '',
       type: ElementType.Normal,
