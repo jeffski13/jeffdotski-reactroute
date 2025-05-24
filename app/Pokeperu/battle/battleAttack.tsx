@@ -54,7 +54,7 @@ export const calculateAdjustedDamage = (
   const secondaryEffectiveness = typeEffectiveness(attackType, defenderMonster.secondType);
   const effectivenessFactor = primaryEffectiveness * secondaryEffectiveness;
   adjustedDamage *= effectivenessFactor;
-
+  
   // STAB (Same Type Attack Bonus)
   if (attackerMonster.type === attackType || attackerMonster.secondType === attackType) {
     adjustedDamage *= 2;
@@ -66,6 +66,13 @@ export const calculateAdjustedDamage = (
     adjustedDamage *= randomFactor; // Apply random factor
   }
 
+  const finalComputedDamage = Math.round(adjustedDamage);
+
+  //handle doesnt effect 
+  if(effectivenessFactor !== 0 && finalComputedDamage < 1){
+    return 1;
+  }
+
   // Round the final adjusted damage to remove decimals
-  return Math.round(adjustedDamage);
+  return finalComputedDamage;
 };
