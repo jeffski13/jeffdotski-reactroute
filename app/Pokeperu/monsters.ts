@@ -132,7 +132,7 @@ export const monsters: Monster[] = [
     name: 'Conty',
     trainer: 'Monty',
     trainerImage: '/images/gymleaders/trainersquad2.png', // Added trainer image
-    description: 'This Pokemon is cute and friendly. He stays with the people all the time. His special attack is Ice X',
+    description: 'This Pokemon is cute and friendly. He stays with the people all the time. His special attack is Ice Eggs',
     inspiration: '', // Added inspiration
     hp: 80,
     attack: 0,
@@ -144,7 +144,7 @@ export const monsters: Monster[] = [
     secondType: ElementType.Dragon,
     image: '/images/monsters/pkmnsquad2b.png',
     attack1: {
-      name: 'Ice Egg',
+      name: 'Ice Eggs',
       type: ElementType.Dragon,
       isPhysical: false,
       damage: 60,
