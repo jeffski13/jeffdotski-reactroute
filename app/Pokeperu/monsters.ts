@@ -44,7 +44,7 @@ export const monsters: Monster[] = [
     speed: 100,
     type: ElementType.Poison,
     secondType: ElementType.Ghost,
-    image: '/images/monsters/pkmnsquad1a.jpg',
+    image: '/images/monsters/pkmnsquad1a.png',
     description: 'Buxic is a Poison/Ghost-type. When he walks he leaves poison on the ground. It\'s super toxic. He is not very friendly. He can be very bad tempered.',
     inspiration: 'Bunny', // Added inspiration
     attack1: {
@@ -108,7 +108,7 @@ export const monsters: Monster[] = [
     speed: 0,
     type: ElementType.Ice,
     secondType: ElementType.Dragon,
-    image: '/images/monsters/pkmnsquad2a.jpg',
+    image: '/images/monsters/pkmnsquad2a.png',
     description: 'This pokemon is very difficult to find. This pokemon is calm and its special attack is Ice-Fire.',
     inspiration: 'Condor', // Added inspiration
     attack1: {
@@ -236,7 +236,7 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Water,
     secondType: ElementType.Electric,
-    image: '/images/monsters/pkmnsquad4a.jpg',
+    image: '/images/monsters/pkmnsquad4a.png',
     description: 'It has electric spikes with in its shell and on its head. It is a seriously angry pokemon. Be careful.',
     inspiration: 'Turtle', // Added inspiration
     attack1: {
