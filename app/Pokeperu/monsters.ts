@@ -53,7 +53,7 @@ export const monsters: Monster[] = [
       isPhysical: false,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: 'Punching Your Face',
@@ -61,7 +61,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -80,20 +80,20 @@ export const monsters: Monster[] = [
     type: ElementType.Normal,
     secondType: null,
     attack1: {
-      name: '',
+      name: 'Horn Attack',
       type: ElementType.Normal,
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
-      name: '',
+      name: 'Mega Punch',
       type: ElementType.Normal,
       isPhysical: true,
-      damage: 40,
-      powerPoints: 4,
-      accuracy: 0.7,
+      damage: 60,
+      powerPoints: 2,
+      accuracy: 0.5,
     },
   },
   {
@@ -117,7 +117,7 @@ export const monsters: Monster[] = [
       isPhysical: false,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: 'Ice Ball',
@@ -125,7 +125,7 @@ export const monsters: Monster[] = [
       isPhysical: false,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -144,12 +144,12 @@ export const monsters: Monster[] = [
     secondType: null,
     image: '/images/monsters/pkmnsquad2b.png',
     attack1: {
-      name: '',
+      name: 'Tackle',
       type: ElementType.Normal,
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: '',
@@ -157,7 +157,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -181,7 +181,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: 'Tackle',
@@ -189,13 +189,13 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
     name: '',
     trainer: 'Trainer Squad 3',
-    trainerImage: '/images/gymleaders/trainersquad3.jpg', // Added trainer image
+    trainerImage: '/images/gymleaders/trainersquad3.png', // Added trainer image
     description: '',
     inspiration: '', // Added inspiration
     hp: 50,
@@ -213,7 +213,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: '',
@@ -221,7 +221,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -245,7 +245,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: 'Water Launch',
@@ -253,7 +253,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -277,7 +277,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: '',
@@ -285,7 +285,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
@@ -300,24 +300,24 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Water,
     secondType: ElementType.Ghost,
-    image: '/images/monsters/pkmnsquad5a.jpg',
+    image: '/images/monsters/pkmnsquad5a.png',
     description: 'Washishi is a Water/Ghost-type Pokémon that that starts as a puddle, and finishes as a big wave. It is a defensive pokemon.',
     inspiration: 'Water', // Added inspiration
     attack1: {
       name: 'Splash',
       type: ElementType.Water,
       isPhysical: true,
-      damage: 10,
-      powerPoints: 20,
+      damage: 25,
+      powerPoints: 10,
       accuracy: 1,
     },
     attack2: {
       name: 'Downpour',
       type: ElementType.Water,
       isPhysical: false,
-      damage: 2,
-      powerPoints: 60,
-      accuracy: 0.4,
+      damage: 60,
+      powerPoints: 2,
+      accuracy: 0.5,
     },
   },
   {
@@ -341,7 +341,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: '',
@@ -349,13 +349,13 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
     name: 'Eternal Fire',
     trainer: 'Trainer Squad 6',
-    trainerImage: '/images/gymleaders/trainersquad6.jpg', // Added trainer image
+    trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
     hp: 50,
     attack: 50,
     defense: 50,
@@ -364,30 +364,30 @@ export const monsters: Monster[] = [
     speed: 50,
     type: ElementType.Fire,
     secondType: null,
-    image: '/images/monsters/pkmnsquad6a.jpg',
+    image: '/images/monsters/pkmnsquad6a.png',
     description: '',
     inspiration: 'Fire ball',
     attack1: {
       name: 'Sand Flies',
       type: ElementType.Fire,
       isPhysical: true,
-      damage: 4,
-      powerPoints: 40,
-      accuracy: 0.7,
+      damage: 40,
+      powerPoints: 4,
+      accuracy: 0.75,
     },
     attack2: {
       name: 'Bite',
       type: ElementType.Fire,
       isPhysical: true,
-      damage: 4,
-      powerPoints: 40,
-      accuracy: 0.7,
+      damage: 40,
+      powerPoints: 4,
+      accuracy: 0.75,
     },
   },
   {
     name: '',
     trainer: 'Trainer Squad 6',
-    trainerImage: '/images/gymleaders/trainersquad6.jpg', // Added trainer image
+    trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
     description: '',
     inspiration: '', // Added inspiration
     hp: 50,
@@ -405,7 +405,7 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
     attack2: {
       name: '',
@@ -413,13 +413,13 @@ export const monsters: Monster[] = [
       isPhysical: true,
       damage: 40,
       powerPoints: 4,
-      accuracy: 0.7,
+      accuracy: 0.75,
     },
   },
   {
     name: 'Gengar',
     trainer: 'Morty',
-    trainerImage: '/images/gymleaders/morty.jpg', // Added trainer image
+    trainerImage: '/images/gymleaders/morty.png', // Added trainer image
     hp: 50,
     attack: 65,
     defense: 60,
@@ -431,17 +431,17 @@ export const monsters: Monster[] = [
     image: '/images/monsters/gengar.png',
     attack1: {
       name: 'Shadow Ball',
-      damage: 50,
       type: ElementType.Ghost,
       isPhysical: false,
+      damage: 50,
       powerPoints: 10,
       accuracy: 1,
     },
     attack2: {
       name: 'Earthquake',
-      damage: 50,
       type: ElementType.Ground,
       isPhysical: false,
+      damage: 50,
       powerPoints: 10,
       accuracy: 1,
     },
