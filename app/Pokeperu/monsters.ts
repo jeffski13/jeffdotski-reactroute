@@ -226,7 +226,7 @@ export const monsters: Monster[] = [
   },
   {
     name: 'Tident',
-    trainer: 'Trainer Squad 4',
+    trainer: 'Ainbo',
     trainerImage: '/images/gymleaders/trainersquad4.png', // Added trainer image
     hp: 50,
     attack: 50,
@@ -237,7 +237,7 @@ export const monsters: Monster[] = [
     type: ElementType.Water,
     secondType: ElementType.Electric,
     image: '/images/monsters/pkmnsquad4a.png',
-    description: 'It has electric spikes with in its shell and on its head. It is a seriously angry pokemon. Be careful.',
+    description: 'It has electric spikes within its shell and on its head. It is a seriously angry pokemon. Be careful.',
     inspiration: 'Turtle', // Added inspiration
     attack1: {
       name: 'Electric Shock',
@@ -257,35 +257,35 @@ export const monsters: Monster[] = [
     },
   },
   {
-    name: '',
-    trainer: 'Trainer Squad 4',
+    name: 'Rotie',
+    trainer: 'Ainbo',
     trainerImage: '/images/gymleaders/trainersquad4.png', // Added trainer image
-    description: '',
-    inspiration: '', // Added inspiration
+    description: 'A tree pokemon. He is happy dangerous and brave. ',
+    inspiration: 'Tree', // Added inspiration
     hp: 50,
     attack: 50,
     defense: 50,
     specialAttack: 50,
     specialDefense: 50,
     speed: 50,
-    type: ElementType.Normal,
-    secondType: null,
+    type: ElementType.Grass,
+    secondType: ElementType.Fighting,
     image: '/images/monsters/pkmnsquad4b.png',
     attack1: {
-      name: '',
-      type: ElementType.Normal,
+      name: 'Lance shot',
+      type: ElementType.Fighting,
       isPhysical: true,
-      damage: 40,
-      powerPoints: 4,
-      accuracy: 0.75,
+      damage: 60,
+      powerPoints: 2,
+      accuracy: 0.5,
     },
     attack2: {
-      name: '',
-      type: ElementType.Normal,
+      name: 'Branch Paralysis',
+      type: ElementType.Grass,
       isPhysical: true,
-      damage: 40,
-      powerPoints: 4,
-      accuracy: 0.75,
+      damage: 60,
+      powerPoints: 2,
+      accuracy: 0.5,
     },
   },
   {
