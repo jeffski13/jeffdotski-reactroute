@@ -80,6 +80,13 @@
 .gymleader-name {
   font-size: 2rem;
   margin-bottom: 12px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 0 2px #000;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 16px;
+  border-radius: 8px;
+  display: inline-block;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
 .gymleader-environment-image {
