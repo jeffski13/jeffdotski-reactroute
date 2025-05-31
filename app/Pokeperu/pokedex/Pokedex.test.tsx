@@ -19,6 +19,8 @@ const mockSelectedMonsters: Monster[] = [
     image: '/images/monsters/pikachu.jpg',
     attack1: { name: 'Quick Attack', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20, accuracy: 1 },
     attack2: { name: 'Thunderbolt', damage: 20, type: ElementType.Electric, isPhysical: false, powerPoints: 20, accuracy: 1 },
+    trainerImage: '',
+    inspiration: ''
   },
   {
     name: 'Charmander',
@@ -35,6 +37,8 @@ const mockSelectedMonsters: Monster[] = [
     image: '/images/monsters/charmander.jpg',
     attack1: { name: 'Scratch', damage: 10, type: ElementType.Normal, isPhysical: true, powerPoints: 20, accuracy: 1 },
     attack2: { name: 'Flamethrower', damage: 20, type: ElementType.Fire, isPhysical: false, powerPoints: 20, accuracy: 1 },
+    trainerImage: '',
+    inspiration: ''
   },
 ];
 

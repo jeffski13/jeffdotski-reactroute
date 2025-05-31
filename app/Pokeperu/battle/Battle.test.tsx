@@ -223,20 +223,20 @@ describe('Battle Component', () => {
 
   it('should deal no damage when an Electric type attack is used against a Ghost type monster with secondary type Ground', () => {
     const gengar: Monster = {
-      name: 'Gengar',
-      trainer: 'Morty',
+      name: 'Nidoking',
+      trainer: 'Giovanni',
       trainerImage: '',
       hp: 100,
       attack: 65,
       defense: 60,
       specialAttack: 130,
       specialDefense: 75,
-      speed: 110,
-      type: ElementType.Ghost,
+      speed: 10,
+      type: ElementType.Poison,
       secondType: ElementType.Ground,
       image: '/images/monsters/gengar.jpg',
       attack1: {
-        name: 'Shadow Ball',
+        name: 'Horn Drill',
         damage: 50,
         type: ElementType.Ghost,
         isPhysical: false,
