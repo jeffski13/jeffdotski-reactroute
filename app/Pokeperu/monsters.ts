@@ -34,7 +34,7 @@ export interface Monster {
 export const monsters: Monster[] = [
   {
     name: 'Buxic',
-    trainer: 'Lilly',
+    trainer: 'Lily',
     trainerImage: '/images/gymleaders/trainersquad1.png', // Added trainer image
     hp: 70,
     attack: 40,
@@ -354,7 +354,7 @@ export const monsters: Monster[] = [
   },
   {
     name: 'Tornado',
-    trainer: 'Trainer Squad 6',
+    trainer: 'Alex',
     trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
     hp: 50,
     attack: 50,
@@ -386,16 +386,16 @@ export const monsters: Monster[] = [
   },
   {
     name: 'Eternal Fire',
-    trainer: 'Trainer Squad 6',
+    trainer: 'Alex',
     trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
     description: '',
     inspiration: '', // Added inspiration
     hp: 100,
     attack: 70,
     defense: 50,
-    specialAttack: 50,
-    specialDefense: 50,
-    speed: 50,
+    specialAttack: 30,
+    specialDefense: 30,
+    speed: 30,
     type: ElementType.Fire,
     secondType: null,
     image: '/images/monsters/pkmnsquad6b.png',
