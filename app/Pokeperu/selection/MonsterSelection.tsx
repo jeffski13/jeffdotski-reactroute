@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 import ROUTES from '../../consts/ROUTES';
 import './monsterselection.css';
+import type { Monster } from '../monsters';
 
 interface MonsterSelectionProps {
-  monsters: {
-    name: string;
-    trainer: string;
-    image: string;
-  }[];
+  monsters: Monster[];
   selectedMonstersNames: string[];
   currentUser: number;
-  handleMonsterSelect: (monster: object) => void;
+  handleMonsterSelect: (monster: Monster) => void;
 }
 
 export default function MonsterSelection({
@@ -21,7 +18,7 @@ export default function MonsterSelection({
 }: MonsterSelectionProps) {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      const key = parseInt(event.key, 10); // Convert the key to a number
+      const key = parseInt(event.key, 10);
       if (!isNaN(key) && key > 0 && key <= monsters.length) {
         const monster = monsters[key - 1];
         if (!selectedMonstersNames.includes(monster.name)) {
@@ -39,6 +36,14 @@ export default function MonsterSelection({
   return (
     <div className="PokePeruStart">
       <div className="header">
+        {/* Gym button in upper left */}
+        <a href={ROUTES.pokePeru.gymleaders} className="gym-link">
+          <img
+            src="/images/gym-icon.png"
+            alt="Gym"
+            className="gym-link-icon"
+          />
+        </a>
         <h1 className="title">Monster Selection</h1>
         <a href={ROUTES.pokePeru.pokedex} className="pokedex-link">
           <img
