@@ -41,10 +41,28 @@
   align-items: center;
   gap: 32px;
   width: 100%;
-  /* The background image and border radius are now set inline from the component */
-  /* Remove any previous background or background-color here if present */
+  position: relative; /* Needed for overlay */
   padding: 24px;
   box-sizing: border-box;
+  /* background image and border radius are set inline from the component */
+  overflow: hidden;
+}
+
+.gymleader-details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.45); /* Adjust opacity as needed */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gymleader-details-top,
+.gymleader-image,
+.gymleader-name {
+  position: relative;
+  z-index: 1;
 }
 
 .gymleader-details-top {
