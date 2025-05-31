@@ -6,8 +6,8 @@ export interface GymLeader {
 
 export const gymLeaders: GymLeader[] = [
   {
-    name: "Blain",
-    image: "/images/gymleaders/blaine.png",
+    name: "Whitney",
+    image: "/images/gymleaders/whitney.jpg",
     environmentImage: "/images/perulandscape/peru-1.jpg",
   },
   {
@@ -16,8 +16,8 @@ export const gymLeaders: GymLeader[] = [
     environmentImage: "/images/perulandscape/peru-2.jpg",
   },
   {
-    name: "Misty",
-    image: "/images/gymleaders/misty.png",
+    name: "Morty",
+    image: "/images/gymleaders/morty.jpg",
     environmentImage: "/images/perulandscape/peru-3.jpg",
   },
   {
@@ -26,13 +26,13 @@ export const gymLeaders: GymLeader[] = [
     environmentImage: "/images/perulandscape/peru-4.jpg",
   },
   {
-    name: "Morty",
-    image: "/images/gymleaders/morty.jpg",
+    name: "Misty",
+    image: "/images/gymleaders/misty.png",
     environmentImage: "/images/perulandscape/peru-5.jpg",
   },
   {
-    name: "Whitney",
-    image: "/images/gymleaders/whitney.jpg",
+    name: "Blain",
+    image: "/images/gymleaders/blaine.png",
     environmentImage: "/images/perulandscape/peru-6.jpg",
   },
 ];
