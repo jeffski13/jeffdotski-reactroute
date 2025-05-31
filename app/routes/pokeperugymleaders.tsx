@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import JeffSkiPageWithContent from "../Inf/JeffSkiPageWithContent";
-import GymLeaderList, { GymLeader } from "../Pokeperu/gym/GymLeaderList";
+import GymLeaderListContainer from "../Pokeperu/gym/GymLeaderList";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -9,22 +9,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-// Example gym leaders data
-const gymLeaders: GymLeader[] = [
-  {
-    name: "Brock",
-    image: "/images/gymleaders/brock.png",
-    environmentImage: "/images/gymleaders/rock_gym.jpg",
-  },
-  {
-    name: "Misty",
-    image: "/images/gymleaders/misty.png",
-    environmentImage: "/images/gymleaders/water_gym.jpg",
-  },
-  // Add more gym leaders as needed
-];
-
-const Content = JeffSkiPageWithContent(() => <GymLeaderList gymLeaders={gymLeaders} />);
+const Content = JeffSkiPageWithContent(() => <GymLeaderListContainer />);
 
 export default function PokePeruGymLeaders() {
   return <Content />;

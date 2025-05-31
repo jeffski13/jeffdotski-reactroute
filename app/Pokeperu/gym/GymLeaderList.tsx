@@ -1,18 +1,17 @@
 import ROUTES from '../../consts/ROUTES';
 import './gymleaderlist.css';
 import '../navigation.css';
-
-export interface GymLeader {
-  name: string;
-  image: string;
-  environmentImage: string;
-}
+import { gymLeaders, type GymLeader } from '../gymleaders';
 
 interface GymLeaderListProps {
   gymLeaders: GymLeader[];
 }
 
-export default function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
+export default function GymLeaderListContainer() {
+  return (<GymLeaderList gymLeaders={gymLeaders} />);
+}
+
+function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
   return (
     <div className="Pokedex">
       <div className="header">
