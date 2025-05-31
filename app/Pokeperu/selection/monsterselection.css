@@ -86,3 +86,22 @@
   font-style: italic;
 }
 
+.gym-link {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+}
+
+.gym-link-icon {
+  width: 65px;
+  height: 65px;
+  transition: transform 0.15s;
+}
+
+.gym-link-icon:hover,
+.gym-link-icon:focus {
+  transform: scale(1.1) rotate(-10deg);
+  outline: none;
+}
+

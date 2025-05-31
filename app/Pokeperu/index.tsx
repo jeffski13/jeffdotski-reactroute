@@ -16,7 +16,7 @@ export default function PokePeru() {
 
 function PokePeruContent() {
   const [selectedMonstersNames, setSelectedMonstersNames] = useState<string[]>([]);
-  const [selectedMonsters, setSelectedMonsters] = useState<object[]>([]);
+  const [selectedMonsters, setSelectedMonsters] = useState<Monster[]>([]);
   const [currentUser, setCurrentUser] = useState(1);
 
   const handleMonsterSelect = (monster: Monster) => {
