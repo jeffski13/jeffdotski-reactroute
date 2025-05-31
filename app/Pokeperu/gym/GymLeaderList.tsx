@@ -27,14 +27,13 @@ function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
         {gymLeaders.map((leader) => (
           <li key={leader.name} className="gymleader-item">
             <div className="gymleader-details">
-              <img src={leader.image} alt={leader.name} className="gymleader-image" />
-              <div>
-                <h2 className="gymleader-name">{leader.name}</h2>
-                <img
-                  src={leader.environmentImage}
-                  alt={`${leader.name} environment`}
-                  className="gymleader-environment-image"
-                />
+              <div className='gymleader-details-top'>
+                <img src={leader.image} alt={leader.name} className="gymleader-image" />
+                <div>
+                  <h2 className="gymleader-name">
+                    {leader.name}
+                  </h2>
+                </div>
               </div>
             </div>
           </li>
