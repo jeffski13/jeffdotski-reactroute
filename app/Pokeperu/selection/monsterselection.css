@@ -72,7 +72,7 @@
 .pokedex-link-icon {
   width: 80px;
   height: 80px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.15s ease-in-out;
 }
 
 .pokedex-link-icon:hover {
@@ -101,7 +101,7 @@
 
 .gym-link-icon:hover,
 .gym-link-icon:focus {
-  transform: scale(1.1) rotate(-10deg);
+  transform: scale(1.2);
   outline: none;
 }
 
