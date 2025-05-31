@@ -26,7 +26,16 @@ function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
       <ul className="gymleader-list">
         {gymLeaders.map((leader) => (
           <li key={leader.name} className="gymleader-item">
-            <div className="gymleader-details">
+            <div
+              className="gymleader-details"
+              style={{
+                backgroundImage: `url(${leader.environmentImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                borderRadius: '16px',
+                minHeight: '180px',
+              }}
+            >
               <div className='gymleader-details-top'>
                 <img src={leader.image} alt={leader.name} className="gymleader-image" />
                 <div>

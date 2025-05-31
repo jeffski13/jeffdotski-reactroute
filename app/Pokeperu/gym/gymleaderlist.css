@@ -29,16 +29,22 @@
 
 .gymleader-item {
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 18px;
   max-width: 600px;
-  padding: 15px;
   margin: 20px 0;
   margin-left: auto;
   margin-right: auto;
 }
 
 .gymleader-details {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  /* The background image and border radius are now set inline from the component */
+  /* Remove any previous background or background-color here if present */
+  padding: 24px;
+  box-sizing: border-box;
 }
 
 .gymleader-details-top {
@@ -51,7 +57,6 @@
   width: 400px;
   height: 400px;
   object-fit: contain;
-  background: #fff;
 }
 
 .gymleader-name {
