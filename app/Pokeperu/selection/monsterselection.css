@@ -105,3 +105,26 @@
   outline: none;
 }
 
+.info-link {
+  position: fixed;
+  bottom: 60px;
+  left: 18px;
+  z-index: 2;
+}
+
+.info-link-icon {
+  width: 65px;
+  height: 65px;
+}
+
+.clickable-link-icon {
+  transition: transform 0.15s;
+}
+
+.clickable-link-icon:hover,
+.clickable-link-icon:focus {
+  transform: scale(1.2);
+  outline: none;
+}
+
+

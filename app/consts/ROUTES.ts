@@ -7,6 +7,7 @@ const ROUTES = {
       battle: '/pokePeru/battle',
       pokedex: '/pokePeru/pokedex',
       gymleaders: '/pokePeru/gymleaders',
+      info: '/pokePeru/info',
     }
 };
 export default ROUTES;
