@@ -57,7 +57,8 @@ function InfoPage({ }: InfoPageProps) {
               </Col>
             </Row>
           </Container>
-          <p>This data can be found and modified inside of the "monsters.tsx" file. The art from the students can be placed inside of the /public/images/monsters folder.</p>
+          <p>This data can be found and modified inside of the "monsters.tsx" file.</p>
+          <p>The art from the students can be placed inside of the /public/images/monsters folder.</p>
         </div>
         <div id="sectionGymLeaderCreation">
           <h3>Gym Leader Creation</h3>
@@ -81,6 +82,9 @@ function InfoPage({ }: InfoPageProps) {
               </Col>
             </Row>
           </Container>
+          <p>This data can be found and modified inside of the "gymleaders.tsx" file.</p>
+          <p>The art from the students can be placed inside of the /public/images/gymleaders folder.</p>
+          <p>The environments can be placed inside of the /public/images/perulandscape folder.</p>
         </div>
         <div id="sectionBattle">
           <h3>Monster Battle</h3>
@@ -88,13 +92,12 @@ function InfoPage({ }: InfoPageProps) {
           <Container>
             <Row className="info-images-container">
               <Col sm={5}>
-                <img src="/images/info/info_gymleader_creation_a.png" alt="Back" className="info-image" />
+                <img src="/images/info/info_battle_a.png" alt="Back" className="info-image" />
               </Col>
               <Col sm={1} className="info-arrow-separator" >
-                <span>➡️</span>
               </Col>
               <Col sm={5}>
-                <img src="/images/info/info_gymleader_creation_b.png" alt="Back" className="info-image" />
+                <img src="/images/info/info_battle_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
           </Container>
@@ -104,7 +107,7 @@ function InfoPage({ }: InfoPageProps) {
           <p>Absolutely! This website is built with node v20.9.0. The contents can be downloaded from my github repo and then run the following commands inside of the unzipped folder:</p>
           <p>npm install</p>
           <p>npm start</p>
-          <p>The monsters.tsx and gymleaders.tsx files can be modified:</p>
+          <p>The monsters.tsx and gymleaders.tsx files can be modified with the respective monster and gym leader data.</p>
           <Container>
             <Row className="info-images-container">
               <Col sm={5}>
