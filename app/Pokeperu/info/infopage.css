@@ -3,6 +3,10 @@
     padding: 50px;
 }
 
+.infoSection {
+    padding-top: 30px;
+}
+
 .info-images-container {
     text-align: center;
     vertical-align: middle;
