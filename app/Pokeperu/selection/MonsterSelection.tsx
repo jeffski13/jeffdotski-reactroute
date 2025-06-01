@@ -41,7 +41,7 @@ export default function MonsterSelection({
           <img
             src="/images/gym-icon.png"
             alt="Gym"
-            className="gym-link-icon"
+            className="gym-link-icon clickable-link-icon"
           />
         </a>
         <h1 className="title">Monster Selection</h1>
@@ -49,7 +49,7 @@ export default function MonsterSelection({
           <img
             src="/images/pokedex-icon.png"
             alt="Pokedex"
-            className="pokedex-link-icon"
+            className="pokedex-link-icon clickable-link-icon"
           />
         </a>
       </div>
