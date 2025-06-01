@@ -1,6 +1,7 @@
 import ROUTES from '../../consts/ROUTES';
 import './gymleaderlist.css';
 import '../navigation.css';
+import '../secondaryPage.css';
 import { gymLeaders, type GymLeader } from '../gymleaders';
 
 interface GymLeaderListProps {
@@ -13,14 +14,14 @@ export default function GymLeaderListContainer() {
 
 function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
   return (
-    <div className="Pokedex">
+    <div className="PokePeruSecondaryPage">
       <div className="header">
         <a href={ROUTES.pokePeru.battle} className="back-button">
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
         </a>
         <div className="title-container">
           <h1>Gym Leaders</h1>
-          <img src="/images/gym-icon.png" alt="Pokedex" className="gym-icon" />
+          <img src="/images/gym-icon.png" alt="Pokedex" className="secondary-page-icon" />
         </div>
       </div>
       <ul className="gymleader-list">

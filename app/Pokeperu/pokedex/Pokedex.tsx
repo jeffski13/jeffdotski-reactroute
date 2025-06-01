@@ -4,6 +4,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { monsters, type Monster } from '../monsters';
 import './pokedex.css';
 import '../navigation.css';
+import '../secondaryPage.css';
+
 interface BattleProps {
   selectedMonsters: Monster[];
 }
@@ -15,14 +17,14 @@ export function Pokedex({
   selectedMonsters,
 }: BattleProps) {
   return (
-    <div className="Pokedex">
+    <div className="PokePeruSecondaryPage">
       <div className="header">
         <a href={ROUTES.pokePeru.battle} className="back-button">
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
         </a>
         <div className="title-container">
           <h1>Pokedex</h1>
-          <img src="/images/pokedex-icon.png" alt="Pokedex" className="pokedex-icon" />
+          <img src="/images/pokedex-icon.png" alt="Pokedex" className="secondary-page-icon" />
         </div>
       </div>
       <ul className="monster-list">
