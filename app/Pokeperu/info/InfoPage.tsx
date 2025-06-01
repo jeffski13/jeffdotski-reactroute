@@ -104,7 +104,7 @@ function InfoPage({ }: InfoPageProps) {
         </div>
         <div id="sectionDIY">
           <h3>Can I Do This With My Students?</h3>
-          <p>Absolutely! This website is built with node v20.9.0. The contents can be downloaded from my github repo and then run the following commands inside of the unzipped folder:</p>
+          <p>Absolutely! This game is built with node v20.9.0. The contents can be downloaded from my github repo and then run the following commands inside of the unzipped folder:</p>
           <p>npm install</p>
           <p>npm start</p>
           <p>In the browser, go to http://localhost:5173/pokePeru/battle</p>
