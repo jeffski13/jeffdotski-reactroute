@@ -146,7 +146,7 @@ export function Pokedex({
                         <span className="attack-name">{attack.name}</span>
                       </Col>
                       <Col xs={5} md={4} className="attack-name-container attack-stats">
-                        <span className="attack-name"><strong>PP:</strong> {attack.powerPoints}  <strong>Pow:</strong> {attack.damage}  <strong>Acc:</strong> {(attack.accuracy * 100)}%</span>
+                        <span className="attack-name"><strong>Pow:</strong> {attack.damage} <strong>PP:</strong> {attack.powerPoints} <strong>Acc:</strong> {(attack.accuracy * 100)}%</span>
                       </Col>
                       <Col xs={3} md={4}>
                         <div
