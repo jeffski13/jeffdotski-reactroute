@@ -103,20 +103,36 @@ function InfoPage({ }: InfoPageProps) {
           </Container>
         </div>
         <div id="sectionDIY">
-          <h3>Can I Do this with my Students/Kids?</h3>
+          <h3>Can I Do This With My Students?</h3>
           <p>Absolutely! This website is built with node v20.9.0. The contents can be downloaded from my github repo and then run the following commands inside of the unzipped folder:</p>
           <p>npm install</p>
           <p>npm start</p>
-          <p>The monsters.tsx and gymleaders.tsx files can be modified with the respective monster and gym leader data.</p>
+          <p>In the browser, go to http://localhost:5173/pokePeru/battle</p>
+          <p>The <strong>monsters.tsx</strong> and <strong>gymleaders.tsx</strong> files can be modified with the respective monster and gym leader data.</p>
           <Container>
             <Row className="info-images-container">
               <Col sm={5}>
-                <img src="/images/info/info_pokemon_creation_dataentry.png" alt="Back" className="info-image" />
+                <img src="/images/info/info_pokemon_creation_dataentry_a.png" alt="Back" className="info-image" />
               </Col>
               <Col sm={1} className="info-arrow-separator" >
+                <span>➡️</span>
               </Col>
               <Col sm={5}>
-                <img src="/images/info/info_gymleader_creation_dataentry.png" alt="Back" className="info-image" />
+                <img src="/images/info/info_pokemon_creation_dataentry_b.png" alt="Back" className="info-image" />
+              </Col>
+            </Row>
+          </Container>
+          <br />
+          <Container>
+            <Row className="info-images-container">
+              <Col sm={5}>
+                <img src="/images/info/info_gymleader_creation_dataentry_a.png" alt="Back" className="info-image" />
+              </Col>
+              <Col sm={1} className="info-arrow-separator" >
+                <span>➡️</span>
+              </Col>
+              <Col sm={5}>
+                <img src="/images/info/info_gymleader_creation_dataentry_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
           </Container>
