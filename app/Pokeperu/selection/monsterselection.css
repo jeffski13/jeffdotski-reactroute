@@ -82,7 +82,7 @@
 .pokedex-link {
   position: absolute;
   right: 10px; /* Position the link on the right side */
-  top: 80%;
+  top: 160px;
   transform: translateY(-50%); /* Vertically center the link */
 }
 
@@ -93,7 +93,7 @@
 
 .gym-link {
   position: absolute;
-  top: 18px;
+  top: 130px;
   left: 18px;
   z-index: 2;
 }

@@ -20,7 +20,7 @@ function InfoPage({ }: InfoPageProps) {
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
         </a>
         <div className="secondary-page-title-container">
-          <h1>About Pokemon in Peru</h1>
+          <h1 className="secondary-page-title">About Pokemon in Peru</h1>
           <img src="/images/info-icon.png" alt="Information Icon" className="secondary-page-icon info-icon" />
         </div>
       </div>
