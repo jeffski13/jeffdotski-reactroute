@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import ROUTES from '../../consts/ROUTES';
-import './monsterselection.css';
 import type { Monster } from '../monsters';
+import './monsterselection.css';
+import '../infolink.css';
 
 interface MonsterSelectionProps {
   monsters: Monster[];

@@ -1,8 +1,9 @@
 import ROUTES from '../../consts/ROUTES';
+import { gymLeaders, type GymLeader } from '../gymleaders';
 import './gymleaderlist.css';
 import '../navigation.css';
 import '../secondaryPage.css';
-import { gymLeaders, type GymLeader } from '../gymleaders';
+import '../infolink.css';
 
 interface GymLeaderListProps {
   gymLeaders: GymLeader[];
@@ -49,6 +50,13 @@ function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
           </li>
         ))}
       </ul>
+      <a href={ROUTES.pokePeru.info} className="info-link">
+        <img
+          src="/images/info-icon.png"
+          alt="Gym"
+          className="info-link-icon clickable-link-icon"
+        />
+      </a>
     </div>
   );
 }

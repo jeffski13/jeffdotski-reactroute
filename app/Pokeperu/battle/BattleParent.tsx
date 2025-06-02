@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import SelectionResultsScreen from '../selectionResults/SelectionResultsScreen';
 import Battle from './Battle';
-import './battle.css';
 import type { Monster } from '../monsters';
+import ROUTES from '~/consts/ROUTES';
+import './battle.css';
+import '../infolink.css';
 
 interface BattleProps {
   selectedMonsters: Monster[]
@@ -26,6 +28,14 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
       ) : (
         <Battle selectedMonsters={selectedMonsters} />
       )}
+
+      <a href={ROUTES.pokePeru.info} className="info-link">
+        <img
+          src="/images/info-icon.png"
+          alt="Gym"
+          className="info-link-icon clickable-link-icon"
+        />
+      </a>
     </div>
   );
 }

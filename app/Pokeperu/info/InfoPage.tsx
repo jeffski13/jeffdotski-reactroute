@@ -1,8 +1,8 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import ROUTES from '../../consts/ROUTES';
+import './infopage.css';
 import '../navigation.css';
 import '../secondaryPage.css';
-import './infopage.css';
 
 interface InfoPageProps {}
 
