@@ -7,9 +7,14 @@
 .back-arrow {
   width: 30px;
   height: 30px;
-  transition: transform 0.3s ease-in-out;
 }
 
-.back-arrow:hover {
-  transform: scale(1.2); /* Increase size by 20% on hover */
+.clickable-link-icon {
+  transition: transform 0.15s;
+}
+
+.clickable-link-icon:hover,
+.clickable-link-icon:focus {
+  transform: scale(1.2);
+  outline: none;
 }
