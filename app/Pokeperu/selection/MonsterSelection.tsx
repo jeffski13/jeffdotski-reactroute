@@ -35,7 +35,7 @@ export default function MonsterSelection({
 
   return (
     <div className="PokePeruStart">
-      <div className="header">
+      <div className="secondary-page-header">
         {/* Gym button in upper left */}
         <a href={ROUTES.pokePeru.gymleaders} className="gym-link">
           <img

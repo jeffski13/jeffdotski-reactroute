@@ -2,18 +2,23 @@
   text-align: center;
 }
 
-.header {
+.secondary-page-header {
   display: flex;
   align-items: center;
   justify-content: center; /* Center the content horizontally */
+  overflow: hidden;
+  white-space: nowrap;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.title-container {
+.secondary-page-title-container {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  overflow: hidden;
+  white-space: nowrap;
   gap: 10px;
-  justify-content: center; /* Center the title and icon */
 }
 
 .secondary-page-icon {

@@ -11,15 +11,17 @@ export default function InfoPageContainer() {
 }
 
 function InfoPage({ }: InfoPageProps) {
+  const pokePeruLink = `http://localhost:5173${ROUTES.pokePeru.battle}`;
+  
   return (
     <div className="PokePeruSecondaryPage">
-      <div className="header">
+      <div className="secondary-page-header">
         <a href={ROUTES.pokePeru.battle} className="back-button">
           <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
         </a>
-        <div className="title-container">
+        <div className="secondary-page-title-container">
           <h1>About Pokemon in Peru</h1>
-          <img src="/images/info-icon.png" alt="Pokedex" className="secondary-page-icon" />
+          <img src="/images/info-icon.png" alt="Information Icon" className="secondary-page-icon info-icon" />
         </div>
       </div>
       <div className="project-info">
@@ -108,7 +110,7 @@ function InfoPage({ }: InfoPageProps) {
           <p>Absolutely! This game is built with node v20.9.0. The contents can be downloaded from my github repo and then run the following commands inside of the unzipped folder:</p>
           <p>npm install</p>
           <p>npm start</p>
-          <p>In the browser, go to http://localhost:5173/pokePeru/battle</p>
+          <p>In the browser, go to <a href={pokePeruLink}>{pokePeruLink}</a></p>
           <p>The <strong>monsters.tsx</strong> and <strong>gymleaders.tsx</strong> files can be modified with the respective monster and gym leader data.</p>
           <Container>
             <Row className="info-images-container">
