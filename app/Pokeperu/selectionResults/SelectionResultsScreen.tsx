@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import NavigationConfirmModal from '../NavigationConfirmModal';
+import BackNavigationConfirmModal from '../BackNavigationConfirmModal';
 import './selectionResults.css';
 import '../navigationOverride.css';
 import '../navigation.css';
@@ -125,7 +125,7 @@ export default function SelectionResultsScreen({
           </Col>
         </Row>
       </Container>
-      {showBackConfirm && (<NavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></NavigationConfirmModal>)}
+      {showBackConfirm && (<BackNavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></BackNavigationConfirmModal>)}
     </div>
   );
 }

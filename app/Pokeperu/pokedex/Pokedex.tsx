@@ -5,6 +5,7 @@ import { monsters, type Monster } from '../monsters';
 import './pokedex.css';
 import '../navigation.css';
 import '../secondaryPage.css';
+import '../infolink.css';
 
 interface BattleProps {
   selectedMonsters: Monster[];
@@ -164,6 +165,13 @@ export function Pokedex({
           );
         })}
       </ul>
+      <a href={ROUTES.pokePeru.info} className="info-link">
+        <img
+          src="/images/info-icon.png"
+          alt="Information Link"
+          className="info-link-icon clickable-link-icon"
+        />
+      </a>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ElementType } from '../ElementType';
 import type { Monster, MonsterAttack } from '../monsters';
-import NavigationConfirmModal from '../NavigationConfirmModal';
+import BackNavigationConfirmModal from '../BackNavigationConfirmModal';
 import Typewriter from './Typewriter';
 import '../navigation.css';
 import './battle.css';
@@ -388,7 +388,7 @@ export default function Battle({
           <Typewriter text={effectivenessResult} isInstantTextRender={isTextRenderInstant} />
         </div>
       </div>
-      {showBackConfirm && (<NavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></NavigationConfirmModal>)}
+      {showBackConfirm && (<BackNavigationConfirmModal onCancelNavigation={() => setShowBackConfirm(false)}></BackNavigationConfirmModal>)}
     </div>
   );
 }
