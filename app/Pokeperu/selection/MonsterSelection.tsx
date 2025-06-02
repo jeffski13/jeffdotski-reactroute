@@ -35,13 +35,13 @@ export default function MonsterSelection({
 
   return (
     <div className="PokePeruStart">
-      <div className="header">
+      <div className="secondary-page-header">
         {/* Gym button in upper left */}
         <a href={ROUTES.pokePeru.gymleaders} className="gym-link">
           <img
             src="/images/gym-icon.png"
             alt="Gym"
-            className="gym-link-icon"
+            className="gym-link-icon clickable-link-icon"
           />
         </a>
         <h1 className="title">Monster Selection</h1>
@@ -49,7 +49,7 @@ export default function MonsterSelection({
           <img
             src="/images/pokedex-icon.png"
             alt="Pokedex"
-            className="pokedex-link-icon"
+            className="pokedex-link-icon clickable-link-icon"
           />
         </a>
       </div>
@@ -69,6 +69,14 @@ export default function MonsterSelection({
           </button>
         ))}
       </div>
+
+      <a href={ROUTES.pokePeru.info} className="info-link">
+        <img
+          src="/images/info-icon.png"
+          alt="Gym"
+          className="info-link-icon clickable-link-icon"
+        />
+      </a>
     </div>
   );
 }
