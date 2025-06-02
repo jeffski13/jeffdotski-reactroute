@@ -296,7 +296,7 @@ export default function Battle({
           onClick={() => setShowBackConfirm(true)}
           style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
         >
-          <img src="/images/arrow-left.png" alt="Back" className="back-arrow" />
+          <img src="/images/arrow-left.png" alt="Back" className="back-arrow clickable-link-icon" />
         </button>
         <div className="battle-text-with-backdrop">
           <h1 className="battle-title"><Typewriter text={battleTitle} isInstantTextRender={isTextRenderInstant} /></h1>

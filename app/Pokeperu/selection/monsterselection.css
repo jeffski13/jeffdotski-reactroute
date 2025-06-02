@@ -63,16 +63,6 @@
   font-style: italic;
 }
 
-.clickable-link-icon {
-  transition: transform 0.15s;
-}
-
-.clickable-link-icon:hover,
-.clickable-link-icon:focus {
-  transform: scale(1.2);
-  outline: none;
-}
-
 .pokedex-icon-container {
   display: flex;
   align-items: right;
