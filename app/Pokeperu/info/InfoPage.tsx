@@ -32,14 +32,15 @@ function InfoPage({ }: InfoPageProps) {
           <li>Names of Animals</li>
           <li>Personality Types</li>
         </ul>
-        <p>The students were required to create pokemon (inspired by animals) and a gym leader (with a personality). The project had an optional battle component with prizes to keep the students invested in the project.</p>
+        <p>The students were required to create pokemon (inspired by animals) and a gym leader (with personality traits). The project had an optional battle component with prizes to keep the students invested in the project.</p>
         <div className="infoSection" id="sectionPokemonCreation">
           <h3>Pokemon Creation</h3>
-          <p>The students were required to create the following:</p>
+          <p>The students were required to create the following for each monster:</p>
           <ul>
             <li>Name</li>
-            <li>Two sentences describing the pokemon's character/personality.</li>
-            <li>Element Type 1 (Type 2 optional)</li>
+            <li>Two formal sentences describing the pokemon's character/personality.</li>
+            <li>Element Type 1</li>
+            <li>Element Type 2 (Optional)</li>
             <li>Stats: HP, Attack, Defense, Special Attack, Special Defense, Speed</li>
             <li>Attack 1 (Name, Power, Power Points, Accuracy)</li>
             <li>Attack 2 (Name, Power, Power Points, Accuracy)</li>
@@ -54,7 +55,7 @@ function InfoPage({ }: InfoPageProps) {
               <Col sm={1}  className="info-arrow-separator" >
                 <span>➡️</span>
               </Col>
-              <Col sm={12} md={5}>
+              <Col sm={11} md={5}>
                 <img src="/images/info/info_pokemon_creation_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
@@ -79,7 +80,7 @@ function InfoPage({ }: InfoPageProps) {
               <Col sm={1}  className="info-arrow-separator" >
                 <span>➡️</span>
               </Col>
-              <Col sm={12} md={5}>
+              <Col sm={11} md={5}>
                 <img src="/images/info/info_gymleader_creation_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
@@ -99,7 +100,7 @@ function InfoPage({ }: InfoPageProps) {
               <Col sm={1}  className="info-arrow-separator" >
                 <span>💥</span>
               </Col>
-              <Col sm={12} md={5}>
+              <Col sm={11} md={5}>
                 <img src="/images/info/info_battle_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
@@ -120,7 +121,7 @@ function InfoPage({ }: InfoPageProps) {
               <Col sm={1}  className="info-arrow-separator" >
                 <span>➡️</span>
               </Col>
-              <Col sm={12} md={5}>
+              <Col sm={11} md={5}>
                 <img src="/images/info/info_pokemon_creation_dataentry_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
@@ -134,7 +135,7 @@ function InfoPage({ }: InfoPageProps) {
               <Col sm={1}  className="info-arrow-separator" >
                 <span>➡️</span>
               </Col>
-              <Col sm={12} md={5}>
+              <Col sm={11} md={5}>
                 <img src="/images/info/info_gymleader_creation_dataentry_b.png" alt="Back" className="info-image" />
               </Col>
             </Row>
