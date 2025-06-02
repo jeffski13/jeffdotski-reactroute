@@ -3,19 +3,19 @@ import ROUTES from '~/consts/ROUTES';
 import './navigationOverride.css';
 import './navigation.css';
 
-interface NavigationConfirmModalProps {
+interface InfoNavigationConfirmModalProps {
     onCancelNavigation: () => void;
 }
 
-export default function NavigationConfirmModal({
+export default function InfoNavigationConfirmModal({
     onCancelNavigation,
-}: NavigationConfirmModalProps) {
+}: InfoNavigationConfirmModalProps) {
 
     return (
         <div className="back-confirm-modal">
             <div className="back-confirm-content">
                 <p>Are you sure?</p>
-                <Button onClick={() => window.location.href = ROUTES.pokePeru.battle}>Yes</Button>
+                <Button onClick={() => window.location.href = ROUTES.pokePeru.info}>Yes</Button>
                 <Button onClick={() => onCancelNavigation()}>No</Button>
             </div>
         </div>

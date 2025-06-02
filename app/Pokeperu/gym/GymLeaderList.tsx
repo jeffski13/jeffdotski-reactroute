@@ -53,7 +53,7 @@ function GymLeaderList({ gymLeaders }: GymLeaderListProps) {
       <a href={ROUTES.pokePeru.info} className="info-link">
         <img
           src="/images/info-icon.png"
-          alt="Gym"
+          alt="Information Link"
           className="info-link-icon clickable-link-icon"
         />
       </a>

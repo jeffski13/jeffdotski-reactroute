@@ -5,6 +5,7 @@ import type { Monster } from '../monsters';
 import ROUTES from '~/consts/ROUTES';
 import './battle.css';
 import '../infolink.css';
+import InfoNavigationConfirmModal from '../InfoNavigationConfirmModal';
 
 interface BattleProps {
   selectedMonsters: Monster[]
@@ -12,6 +13,8 @@ interface BattleProps {
 
 export default function BattleContainer({ selectedMonsters }: BattleProps) {
   const [isBattleClicked, setBattleClicked] = useState(false);
+
+  const [showInfoNavigationConfirm, setInfoNavigationConfirm] = useState(false);
 
   if (selectedMonsters.length !== 2) {
     return <></>;
@@ -29,13 +32,15 @@ export default function BattleContainer({ selectedMonsters }: BattleProps) {
         <Battle selectedMonsters={selectedMonsters} />
       )}
 
-      <a href={ROUTES.pokePeru.info} className="info-link">
+      <a className="info-link" onClick={() => setInfoNavigationConfirm(true)}
+        >
         <img
           src="/images/info-icon.png"
-          alt="Gym"
+          alt="Information Link"
           className="info-link-icon clickable-link-icon"
         />
       </a>
+      {showInfoNavigationConfirm && (<InfoNavigationConfirmModal onCancelNavigation={() => setInfoNavigationConfirm(false)}></InfoNavigationConfirmModal>)}
     </div>
   );
 }
