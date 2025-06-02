@@ -72,7 +72,7 @@ export default function MonsterSelection({
 
       <a href={ROUTES.pokePeru.info} className="info-link">
         <img
-          src="/images/gym-icon.png"
+          src="/images/info-icon.png"
           alt="Gym"
           className="info-link-icon clickable-link-icon"
         />
