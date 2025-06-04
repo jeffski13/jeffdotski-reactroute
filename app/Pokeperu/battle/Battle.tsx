@@ -64,17 +64,40 @@ export default function Battle({
     const attackerMonster = selectedMonsters[attacker - 1];
     const defenderMonster = selectedMonsters[attacker === 1 ? 1 : 0];
     const selfDamage = Math.round(0.1 * attackerMonster.hp);
-    const adjustedDamage = calculateAdjustedDamage(attackerMonster, defenderMonster, STRUGGLE_ATTACK.damage, STRUGGLE_ATTACK.type, STRUGGLE_ATTACK.isPhysical, isAttackRandomDamage);
+    const adjustedDamage = calculateAdjustedDamage(
+      attackerMonster,
+      defenderMonster,
+      STRUGGLE_ATTACK.damage,
+      STRUGGLE_ATTACK.type,
+      STRUGGLE_ATTACK.isPhysical,
+      isAttackRandomDamage
+    );
+
+    // Show struggle attack animation
     if (attacker === 1) {
+      setDamageToMonster2Animation(STRUGGLE_ATTACK.type);
+      setMonster1AttackAnim(true);
+      setTimeout(() => {
+        setDamageToMonster2Animation(null);
+        setMonster1AttackAnim(false);
+      }, 500);
       setIsMonster1Turn(false);
       setMonster2Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       setMonster1Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
     } else {
+      setDamageToMonster1Animation(STRUGGLE_ATTACK.type);
+      setMonster2AttackAnim(true);
+      setTimeout(() => {
+        setDamageToMonster1Animation(null);
+        setMonster2AttackAnim(false);
+      }, 500);
       setIsMonster1Turn(true);
       setMonster1Hp((prevHp) => Math.max(prevHp - adjustedDamage, 0));
       setMonster2Hp((prevHp) => Math.max(prevHp - selfDamage, 0));
     }
-    setAttackResult(`${attackerMonster.name} used ${STRUGGLE_ATTACK.name}! It did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`);
+    setAttackResult(
+      `${attackerMonster.name} used ${STRUGGLE_ATTACK.name}! It did ${Math.round(adjustedDamage)} damage to ${defenderMonster.name}.`
+    );
     setEffectivenessResult(`${attackerMonster.name} is hurt by recoil!`);
   }
 
