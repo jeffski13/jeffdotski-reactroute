@@ -4,8 +4,8 @@ import Pokedex from "../Pokeperu/pokedex/Pokedex";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "PokePeru" },
-    { name: "Pokemon in Peru", content: "Pokemon in Peru" },
+    { title: "PokePeru Pokedex" },
+    { name: "Pokemon in Peru Pokedex", content: "Pokemon in Peru" },
   ];
 }
 
