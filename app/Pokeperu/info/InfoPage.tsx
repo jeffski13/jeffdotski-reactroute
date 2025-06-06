@@ -60,8 +60,8 @@ function InfoPage({ }: InfoPageProps) {
               </Col>
             </Row>
           </Container>
-          <p>This data can be found and modified inside of the "monsters.tsx" file.</p>
-          <p>The art from the students can be placed inside of the /public/images/monsters folder.</p>
+          <p>This data can be found and modified inside of the <strong>monsters.tsx</strong> file.</p>
+          <p>The art from the students can be placed inside of the <strong>/public/images/monsters</strong> folder.</p>
         </div>
         <div className="infoSection" id="sectionGymLeaderCreation">
           <h3>Gym Leader Creation</h3>
@@ -85,9 +85,9 @@ function InfoPage({ }: InfoPageProps) {
               </Col>
             </Row>
           </Container>
-          <p>This data can be found and modified inside of the "gymleaders.tsx" file.</p>
-          <p>The art from the students can be placed inside of the /public/images/gymleaders folder.</p>
-          <p>The environments can be placed inside of the /public/images/perulandscape folder.</p>
+          <p>This data can be found and modified inside of the <strong>gymleaders.tsx</strong> file.</p>
+          <p>The art from the students can be placed inside of the <strong>/public/images/gymleaders</strong> folder.</p>
+          <p>The environments can be placed inside of the <strong>/public/images/perulandscape</strong> folder.</p>
         </div>
         <div className="infoSection" id="sectionBattle">
           <h3>Monster Battle</h3>
@@ -105,6 +105,13 @@ function InfoPage({ }: InfoPageProps) {
               </Col>
             </Row>
           </Container>
+          <p>The students could choose from the following 3 types of attacks:</p>
+          <ul>
+            <li>Power: 25, Accuracy: 100%, Power Points: 10</li>
+            <li>Power: 40, Accuracy: 75%, Power Points: 4</li>
+            <li>Power: 60, Accuracy: 50%, Power Points: 2</li>
+          </ul>
+          <p>All stats (attack, defense, etc) had to add up to 300 to keep the battles fun and balanced.</p>
         </div>
         <div className="infoSection" id="sectionDIY">
           <h3>Can I Do This With My Students?</h3>
@@ -113,6 +120,8 @@ function InfoPage({ }: InfoPageProps) {
           <p>npm start</p>
           <p>In the browser, go to <a href={pokePeruLink}>{pokePeruLink}</a></p>
           <p>The <strong>monsters.tsx</strong> and <strong>gymleaders.tsx</strong> files can be modified with the respective monster and gym leader data.</p>
+          <p>Images can be added inside of the <strong>/public/images/monsters</strong> and <strong>/public/images/gymleaders</strong> folders with the respective monster and gym leader data.</p>
+          <p>New environments can be added inside of <strong>/public/images/perulandscape</strong></p>
           <Container>
             <Row className="info-images-container">
               <Col sm={11} md={5}>
