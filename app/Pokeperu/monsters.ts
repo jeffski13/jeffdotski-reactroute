@@ -70,7 +70,7 @@ export const monsters: Monster[] = [
     trainer: 'Lily',
     trainerImage: '/images/gymleaders/trainersquad1.png', // Added trainer image
     description: 'He tricks you. He might seem like a very sweet pokemon but hew can kill you in a second. He leaves a very sweet scent that smells like cotton candy. Some people say that he eats too much sugar and now he is crazy.',
-    inspiration: '', // Added inspiration
+    inspiration: 'Duck', // Added inspiration
     hp: 90,
     attack: 50,
     defense: 30,
@@ -353,7 +353,7 @@ export const monsters: Monster[] = [
     },
   },
   {
-    name: 'Tornado',
+    name: 'Eternal Fire',
     trainer: 'Alex',
     trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
     hp: 50,
@@ -365,7 +365,7 @@ export const monsters: Monster[] = [
     type: ElementType.Fire,
     secondType: null,
     image: '/images/monsters/pkmnsquad6a.png',
-    description: '',
+    description: 'It is dangerous. It can make you fly and is known to be lethal.',
     inspiration: 'Fire ball',
     attack1: {
       name: 'Sand Flies',
@@ -385,11 +385,11 @@ export const monsters: Monster[] = [
     },
   },
   {
-    name: 'Eternal Fire',
+    name: 'Tornado',
     trainer: 'Alex',
     trainerImage: '/images/gymleaders/trainersquad6.png', // Added trainer image
-    description: '',
-    inspiration: '', // Added inspiration
+    description: 'It is angry. It always needs to win in battle.',
+    inspiration: 'Cyclone', // Added inspiration
     hp: 100,
     attack: 70,
     defense: 50,
